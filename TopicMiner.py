@@ -9,10 +9,14 @@ import re
 import spacy
 import numpy as np
 from nltk.tokenize import word_tokenize
+from nltk.tag import StanfordNERTagger
+nltk.download('punkt')
         
 class TopicMiner:     
     def __init__(self, doc):
         super(TopicMiner, self).__init__()
+        st = StanfordNERTagger('../stanford-ner-2018-10-16/classifiers/english.all.3class.distsim.crf.ser.gz',
+					   '../stanford-ner-2018-10-16/stanford-ner.jar', encoding='utf-8')		
         # NLTK Stop words
         nltk.download('stopwords')
         nltk.download('wordnet')
@@ -189,7 +193,45 @@ class TopicMiner:
              topic_words = np.array(tf_feature_names)[np.argsort(topic_dist)][:-(n_top_words+1):-1]
              print('Topic {}: {}'.format(i, ' '.join(topic_words)))
      
+    def get_phoneNumber(text):
+	phone_number = ""
+	regex = re.compile("((\(\d{3,4}\)|\d{3,4}-)\d{4,9}(-\d{1,5}|\d{0}))|(\d{4,12})")
 
+	for phoneNumber in get_phoneNumbers(text, regex):
+			phone_number = phone_number + phoneNumber + "\n"
+	re.findall(r'[\+\(]?[1-9][0-9 .\-\(\)]{8,}[0-9]', text)
+	return re.findall(r'[\+\(]?[1-9][0-9 .\-\(\)]{8,}[0-9]', text)
+
+    def get_phoneNumbers(s, regex):
+        return (phoneNumber[0] for phoneNumber in re.findall(regex, s))
+
+    def email(text):
+        email = re.findall(r'[\w\.-]+@[\w\.-]+', text)
+        return email
+
+    def Name(text):    	    
+        tokenized_text = word_tokenize(text)
+        classified_text = self.st.tag(tokenized_text)
+        print(classified_text)
+        names = []
+        found_name = False
+        name = ''
+        for tup in classified_text:
+            if found_name:
+                if tup[1] == 'PERSON':
+                    name += ' '+tup[0].title()
+                else:
+                    break
+            elif tup[1] == 'PERSON':
+                name += tup[0].title()
+                found_name = True
+        names.append(name)
+        return names
+
+    def location(text):
+        location = ""     	
+        
+        return location
 
 def MineTopic(doc):
     try:
