@@ -182,7 +182,7 @@ class Extract:
 
         X = token_vectorizer.fit_transform(corrected_content)
 
-        tf_feature_names = token_vectorizer.get_feature_names_out()
+        tf_feature_names = token_vectorizer.get_feature_names()
 
         word2id = dict((v, idx) for idx, v in enumerate(tf_feature_names))
 
