@@ -17,6 +17,11 @@ import numpy as np
 from nltk.tokenize import word_tokenize
 from nltk.tag import StanfordNERTagger
 nltk.download('punkt')
+nltk.downloader.download('maxent_ne_chunker')
+nltk.downloader.download('words')
+nltk.downloader.download('treebank')
+nltk.downloader.download('maxent_treebank_pos_tagger')
+import locationtagger
         
 class Extract:     
     def __init__(self, doc):
@@ -206,7 +211,7 @@ class Extract:
         email = re.findall(r'[\w\.-]+@[\w\.-]+', self.doc)
         return email
 
-    def extract_name(self):    	    
+    def extract_name(self):
         tokenized_text = word_tokenize(self.doc)
         classified_text = self.st.tag(tokenized_text)
         print(classified_text)
@@ -215,25 +220,40 @@ class Extract:
         name = ''
         for tup in classified_text:
             if found_name:
-                if tup[1] == 'PERSON':
+                if tup[1] == "PERSON":
                     name += ' '+tup[0].title()
                 else:
                     break
-            elif tup[1] == 'PERSON':
+            elif tup[1] == "PERSON":
                 name += tup[0].title()
                 found_name = True
         names.append(name)
-        return names
+        return names   
 
-    def extract_location(self):
-        location = ""     	
-        
-        return location
-    
     def extract_university(self):
-        univ = ""     	
-        
-        return univ
+        tokenized_text = word_tokenize(self.doc)
+        classified_text = self.st.tag(tokenized_text)
+        print(classified_text)
+        names = []
+        found_name = False
+        name = ''
+        for tup in classified_text:
+            if found_name:
+                if tup[1] == "ORGANIZATION":
+                    name += ' '+tup[0].title()
+                else:
+                    break
+            elif tup[1] == "ORGANIZATION":
+                name += tup[0].title()
+                found_name = True
+        names.append(name)
+        return names   
+
+    def extract_location(self, text):
+        location = ""     	
+        place_entity = locationtagger.find_locations(text = text)
+        location = str(place_entity.cities) + " " + str(place_entity.regions) + " " + str(place_entity.countries)
+        return location    
 
 def ExtractItems(doc):
     try:
@@ -242,11 +262,12 @@ def ExtractItems(doc):
         return Extract(doc)  
      
 if __name__ == '__main__':
-    doc1 = " Timothy M. Chan Department of Computer Science University of Illinois at Urbana-Champaign 223-240-2233 abc@xyz.com 201 N. Goodwin Ave. Urbana, IL 61801, USA E-mail : tmc at illinois dot edu Office : Siebel 3230 I am a Founder Professor in Computer Science. (Prior to joining UIUC, I taught at the Cheriton School of Computer Science, University of Waterloo from 1999 to 2016.) Research Interests: Computational Geometry Algorithms and Data Structures Publications (see also DBLP's listing ) Publications by Topics Current Journal Editorial Boards: Algorithmica Discrete and Computational Geometry Computational Geometry: Theory and Applications International Journal of Computational Geometry and Applications SIAM Journal on Computing Recent Conference Program Committees: SODA'19 (chair), SPIRE'17 , STOC'16 , CPM'15 , FSTTCS'14 , FOCS'14 , ITCS'14 , CCCG'13 , SoCG'13 (co-chair), ISAAC'12 , ... Recent Invited Talks: Geometric Problems in Moderate Dimensions ( HALG'18 ) Fun with Recursion and Tree Drawings (for GD'17 ) Computational Geometry, from Low to High Dimensions (for the STOC/SoCG'16 day) Cuttings in 2D Revisited (for CCCG'14 ) The Art of Shaving Logs (for WADS'13 ) Combinatorial Geometry and Approximation Algorithms (for ISAAC'12 ) Mihai's Work in Computational Geometry (for FOCS'12 Workshop on Data Structures, in memory of Mihai Patrascu ) Computational Geometry for Non-Geometers: Recent Developments on Some Classical Problems (for SODA'11 ) Instance-Optimal Geometric Algorithms (for EuroCG'10 ) Current Teaching: CS 598 (TMC) Geometric Approximation Algorithms (Fall 2018)  "
+    doc1 = "  Geoffrey Werner Challen Teaching Associate Professor 2227 Siebel Center for Comp Sci 201 N. Goodwin Ave. Urbana Illinois 61801 (217) 300-6150 challen@illinois.edu : Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page Education Ph.D. Computer Science, Harvard University, 2010 AB Physics, Harvard University, 2003 Academic Positions Associate Teaching Professor, University of Illinois, 2017 . Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . . For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . "
     extract_items = ExtractItems(doc1)
     print(extract_items.extract_expertise())
     print(extract_items.extract_phone())
-    print(extract_items.extract_email())
+    print(extract_items.extract_email())  
     print(extract_items.extract_name())
-    print(extract_items.extract_location())
-    print(extract_items.extract_university())
+    print(extract_items.extract_university())    
+    print(extract_items.extract_location(doc1))
+    
