@@ -22,6 +22,7 @@ nltk.downloader.download('words')
 nltk.downloader.download('treebank')
 nltk.downloader.download('maxent_treebank_pos_tagger')
 import locationtagger
+from urllib import request
         
 class Extract:     
     def __init__(self, doc):
@@ -230,7 +231,7 @@ class Extract:
         names.append(name)
         return names   
 
-    def extract_university(self):
+    def extract_department(self):
         tokenized_text = word_tokenize(self.doc)
         classified_text = self.st.tag(tokenized_text)
         print(classified_text)
@@ -246,8 +247,19 @@ class Extract:
             elif tup[1] == "ORGANIZATION":
                 name += tup[0].title()
                 found_name = True
-        names.append(name)
+        names.append(name)        
+        
         return names   
+    
+    def extract_university(self, url):        
+        html = request.urlopen(url).read().decode('utf8')
+        html[:60]
+
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup(html, 'html.parser')
+        title = soup.find('title')
+        
+        return title.string  
 
     def extract_location(self, text):
         location = ""     	
@@ -268,6 +280,7 @@ if __name__ == '__main__':
     print(extract_items.extract_phone())
     print(extract_items.extract_email())  
     print(extract_items.extract_name())
-    print(extract_items.extract_university())    
+    print(extract_items.extract_department())
+    print(extract_items.extract_university("https://illinois.edu/"))    
     print(extract_items.extract_location(doc1))
     
