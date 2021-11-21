@@ -1,0 +1,8 @@
+nltk
+gensim
+spacy
+locationtagger
+metapy
+requests
+flask
+gunicorn
