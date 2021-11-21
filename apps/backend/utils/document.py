@@ -3,6 +3,7 @@ from urllib import request
 import gensim
 import gensim.corpora as corpora
 import guidedlda
+import logging
 import numpy as np
 from bs4 import BeautifulSoup
 from nltk.tag import StanfordNERTagger
@@ -22,28 +23,23 @@ nltk.downloader.download('maxent_treebank_pos_tagger')
 
 class Document:
 
-    def __init__(self, doc):
+    def __init__(self, doc, faculty_url=None, base_url=None):
         self.doc = doc
-        self.st = StanfordNERTagger('/Users/usaha/mcs/08_text_information_systems/project/repo/working/CourseProject/lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz',
-                                    '/Users/usaha/mcs/08_text_information_systems/project/repo/working/CourseProject/lib/stanford-ner-2020-11-17/stanford-ner.jar', encoding='utf-8')
+        self.faculty_url = faculty_url
+        self.base_url = base_url
         self.stop_words = stopwords.words('english')
+        logger = logging.getLogger('my_module_name').setLevel(logging.WARNING)
 
     def extract_expertise(self):
 
-        tokens = [tokenizer(self.doc)]
-
+        tokens = tokenizer(self.doc)
         # print("tokens: ", tokens)
 
         # Create Dictionary
-        id2word = corpora.Dictionary(tokens)
+        id2word = corpora.Dictionary([tokens])
 
         # Create Corpus - # Term Document Frequency
-        corpus = [id2word.doc2bow(text) for text in tokens]
-
-        # View
-        # print(corpus[:1])
-
-        # [[(id2word[id], freq) for id, freq in cp] for cp in corpus[:1]]
+        corpus = [id2word.doc2bow(tokens)]
 
         # Build LDA model
         lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
@@ -75,7 +71,7 @@ class Document:
         # LDA topics
         seed_topic_list = [[word[0] for word in topic[1]] for topic in shown_topics]
 
-        # print("LDA Topics: ", seed_topic_list)
+        print("LDA Topics: ", seed_topic_list)
 
         token_vectorizer = CountVectorizer(tokenizer=tokenizer,
                                            min_df=1,
@@ -103,65 +99,74 @@ class Document:
             topic_words = np.array(tf_feature_names)[np.argsort(topic_dist)][:-(n_top_words + 1):-1]
             # print('Topic {}: {}'.format(i, ' '.join(topic_words)))
 
-        # return the list of unqiue topic words
-        return list(set(" ".join(topic_words).split()))
+        # return unqiue topic words
+        return " ".join(list(set(" ".join(topic_words).split())))
 
     def extract_phone(self):
-        return re.findall(r'[+(]?[1-9][0-9 .\-()]{8,}[0-9]', self.doc)
+        # phone_numbers = re.findall(r'[+(]?[1-9][0-9 .\-()]{8,}[0-9]', self.doc)
+
+        phone_numbers = re.findall(r"\(?\b[2-9][0-9]{2}\)?[-. ]?[2-9][0-9]{2}[-. ]?[0-9]{4}\b", self.doc)
+        return phone_numbers[0] if phone_numbers else ""
 
     def extract_email(self):
-        return re.findall(r'[\w.-]+@[\w.-]+', self.doc)
+        emails = re.findall(r'[\w.-]+@[\w.-]+', self.doc)
+        return emails[0] if emails else ""
+
+    def extract_ner(self, tag="PERSON"):
+        """
+        Using StanfordNERTagger finds name entity recognition
+        :param tag:
+        :return:
+        """
+        # TODO We need to fix the NERT file location - Absolute location is not a solutions
+        self.st = StanfordNERTagger(
+            '/Users/usaha/mcs/08_text_information_systems/project/repo/working/CourseProject/lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz',
+            '/Users/usaha/mcs/08_text_information_systems/project/repo/working/CourseProject/lib/stanford-ner-2020-11-17/stanford-ner.jar',
+            encoding='utf-8')
+
+        tokenized_text = word_tokenize(self.doc)
+        classified_text = self.st.tag(tokenized_text)
+
+        # print(classified_text)
+
+        matched_tokens = []
+        found_name = False
+        name = ''
+        for tup in classified_text:
+            if found_name:
+                if tup[1] == tag:
+                    name += ' ' + tup[0].title()
+                else:
+                    break
+            elif tup[1] == tag:
+                name += tup[0].title()
+                found_name = True
+
+        matched_tokens.append(name)
+
+        return " ".join(matched_tokens)
 
     def extract_name(self):
-        tokenized_text = word_tokenize(self.doc)
-        classified_text = self.st.tag(tokenized_text)
-        print(classified_text)
-        names = []
-        found_name = False
-        name = ''
-        for tup in classified_text:
-            if found_name:
-                if tup[1] == "PERSON":
-                    name += ' ' + tup[0].title()
-                else:
-                    break
-            elif tup[1] == "PERSON":
-                name += tup[0].title()
-                found_name = True
-        names.append(name)
-        return names
+        return self.extract_ner(tag="PERSON")
 
     def extract_department(self):
-        tokenized_text = word_tokenize(self.doc)
-        classified_text = self.st.tag(tokenized_text)
-        print(classified_text)
-        names = []
-        found_name = False
-        name = ''
-        for tup in classified_text:
-            if found_name:
-                if tup[1] == "ORGANIZATION":
-                    name += ' ' + tup[0].title()
-                else:
-                    break
-            elif tup[1] == "ORGANIZATION":
-                name += tup[0].title()
-                found_name = True
-        names.append(name)
+        # TODO Find a better approach to extract department
+        return self.extract_ner(tag="ORGANIZATION")
 
-        return names
-
-    @staticmethod
-    def extract_university(url):
-        html = request.urlopen(url).read().decode('utf8')
+    def extract_university(self):
+        html = request.urlopen(self.base_url).read().decode('utf8')
 
         soup = BeautifulSoup(html, 'html.parser')
         title = soup.find('title')
 
-        return title.string
+        university_name = title.string if title else ""
+        university_name = university_name.split('|')[1].strip() if university_name else ""
+
+        return university_name
 
     @staticmethod
     def extract_location(university_name):
+        # TODO Find a better approach to location tagger, fails is python3.5
         import locationtagger
         location = ""
         place_entity = locationtagger.find_locations(text=university_name)
@@ -171,11 +176,11 @@ class Document:
 
 if __name__ == '__main__':
     doc1 = "  Geoffrey Werner Challen Teaching Associate Professor 2227 Siebel Center for Comp Sci 201 N. Goodwin Ave. Urbana Illinois 61801 (217) 300-6150 challen@illinois.edu : Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page Education Ph.D. Computer Science, Harvard University, 2010 AB Physics, Harvard University, 2003 Academic Positions Associate Teaching Professor, University of Illinois, 2017 . Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . . For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . "
-    doc = Document(doc1)
-    print(doc.extract_expertise())
-    print(doc.extract_phone())
-    print(doc.extract_email())
-    print(doc.extract_name())
-    print(doc.extract_department())
-    print(doc.extract_university("https://illinois.edu/"))
+    doc = Document(doc1, base_url="https://illinois.edu/")
+    print("EXPERTISE: ", doc.extract_expertise())
+    print("PHONE: ", doc.extract_phone())
+    print("EMAIL: ", doc.extract_email())
+    print("NAME: ", doc.extract_name())
+    print("DEPARTMENT: ", doc.extract_department())
+    print("UNIVERSITY: ", doc.extract_university())
     # print(doc.extract_location(doc1))

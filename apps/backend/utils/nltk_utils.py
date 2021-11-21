@@ -59,5 +59,6 @@ def tokenizer(doc):
     # remove stop words
     tokens = [s for s in tokens if s not in stopwords.words('english')]
 
-    print("Tokens: ", tokens)
+    # print("Tokens: ", tokens)
+
     return tokens
