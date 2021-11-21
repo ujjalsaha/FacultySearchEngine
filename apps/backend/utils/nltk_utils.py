@@ -28,7 +28,7 @@ def word_lemmatizer(text):
     return text
 
 
-def reflection_tokenizer(doc):
+def tokenizer(doc):
     # remove emails
     doc = re.sub('\S*@\S*\s?', '', doc)
 

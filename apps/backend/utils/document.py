@@ -30,7 +30,7 @@ class Document:
 
     def extract_expertise(self):
 
-        tokens = [reflection_tokenizer(self.doc)]
+        tokens = [tokenizer(self.doc)]
 
         # print("tokens: ", tokens)
 
@@ -77,7 +77,7 @@ class Document:
 
         # print("LDA Topics: ", seed_topic_list)
 
-        token_vectorizer = CountVectorizer(tokenizer=reflection_tokenizer,
+        token_vectorizer = CountVectorizer(tokenizer=tokenizer,
                                            min_df=1,
                                            max_df=1.0,
                                            ngram_range=(1, 4))
