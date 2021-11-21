@@ -9,7 +9,11 @@ The UIUC ExpertSearch system (https://github.com/CS410Assignments/ExpertSearch) 
 
 python 3.5 [Recommended]
 
+Linux or MacOS [Recommended]
+
 All packages installed from requirements.txt
+
+
 
 ## Execution Instructions
 
