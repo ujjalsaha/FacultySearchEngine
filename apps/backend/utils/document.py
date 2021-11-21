@@ -118,31 +118,33 @@ class Document:
         :param tag:
         :return:
         """
-        # TODO We need to fix the NERT file location - Absolute location is not a solutions
-        self.st = StanfordNERTagger(
-            '/Users/usaha/mcs/08_text_information_systems/project/repo/working/CourseProject/lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz',
-            '/Users/usaha/mcs/08_text_information_systems/project/repo/working/CourseProject/lib/stanford-ner-2020-11-17/stanford-ner.jar',
-            encoding='utf-8')
-
-        tokenized_text = word_tokenize(self.doc)
-        classified_text = self.st.tag(tokenized_text)
-
-        # print(classified_text)
-
         matched_tokens = []
-        found_name = False
-        name = ''
-        for tup in classified_text:
-            if found_name:
-                if tup[1] == tag:
-                    name += ' ' + tup[0].title()
-                else:
-                    break
-            elif tup[1] == tag:
-                name += tup[0].title()
-                found_name = True
 
-        matched_tokens.append(name)
+        try:
+            # TODO We need to fix the NERT file location - Absolute location is not a solutions
+            self.st = StanfordNERTagger(
+                '/Users/usaha/mcs/08_text_information_systems/project/repo/working/CourseProject/lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz',
+                '/Users/usaha/mcs/08_text_information_systems/project/repo/working/CourseProject/lib/stanford-ner-2020-11-17/stanford-ner.jar',
+                encoding='utf-8')
+
+            tokenized_text = word_tokenize(self.doc)
+            classified_text = self.st.tag(tokenized_text)
+
+            found_name = False
+            name = ''
+            for tup in classified_text:
+                if found_name:
+                    if tup[1] == tag:
+                        name += ' ' + tup[0].title()
+                    else:
+                        break
+                elif tup[1] == tag:
+                    name += tup[0].title()
+                    found_name = True
+
+            matched_tokens.append(name)
+        except:
+            pass
 
         return " ".join(matched_tokens)
 
