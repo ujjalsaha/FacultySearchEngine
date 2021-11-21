@@ -7,15 +7,18 @@ The UIUC ExpertSearch system (https://github.com/CS410Assignments/ExpertSearch) 
 
 ## Installation Requirements
 
-python 3.5 [Recommended]
-
-Linux or MacOS [Recommended]
-
-All packages must be installed from requirements.txt
-
+1. python 3.5 [Recommended]
+2. Linux or MacOS [Recommended]
+3. All packages must be installed from requirements.txt
 
 
 ## Execution Instructions
 
-TBD
+1. Install python3.5 Virtual Environemnt
+   
+2. Download spacy en packages\
+   ``python -m spacy download en_core_web_sm``\
+   ``python -m spacy download en``
+
+2. 
 

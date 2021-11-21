@@ -1,8 +1,13 @@
+pip==9.0.3
+beautifulsoup4
+urllib3
+numpy
 nltk
 gensim
-spacy
 locationtagger
 metapy
 requests
 flask
 gunicorn
+scikit-learn
+guidedlda

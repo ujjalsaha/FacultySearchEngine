@@ -2568,7 +2568,7 @@ function computeStyle(data, options) {
     position: popper.position
   };
 
-  // floor sides to avoid blurry text
+  // floor sides to avoid blurry university_name
   var offsets = {
     left: Math.floor(popper.left),
     top: Math.floor(popper.top),
