@@ -11,7 +11,7 @@ python 3.5 [Recommended]
 
 Linux or MacOS [Recommended]
 
-All packages installed from requirements.txt
+All packages must be installed from requirements.txt
 
 
 
