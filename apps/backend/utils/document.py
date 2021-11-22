@@ -163,6 +163,8 @@ class Document:
     def extract_name(self):
         return self.extract_ner(tag="PERSON")
 
+    # deprecate __extract_department
+
     def __extract_department(self):
         # TODO Find a better approach to extract department
         return self.extract_ner(tag="ORGANIZATION")
