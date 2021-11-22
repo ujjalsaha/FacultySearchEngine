@@ -191,7 +191,7 @@ class Document:
         return self.extract_title(self.department_url)
 
     def extract_location(university_name):
-        API_KEY = 'AIzaSyCCeZ68tJ1lbKNG6V2WN_M8vp2bxYh2XFc'
+        API_KEY = ''
 
         base_url = 'https://maps.googleapis.com/maps/api/place/'
         place_url = 'findplacefromtext/json?'
