@@ -5,6 +5,9 @@ import gensim.corpora as corpora
 import guidedlda
 import logging
 import numpy as np
+import requests
+import json
+import urllib.parse
 from bs4 import BeautifulSoup
 from nltk.tag import StanfordNERTagger
 from sklearn.feature_extraction.text import CountVectorizer
@@ -19,7 +22,6 @@ nltk.downloader.download('maxent_ne_chunker')
 nltk.downloader.download('words')
 nltk.downloader.download('treebank')
 nltk.downloader.download('maxent_treebank_pos_tagger')
-
 
 class Document:
 
@@ -188,14 +190,41 @@ class Document:
     def extract_department(self):
         return self.extract_title(self.department_url)
 
-    @staticmethod
     def extract_location(university_name):
-        # TODO Explore a better approach to locationtagger, fails is python3.5
-        import locationtagger
-        location = ""
-        place_entity = locationtagger.find_locations(text=university_name)
-        location = str(place_entity.cities) + " " + str(place_entity.regions) + " " + str(place_entity.countries)
-        return location
+        API_KEY = 'AIzaSyCCeZ68tJ1lbKNG6V2WN_M8vp2bxYh2XFc'
+
+        base_url = 'https://maps.googleapis.com/maps/api/place/'
+        place_url = 'findplacefromtext/json?'
+        place_params = {'fields':'place_id','key':API_KEY,'inputtype':'textquery'}
+
+        detail_url = 'details/json?'
+        details_params = {'fields':'address_components','key':API_KEY}
+
+        place_params['input'] = university_name
+        url = base_url+place_url+urllib.parse.urlencode(place_params)
+        resp = requests.get(url)
+        place_id = json.loads(resp.text)['candidates'][0]['place_id']
+
+        details_params['place_id'] = place_id
+        url = base_url+detail_url+urllib.parse.urlencode(details_params)
+        resp = requests.get(url)
+        resp_json = json.loads(resp.text)
+
+        comps = resp_json['result']['address_components']        
+        place = ""
+
+        for comp in comps:
+            if len(comp['types'])>1:
+                if comp['types'][0]=='administrative_area_level_1':
+                    state = comp['long_name']
+                    place = place + str(comp['long_name']) + ", "
+                if comp['types'][0]=='locality':
+                    city = comp['long_name']
+                    place = place + str(comp['long_name']) + ", "
+                if comp['types'][0]=='country':
+                    country = comp['long_name']
+                    place = place + str(comp['long_name'])
+        return place
 
 
 if __name__ == '__main__':
