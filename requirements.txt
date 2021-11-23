@@ -12,3 +12,4 @@ guidedlda
 tldexpert
 selenium
 bs4
+python-decouple

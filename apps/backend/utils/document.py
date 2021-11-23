@@ -193,13 +193,8 @@ class Document:
         return self.extract_title(self.department_url)
 
     def extract_biodata(self):
-        if not self.doc:
-            return ""        
-        doc_clean = ""           
-        doc_clean = tokenizer(self.doc,'bio')
-        
-        return doc_clean
-    
+        return " ".join(tokenizer(self.doc, remove_email=False)) if self.doc else ""
+
     def extract_location(self):
         location = ""
 
@@ -208,7 +203,7 @@ class Document:
         if not api_key:
             return location
 
-        googleAPI = GoogleAPI(place_name=self.uni_name)
+        googleAPI = GoogleAPI(place_name=self.university_url)
         comps = googleAPI.get_component(field_comp='address_component')
 
         for comp in comps:
@@ -234,4 +229,5 @@ if __name__ == '__main__':
     print("PHONE:      ", doc.extract_phone())
     print("EMAIL:      ", doc.extract_email())
     print("EXPERTISE:  ", doc.extract_expertise())
-    print("LOCATION:   ", doc.extract_location())
+    # print("LOCATION:   ", doc.extract_location())
+    print("BIODATA:    ", doc.extract_biodata())

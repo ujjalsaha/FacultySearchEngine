@@ -36,7 +36,7 @@ class GoogleAPI:
             response_json = json.loads(response.text)
             components = response_json['result'][field_comp]
         except Exception as exc:
-            raise Exception(f"Error occurred while retrieving component : {repr(exc)}")
+            raise Exception("Error occurred while retrieving component : " + repr(exc))
         return components
 
     def __call__(self):
@@ -50,7 +50,7 @@ class GoogleAPI:
             self.place_id = resp['candidates'][0]['place_id']
         except Exception as ex:
             self.logger.exception(ex.__cause__)
-            raise Exception(f"Received error : {repr(ex)}")
+            raise Exception("Received error : " + repr(ex))
 
     def __get_details_url__(self, field):
         """
@@ -73,5 +73,5 @@ class GoogleAPI:
             response_json = json.loads(response.text)
         except Exception as exc:
             self.logger.exception(exc.__cause__)
-            raise Exception(f"Error occurred while calling Google API : {repr(exc)}")
+            raise Exception("Error occurred while calling Google API : " + repr(exc))
         return response_json

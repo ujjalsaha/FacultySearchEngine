@@ -28,9 +28,14 @@ def word_lemmatizer(text):
     return text
 
 
-def tokenizer(doc, flag):
-    if(flag != 'bio'):
-        # remove emails
+def tokenizer(doc, remove_email: bool=True):
+    tokens = []
+
+    if not doc:
+        return tokens
+
+    # remove emails
+    if remove_email:
         doc = re.sub('\S*@\S*\s?', '', doc)
 
     # remove new line

@@ -19,9 +19,10 @@ class FacultyDB:
         conn = json_data = None
 
         dirname = os.path.dirname(__file__)
+        print(dirname)
         config_file = os.path.join(dirname, '../../../config/config.json')
 
-        with open("../../../config/config.json", "r") as jsonfile:
+        with open(config_file, "r") as jsonfile:
             json_data = json.load(jsonfile)
 
         db_file = json_data.get("db_filename", "")
