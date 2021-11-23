@@ -12,7 +12,7 @@ import urllib.parse
 from bs4 import BeautifulSoup
 from nltk.tag import StanfordNERTagger
 from sklearn.feature_extraction.text import CountVectorizer
-
+from apps.backend.api.googleapi import GoogleAPI
 from apps.backend.utils.nltk_utils import *
 
 nltk.download('punkt')
@@ -208,24 +208,8 @@ class Document:
         if not api_key:
             return location
 
-        base_url = 'https://maps.googleapis.com/maps/api/place/'
-        place_url = 'findplacefromtext/json?'
-        place_params = {'fields':'place_id','key':api_key,'inputtype':'textquery'}
-
-        detail_url = 'details/json?'
-        details_params = {'fields':'address_components','key':api_key}
-
-        place_params['input'] = self.university_url
-        url = base_url+place_url+urllib.parse.urlencode(place_params)
-        resp = requests.get(url)
-        place_id = json.loads(resp.text)['candidates'][0]['place_id']
-
-        details_params['place_id'] = place_id
-        url = base_url+detail_url+urllib.parse.urlencode(details_params)
-        resp = requests.get(url)
-        resp_json = json.loads(resp.text)
-
-        comps = resp_json['result']['address_components']        
+        googleAPI = GoogleAPI(place_name=self.uni_name)
+        comps = googleAPI.get_component(field_comp='address_component')
 
         for comp in comps:
             if len(comp['types'])>1:
