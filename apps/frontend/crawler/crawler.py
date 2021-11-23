@@ -3,44 +3,16 @@ import os
 import sys
 import requests
 import tldextract
-from bs4 import BeautifulSoup
-from bs4.element import Comment
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'lib'))
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
 
 from apps.backend.api.googleapi import GoogleAPI
-
-options = Options()
-options.headless = True
-driver = webdriver.Chrome('lib/chromedriver', options=options)
+from apps.frontend.utils.beautiful_soup import get_js_soup, remove_script, tag_visible
 
 console_format = '%(name)s - %(levelname)s - %(message)s'
 logging.root.setLevel(logging.INFO)
 logging.basicConfig(level=logging.INFO, format=console_format)
-
-
-def get_js_soup(url):
-    driver.get(url)
-    res_html = driver.execute_script('return document.body.innerHTML')
-    soup = BeautifulSoup(res_html, 'html.parser')  # beautiful soup object to be used for parsing html content
-    return soup
-
-
-def remove_script(soup):
-    for script in soup(["script", "style"]):
-        script.decompose()
-    return soup
-
-
-def tag_visible(element):
-    if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
-        return False
-    if isinstance(element, Comment):
-        return False
-    return True
 
 
 class Crawler:
@@ -53,16 +25,15 @@ class Crawler:
         self.key_words = self.get_key_words()
         self.faculty_links = []
         self.logger = logging.getLogger('Crawler')
-        self.return_dict = {}
-        self.return_dict['dept_url'] = base_url
+        self.return_dict = {'dept_url': base_url}
 
     def get_base_url(self):
         """
         Get the base URL using tldextract library.
         :return:None
         """
-        extractURL = tldextract.extract(self.base_url)
-        uni_url = "https://www." + extractURL.domain + "." + extractURL.suffix
+        extract = tldextract.extract(self.base_url)
+        uni_url = "https://www." + extract.domain + "." + extract.suffix
         self.return_dict['base_url'] = uni_url
 
     def get_key_words(self):
@@ -134,11 +105,6 @@ class Crawler:
                     max_count = faculty_count
                     final_link = url
                     final_link_js_soup = faculty_link_soup
-                # print('max_count => ', max_count)
-                # print('current faculty count  => ', faculty_count)
-        # elif len(self.faculty_links) > 0:
-        #     final_link = self.faculty_links[0]
-        #     final_link_js_soup = remove_script(get_js_soup(final_link))
         self.logger.info('Found faculty url as => %s', final_link)
         self.return_dict['faculty_link'] = final_link
         self.return_dict['faculty_link_soup'] = final_link_js_soup
