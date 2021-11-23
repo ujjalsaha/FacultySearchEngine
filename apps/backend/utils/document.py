@@ -39,7 +39,7 @@ class Document:
         if not self.doc:
             return ""
 
-        tokens = tokenizer(self.doc)
+        tokens = tokenizer(self.doc, 'topic')
         # print("tokens: ", tokens)
 
         # Create Dictionary
@@ -192,6 +192,14 @@ class Document:
     def extract_department(self):
         return self.extract_title(self.department_url)
 
+    def extract_biodata(self):
+        if not self.doc:
+            return ""        
+        doc_clean = ""           
+        doc_clean = tokenizer(self.doc,'bio')
+        
+        return doc_clean
+    
     def extract_location(self):
         location = ""
 
