@@ -1,3 +1,4 @@
+import sys, os
 from urllib import request
 
 import gensim
@@ -135,11 +136,11 @@ class Document:
         matched_tokens = []
 
         try:
-            # TODO We need to fix the NERT file location - Absolute location is not a solutions
-            self.st = StanfordNERTagger(
-                '/Users/usaha/mcs/08_text_information_systems/project/repo/working/CourseProject/lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz',
-                '/Users/usaha/mcs/08_text_information_systems/project/repo/working/CourseProject/lib/stanford-ner-2020-11-17/stanford-ner.jar',
-                encoding='utf-8')
+            dirname = os.path.dirname(__file__)
+            model_file = os.path.join(dirname, '../../../lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz')
+            jar_file = os.path.join(dirname, '../../../lib/stanford-ner-2020-11-17/stanford-ner.jar')
+
+            self.st = StanfordNERTagger(model_file, jar_file, encoding='utf-8')
 
             tokenized_text = word_tokenize(self.doc)
             classified_text = self.st.tag(tokenized_text)
@@ -157,7 +158,8 @@ class Document:
                     found_name = True
 
             matched_tokens.append(name)
-        except:
+        except Exception as e:
+            print ("Exception encouneted while extracting name: " + str(e))
             pass
 
         return " ".join(matched_tokens)
@@ -190,17 +192,22 @@ class Document:
     def extract_department(self):
         return self.extract_title(self.department_url)
 
-    def extract_location(university_name):
-        API_KEY = ''
+    def extract_location(self):
+        location = ""
+
+        api_key = os.getenv('GOOGLE_API_KEY')
+
+        if not api_key:
+            return location
 
         base_url = 'https://maps.googleapis.com/maps/api/place/'
         place_url = 'findplacefromtext/json?'
-        place_params = {'fields':'place_id','key':API_KEY,'inputtype':'textquery'}
+        place_params = {'fields':'place_id','key':api_key,'inputtype':'textquery'}
 
         detail_url = 'details/json?'
-        details_params = {'fields':'address_components','key':API_KEY}
+        details_params = {'fields':'address_components','key':api_key}
 
-        place_params['input'] = university_name
+        place_params['input'] = self.university_url
         url = base_url+place_url+urllib.parse.urlencode(place_params)
         resp = requests.get(url)
         place_id = json.loads(resp.text)['candidates'][0]['place_id']
@@ -211,20 +218,19 @@ class Document:
         resp_json = json.loads(resp.text)
 
         comps = resp_json['result']['address_components']        
-        place = ""
 
         for comp in comps:
             if len(comp['types'])>1:
                 if comp['types'][0]=='administrative_area_level_1':
                     state = comp['long_name']
-                    place = place + str(comp['long_name']) + ", "
+                    location = location + str(comp['long_name']) + ", "
                 if comp['types'][0]=='locality':
                     city = comp['long_name']
-                    place = place + str(comp['long_name']) + ", "
+                    location = location + str(comp['long_name']) + ", "
                 if comp['types'][0]=='country':
                     country = comp['long_name']
-                    place = place + str(comp['long_name'])
-        return place
+                    location = location + str(comp['long_name'])
+        return location
 
 
 if __name__ == '__main__':
@@ -236,4 +242,4 @@ if __name__ == '__main__':
     print("PHONE:      ", doc.extract_phone())
     print("EMAIL:      ", doc.extract_email())
     print("EXPERTISE:  ", doc.extract_expertise())
-    # print(doc.extract_location(doc1))
+    print("LOCATION:   ", doc.extract_location())

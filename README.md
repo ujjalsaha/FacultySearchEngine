@@ -7,18 +7,17 @@ The UIUC ExpertSearch system (https://github.com/CS410Assignments/ExpertSearch) 
 
 ## Installation Requirements
 
-1. python 3.5 [Recommended]
+1. Python3.5 [Recommended]
 2. Linux or MacOS [Recommended]
 3. All packages must be installed from requirements.txt
 
 
 ## Execution Instructions
 
-1. Install python3.5 Virtual Environemnt
-   
-2. Download spacy en packages\
-   ``python -m spacy download en_core_web_sm``\
-   ``python -m spacy download en``
+1. Install python3.5. Preferably a virtual environemnt. See conda socumentation how to install python virtual environemnt.  
 
-2. 
+2. Set Environemnt Variable\
+    `GOOGLE_API_KEY=<Add Google api Key>`
+       
+3. 
 

@@ -4,7 +4,6 @@ urllib3
 numpy
 nltk
 gensim
-locationtagger
 metapy
 requests
 flask
