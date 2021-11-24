@@ -25,7 +25,7 @@ class FacultyDB:
         with open(config_file, "r") as jsonfile:
             json_data = json.load(jsonfile)
 
-        db_file = json_data.get("db_filename", "")
+        db_file = json_data.get("database", {}).get("db_filename", "")
         db_file = os.path.join(dirname, "../../../data/sqlite3/" + db_file)
 
         # create database and open a conection

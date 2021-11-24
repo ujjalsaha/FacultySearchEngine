@@ -12,6 +12,7 @@ import urllib.parse
 from bs4 import BeautifulSoup
 from nltk.tag import StanfordNERTagger
 from sklearn.feature_extraction.text import CountVectorizer
+
 from apps.backend.api.googleapi import GoogleAPI
 from apps.backend.utils.nltk_utils import *
 
@@ -34,12 +35,66 @@ class Document:
         self.stop_words = stopwords.words('english')
         logger = logging.getLogger('my_module_name').setLevel(logging.WARNING)
 
+    def __extract_ner(self, tag="PERSON"):
+        """
+        Using StanfordNERTagger finds name entity recognition
+        :param tag:
+        :return:
+        """
+        if not self.doc:
+            return ""
+
+        matched_tokens = []
+
+        try:
+            dirname = os.path.dirname(__file__)
+            model_file = os.path.join(dirname,
+                                      '../../../lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz')
+            jar_file = os.path.join(dirname, '../../../lib/stanford-ner-2020-11-17/stanford-ner.jar')
+
+            self.st = StanfordNERTagger(model_file, jar_file, encoding='utf-8')
+
+            tokenized_text = word_tokenize(self.doc)
+            classified_text = self.st.tag(tokenized_text)
+
+            found_name = False
+            name = ''
+            for tup in classified_text:
+                if found_name:
+                    if tup[1] == tag:
+                        name += ' ' + tup[0].title()
+                    else:
+                        break
+                elif tup[1] == tag:
+                    name += tup[0].title()
+                    found_name = True
+
+            matched_tokens.append(name)
+        except Exception as e:
+            print("Exception encouneted while extracting name: " + str(e))
+            pass
+
+        return " ".join(matched_tokens)
+
+    def __extract_title(self, url):
+        if not url:
+            return ""
+
+        html = request.urlopen(url).read().decode('utf8')
+
+        soup = BeautifulSoup(html, 'html.parser')
+        title = soup.find('title')
+
+        print()
+        title = title.string if title else ""
+        return title.split('|')[1].strip() if title and "|" in title else title if title else ""
+
     def extract_expertise(self):
 
         if not self.doc:
             return ""
 
-        tokens = tokenizer(self.doc, 'topic')
+        tokens = tokenizer(self.doc)
         # print("tokens: ", tokens)
 
         # Create Dictionary
@@ -124,73 +179,15 @@ class Document:
         emails = re.findall(r'[\w.-]+@[\w.-]+', self.doc)
         return emails[0] if emails else ""
 
-    def extract_ner(self, tag="PERSON"):
-        """
-        Using StanfordNERTagger finds name entity recognition
-        :param tag:
-        :return:
-        """
-        if not self.doc:
-            return ""
-
-        matched_tokens = []
-
-        try:
-            dirname = os.path.dirname(__file__)
-            model_file = os.path.join(dirname, '../../../lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz')
-            jar_file = os.path.join(dirname, '../../../lib/stanford-ner-2020-11-17/stanford-ner.jar')
-
-            self.st = StanfordNERTagger(model_file, jar_file, encoding='utf-8')
-
-            tokenized_text = word_tokenize(self.doc)
-            classified_text = self.st.tag(tokenized_text)
-
-            found_name = False
-            name = ''
-            for tup in classified_text:
-                if found_name:
-                    if tup[1] == tag:
-                        name += ' ' + tup[0].title()
-                    else:
-                        break
-                elif tup[1] == tag:
-                    name += tup[0].title()
-                    found_name = True
-
-            matched_tokens.append(name)
-        except Exception as e:
-            print ("Exception encouneted while extracting name: " + str(e))
-            pass
-
-        return " ".join(matched_tokens)
-
     def extract_name(self):
-        return self.extract_ner(tag="PERSON")
+        return self.__extract_ner(tag="PERSON")
 
-    # deprecate __extract_department
-
-    def __extract_department(self):
-        # TODO Find a better approach to extract department
-        return self.extract_ner(tag="ORGANIZATION")
-
-    def extract_title(self, url):
-        if not url:
-            return ""
-
-        html = request.urlopen(url).read().decode('utf8')
-
-        soup = BeautifulSoup(html, 'html.parser')
-        title = soup.find('title')
-
-        print()
-        title = title.string if title else ""
-        return title.split('|')[1].strip() if title and "|" in title else title if title else ""
 
     def extract_university(self):
-        return self.extract_title(self.university_url)
+        return self.__extract_title(self.university_url)
 
     def extract_department(self):
-        return self.extract_title(self.department_url)
+        return self.__extract_title(self.department_url)
 
     def extract_biodata(self):
         return " ".join(tokenizer(self.doc, remove_email=False)) if self.doc else ""
@@ -204,7 +201,7 @@ class Document:
             return location
 
         googleAPI = GoogleAPI(place_name=self.university_url)
-        comps = googleAPI.get_component(field_comp='address_component')
+        comps = googleAPI.get_component(field_comp='address_components')
 
         for comp in comps:
             if len(comp['types'])>1:
@@ -221,13 +218,16 @@ class Document:
 
 
 if __name__ == '__main__':
-    doc1 = "  Geoffrey Werner Challen Teaching Associate Professor 2227 Siebel Center for Comp Sci 201 N. Goodwin Ave. Urbana Illinois 61801 (217) 300-6150 challen@illinois.edu : Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page Education Ph.D. Computer Science, Harvard University, 2010 AB Physics, Harvard University, 2003 Academic Positions Associate Teaching Professor, University of Illinois, 2017 . Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . . For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . "
-    doc = Document(doc1, department_url="https://www.cs.utah.edu/", university_url="https://utah.edu/")
+    doc = "  Geoffrey Werner Challen Teaching Associate Professor 2227 Siebel Center for Comp Sci 201 N. Goodwin Ave. Urbana Illinois 61801 (217) 300-6150 challen@illinois.edu : Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page Education Ph.D. Computer Science, Harvard University, 2010 AB Physics, Harvard University, 2003 Academic Positions Associate Teaching Professor, University of Illinois, 2017 . Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . . For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . "
+    doc = Document(doc,
+                   faculty_url="http://czhai.cs.illinois.edu",
+                   department_url="https://www.cs.utah.edu/",
+                   university_url="https://utah.edu/")
     print("NAME:       ", doc.extract_name())
     print("DEPARTMENT: ", doc.extract_department())
     print("UNIVERSITY: ", doc.extract_university())
     print("PHONE:      ", doc.extract_phone())
     print("EMAIL:      ", doc.extract_email())
     print("EXPERTISE:  ", doc.extract_expertise())
-    # print("LOCATION:   ", doc.extract_location())
+    print("LOCATION:   ", doc.extract_location())
     print("BIODATA:    ", doc.extract_biodata())

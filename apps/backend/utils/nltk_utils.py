@@ -28,7 +28,7 @@ def word_lemmatizer(text):
     return text
 
 
-def tokenizer(doc, remove_email: bool=True):
+def tokenizer(doc, remove_email: bool = True):
     tokens = []
 
     if not doc:
