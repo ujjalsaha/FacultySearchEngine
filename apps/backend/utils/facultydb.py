@@ -251,18 +251,19 @@ class FacultyDB:
 
             ids = "('" + "','".join([str(i) for i in id]) + "')"
 
-            select_faculty_sql = "SELECT faculty_name, " \
-                                 "       faculty_homepage_url, " \
-                                 "       faculty_department_url, " \
-                                 "       faculty_department_name, " \
-                                 "       faculty_university_url, " \
-                                 "       faculty_university_name, " \
-                                 "       faculty_email, " \
-                                 "       faculty_phone, " \
-                                 "       faculty_location, " \
-                                 "       faculty_expertise " \
-                                 " FROM  faculty_info " \
-                                 " WHERE id IN " + ids
+            select_faculty_sql = """
+            SELECT faculty_name,
+                    faculty_homepage_url,
+                    faculty_department_url,
+                    faculty_department_name,
+                    faculty_university_url,
+                    faculty_university_name,
+                    faculty_email,
+                    faculty_phone,
+                    faculty_location,
+                    faculty_expertise
+              FROM  faculty_info
+              WHERE id IN """ + ids
 
             # print("select_faculty_sql: ", select_faculty_sql)
 
