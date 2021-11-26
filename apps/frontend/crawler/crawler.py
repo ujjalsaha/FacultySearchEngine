@@ -15,6 +15,24 @@ logging.root.setLevel(logging.INFO)
 logging.basicConfig(level=logging.INFO, format=console_format)
 
 
+def build_url(link, url):
+    last_index_slash = url.rfind('/')
+    url = url[:last_index_slash] if last_index_slash == len(url) - 1 else url
+    if link.startswith('https:') or link.startswith('//') or link.startswith('http:'):
+        link = link.replace('//', 'https://') if link.startswith('//') else link
+        link = link.replace('http:', 'https:')
+        faculty_link = link
+    elif link.startswith('..'):
+        link = link.replace('../', '/')
+        faculty_link = url + link
+    elif link.startswith('/'):
+        faculty_link = url + link
+    else:
+        faculty_link = url + '/' + link
+
+    return faculty_link
+
+
 class Crawler:
     """
     This class crawls the faculty pages.
@@ -63,18 +81,7 @@ class Crawler:
             if link not in faculty_pages and \
                     any(keyword in link for keyword in self.get_key_words()):
                 faculty_pages.add(link)
-                url = self.base_url
-                last_index_slash = url.rfind('/')
-                url = url[:last_index_slash] if last_index_slash == len(url) - 1 else url
-                faculty_link = None
-                if link.startswith('https:') or link.startswith('//') or link.startswith('http:'):
-                    link = link.replace('//', 'https://') if link.startswith('//') else link
-                    link = link.replace('http:', 'https:')
-                    faculty_link = link
-                elif link.startswith('/'):
-                    faculty_link = url + link
-                else:
-                    faculty_link = url + '/' + link
+                faculty_link = build_url(link, self.base_url)
                 self.faculty_links.append(faculty_link)
         self.get_faculty_dir_page()
         self.get_base_url()
