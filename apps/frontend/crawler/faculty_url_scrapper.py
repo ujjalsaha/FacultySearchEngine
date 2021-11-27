@@ -148,8 +148,8 @@ class ScrapeFacultyWebPage:
                     faculty_dict['faculty_biodata'] = bio
                     faculty_dict_list.append(faculty_dict)
                     break
-        faculty_list_json = json.loads(faculty_dict_list)
-        self.__do_db_call__(faculty_list_json)
+        faculty_list_json = json.dumps(faculty_dict_list)
+        self.__do_db_call__(faculty_dict_list)
 
     def __do_db_call__(self, faculty_list):
         try:
