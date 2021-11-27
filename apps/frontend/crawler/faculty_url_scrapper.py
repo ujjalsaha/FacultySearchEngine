@@ -53,9 +53,9 @@ class ScrapeFacultyWebPage:
             if tag_text:
                 # print('text inside a tag => ', tag_text)
                 self.all_faculty_text += tag_text + ' ~ '
-        print('all text ', self.all_faculty_text)
+        # print('all text ', self.all_faculty_text)
         self.__check_name__()
-        print('sanitized list ', self.sanitized_list)
+        # print('sanitized list ', self.sanitized_list)
         for tag in all_a_tags:
             link = tag["href"]
             tag_text = tag.text.strip()
@@ -95,7 +95,7 @@ class ScrapeFacultyWebPage:
             tags = st.tag(tokens)
             full_name = ''
             for tag in tags:
-                print('tag inside validate method ', tag)
+                #print('tag inside validate method ', tag)
                 if tag[1] == 'PERSON':
                     full_name += tag[0]
                 if tag[0] == '~':
