@@ -16,8 +16,8 @@ from apps.frontend.crawler.crawler import build_url
 from apps.backend.utils.document import Document
 from apps.backend.utils.facultydb import FacultyDB
 
-st = StanfordNERTagger('lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz',
-                       'lib/stanford-ner-2020-11-17/stanford-ner.jar')
+st = StanfordNERTagger('../../../lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz',
+                       '../../../lib/stanford-ner-2020-11-17/stanford-ner.jar')
 
 
 def random_str_generator(size=8, chars=string.ascii_lowercase + string.digits):
@@ -66,7 +66,7 @@ class ScrapeFacultyWebPage:
                     self.faculty_urls.append(faculty_link)
                     break
         headers = ['uni_url', 'dept_url', 'faculty_url', 'bio']
-        fileName = 'data/' + random_str_generator() + '_bio.txt'
+        fileName = '../../../data/' + random_str_generator() + '_bio.txt'
         with open(fileName, mode='w', encoding='utf-8') as temp_file:
             for url in self.faculty_urls:
                 bio_texts = self.get_bio(url)
@@ -148,6 +148,8 @@ class ScrapeFacultyWebPage:
                     faculty_dict['faculty_biodata'] = bio
                     faculty_dict_list.append(faculty_dict)
                     break
+
+        print(__file__, ":: faculty_dict_list: ", faculty_dict_list)
         faculty_list_json = json.dumps(faculty_dict_list)
         self.__do_db_call__(faculty_dict_list)
 

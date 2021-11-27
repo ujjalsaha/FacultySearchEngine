@@ -3,7 +3,7 @@ from urllib import request
 
 import gensim
 import gensim.corpora as corpora
-import guidedlda
+# import guidedlda
 import logging
 import numpy as np
 import requests
@@ -133,6 +133,7 @@ class Document:
         # LDA topics
         seed_topic_list = [[word[0] for word in topic[1]] for topic in shown_topics]
 
+        """
         # print("LDA Topics: ", seed_topic_list)
 
         token_vectorizer = CountVectorizer(tokenizer=tokenizer,
@@ -163,6 +164,10 @@ class Document:
 
         # return unqiue topic words
         return " ".join(list(set(" ".join(topic_words).split())))
+        """
+        # return unqiue topic words
+        # return " ".join(list(set(seed_topic_list)))
+        return "sample topic todo"
 
     def extract_phone(self):
         if not self.doc:

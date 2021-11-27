@@ -14,7 +14,15 @@ sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'lib'))
 options = Options()
 options.headless = True
 options.add_argument('--no-sandbox')
-driver = webdriver.Chrome('lib/chromedriver', options=options)
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+s = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=s, options=options)
+
+# driver = webdriver.Chrome('../../../lib/chromedriver', options=options)
 
 
 def get_js_soup(base_url):

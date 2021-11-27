@@ -129,9 +129,12 @@ class FacultyDB:
                       }, {...}
                      ]
         """
+        print("faculty_data: ", faculty_data)
 
         if not faculty_data:
             return
+
+
 
         faculty_records, dept_records, uni_records = [], [], []
         departments, universities = {}, {}
@@ -173,6 +176,8 @@ class FacultyDB:
         try:
             conn = self.__open_connection()
             c = conn.cursor()
+
+            print ("faculty_records: ", faculty_records)
 
             # insert multiple records in a single query in faculty_info table
             c.executemany('INSERT INTO faculty_info VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);', faculty_records)

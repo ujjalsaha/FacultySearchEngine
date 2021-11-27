@@ -9,7 +9,7 @@ flask
 gunicorn
 scikit-learn
 guidedlda
-tldexpert
+tldextract
 selenium
 bs4
 python-decouple
