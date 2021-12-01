@@ -3,12 +3,10 @@ urllib3
 numpy
 nltk
 gensim
-metapy
 requests
 flask
 gunicorn
 scikit-learn
-guidedlda
 tldextract
 selenium
 bs4

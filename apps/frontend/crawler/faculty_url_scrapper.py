@@ -122,10 +122,13 @@ class ScrapeFacultyWebPage:
         faculty_dict_list = []
         file_data = None
         file_line_list = []
-        with open(file_name, 'r') as file:
+        print('file_name => ', file_name)
+        with open(file_name, 'r',  encoding='utf-8') as file:
             file_data = file.read().replace('\n', '')
             lines = file.readlines()
             file_line_list = [line.rstrip() for line in lines]
+
+        print(file_line_list)
         for url in self.faculty_urls:
             for line in file_line_list:
                 if url in line:
