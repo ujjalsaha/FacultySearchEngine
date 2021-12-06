@@ -89,7 +89,7 @@ class Document:
         title = title.string if title else ""
         return title.split('|')[1].strip() if title and "|" in title else title if title else ""
 
-        def extract_expertise(self):
+    def extract_expertise(self):
 
         if not self.doc:
             return ""
@@ -134,7 +134,7 @@ class Document:
 
         # LDA topics
         """seed_topic_list = [[word[0] for word in topic[1]] for topic in shown_topics]
-                
+
         # print("LDA Topics: ", seed_topic_list)
         token_vectorizer = CountVectorizer(tokenizer=tokenizer,
                                            min_df=1,
