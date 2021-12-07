@@ -1,13 +1,23 @@
-beautifulsoup4
+#### Reuirements - General ####
 urllib3
-numpy
-nltk
-gensim
+tldextract
 requests
+python-decouple
+
+#### Reuirements - Server and Hosting Services ####
 flask
 gunicorn
-scikit-learn
-tldextract
+
+#### Reuirements - Web Driver and Scraping ####
+beautifulsoup4
 selenium
-bs4
-python-decouple
+webdriver-manager
+
+#### Reuirements - Scientific Processing ####
+numpy
+scikit-learn
+
+#### Reuirements - NLP / Text Retrieval / Text Mining ####
+nltk
+gensim
+rank_bm25
