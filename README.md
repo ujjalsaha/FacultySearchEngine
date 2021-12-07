@@ -16,11 +16,28 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 4. 5 GB free disk space
 
-## Requirements
+## Software Requirements
 
-1. Python3.9 virtual environment [Recommended]   
+1. Python3.9 virtual environment
+   * [MacOS Conda Installation Guide](https://www.anaconda.com/products/individual) or [Linux Conda Installation Guide](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) \
+   * [Managing Conda - Install python virtual environment using Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
+   
+   \
+   Run the below command in virtual environment and Make sure you have installed Python3.9.X.
+   ```shell script
+   python --version
+   ````
+   <br/> 
     
-3. git cli tool [Recommended]   
+1. `pip` package installed in python3.9 virtual environment  - _Should be default wiith Python3.9_   
+   * To install pip on your virtual environment run below command
+   ```shell script
+   conda install pip 
+    ````
+   <br/> 
+    
+2. git cli tool
+    * [Install git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)   
 
 
 ## Setup
