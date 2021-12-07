@@ -18,7 +18,9 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 ## Software Requirements
 
-1. Python3.9 virtual environment
+1. Chrome Browser, Version 96+ and above
+ 
+2. Python3.9 virtual environment
    * [MacOS Conda Installation Guide](https://www.anaconda.com/products/individual) or [Linux Conda Installation Guide](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
    * [Managing Conda - Install python virtual environment using Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) 
    
@@ -27,12 +29,12 @@ x86 64-bit CPU Multi Core **[Recommended]**
    python --version
    ````
       
-1. `pip` package installed in python3.9 virtual environment  - _Should be default wiith Python3.9_   
+3. `pip` package installed in python3.9 virtual environment  - _Should be default wiith Python3.9_   
    * To install pip on your virtual environment run below command
    ```shell script
    conda install pip 
     ````
-2. git cli tool
+4. git cli tool
     * [Install git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)   
 
 
@@ -44,10 +46,40 @@ x86 64-bit CPU Multi Core **[Recommended]**
     ```shell script
     export GOOGLE_API_KEY=<Add Google api Key from CMT Abstract section>
     ```
-    If using pycharm, Pycharm Menu --> Preferences --> Build, Execution, Deployment --> Python Console --> Environment Variables: --> Add `GOOGLE_API_KEY=<Add Google api Key from CMT Abstract section>` --> Ok 
-3. 
+    If using PyCharm, Pycharm Menu --> Preferences --> Build, Execution, Deployment --> Python Console --> Environment Variables: --> Add `GOOGLE_API_KEY=<Add Google api Key from CMT Abstract section>` --> Ok  
 
+2. Using git clone the repository to a path
+   ```shell script
+   cd <desired path where you want to download the project>
+   git clone https://github.com/sudiptobilu/CourseProject.git
+   cd CourseProject
+   ```
 
+3. Switch to the Python3.9 virtual environemnt\
+   If using Conda,
+   ```shell script
+   # TIP: Show all conda environemt
+   conda env list   
+   
+   # pick the Python3.9 environment name from the above output. Then run
+   conda activate <python3.9 virtual environment name> 
+   ```
+
+4. Install the project requirements file on Python3.9 virtual environment
+    ```shell script
+    pip install -r requirements.txt
+    ```
+5. Run the below command to launch the project
+    ```shell script
+   cd apps/frontend
+   
+    python server.py
+    ````
+6. Open Chrome browser and browse the below url
+    ```shell script
+   http://localhost:8095
+    ````
+7. The browser should show up ExpertSearchv2.0 search application 
 
 
 ## Workflows 
