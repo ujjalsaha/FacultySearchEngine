@@ -101,5 +101,5 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 User Story                                    |  Contributor        
 --------------------------------------------- | ------------------------- 
-### Crawler Implementation for a given webpage url ###  <br/> <br /> Description: In the admin interface when admin inputs an url, this story takes the url as input and scrapes the page and extracts the faculty biodata. We also implemented intelligent logic in scraper to find right faculty page if the base url has links that leads to multiple faculty related pages.  | Arnab Kar Sarkar  
+### Crawler Implementation for a given webpage url  <br/> <br /> Description: In the admin interface when admin inputs an url, this story takes the url as input and scrapes the page and extracts the faculty biodata. We also implemented intelligent logic in scraper to find right faculty page if the base url has links that leads to multiple faculty related pages.  | Arnab Kar Sarkar  
 Adding admin interface for web page indexing  | Arnab Kar Sarkar
