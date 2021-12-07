@@ -37,10 +37,10 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 ## Workflows 
 
-![alt text](https://github.com/sudiptobilu/CourseProject/blob/dev/docs/workflows/images/search.jpg?raw=true)
+![alt text](docs/workflows/images/search.jpg?raw=true)
 <br/>
 <br/>
 <br/>
 
-![alt text](https://github.com/sudiptobilu/CourseProject/blob/dev/docs/workflows/images/admin.jpg?raw=true)
+![alt text](docs/workflows/images/admin.jpg?raw=true)
 
