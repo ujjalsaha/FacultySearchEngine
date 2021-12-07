@@ -32,7 +32,7 @@ class Ranker:
             tokenized_corpus = [doc.split(" ") for doc in self.corpus]
             tokenized_query = query.split(" ")
 
-            results =  BM25Okapi(tokenized_corpus).get_top_n(tokenized_query, corpus, n=n)
+            results = BM25Okapi(tokenized_corpus).get_top_n(tokenized_query, corpus, n=n)
             results = [int(result.split()[0]) for result in results] if results else []
 
         except Exception as e:

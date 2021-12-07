@@ -68,3 +68,35 @@ def tokenizer(doc, remove_email: bool = True):
     # print("Tokens: ", tokens)
 
     return tokens
+
+
+def sanitizer(doc):
+    tokens = []
+
+    if not doc:
+        return tokens
+
+    # remove new line
+    doc = doc.replace('\n', ' ')
+
+    # reomve line feed
+    doc = doc.replace('\r', '')
+
+    # remove single quotes
+    doc = doc.replace("\'", "")
+
+    # keeps alphanumeric characters
+    doc = re.sub(r'[\W_]+', ' ', doc)
+
+    # convert lowercase
+    doc = doc.lower()
+
+    tokens = [word for word in word_tokenize(doc)]
+    tokens = [word for word in tokens if len(word) >= 3]
+
+    # removes smaller than 3 character
+    tokens = [word_lemmatizer(w) for w in tokens]
+
+    # print("Tokens: ", tokens)
+
+    return tokens
