@@ -1,18 +1,20 @@
+from apps.backend.utils.facultydb import FacultyDB
+from apps.backend.utils.ranker import Ranker
 class search:
     def __init__(self):
         print("Initialize")
 
-    def get_faculty_corpus(self):
+    def dosearch(self, university_filter, location_filter):
         print("Corpus Method")
+        faculty = FacultyDB()
+        list = faculty.get_biodata_records(university_filter, location_filter)
+        print(list)
 
-    def get_faculty_data(self):
-        print("Faculty data for display after scoring")
-
-    def get_university(self):
-        print("Universities")
-
-    def get_locations(self):
-        print("locations")
+        ranker = Ranker(list)
+        rankedlist = ranker.score("ANOOP BN", 10)
+        print(rankedlist)
 
 if __name__ == '__main__':
     print("Main")
+    search = search()
+    search.dosearch("Manipal","Sikkim")
