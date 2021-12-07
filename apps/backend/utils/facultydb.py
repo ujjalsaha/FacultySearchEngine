@@ -168,14 +168,14 @@ class FacultyDB:
 
             select_biodata_sql = 'SELECT id, faculty_biodata FROM faculty_info'
             if university_filter:
-                select_biodata_sql += " WHERE faculty_university_name LIKE '%" + university_filter + "'"
+                select_biodata_sql += " WHERE faculty_university_name LIKE '%" + university_filter + "%'"
                 if location_filter:
-                    select_biodata_sql += " AND faculty_location LIKE '%" + location_filter + "'"
+                    select_biodata_sql += " OR faculty_location LIKE '%" + location_filter + "%'"
 
             elif location_filter:
-                select_biodata_sql += " WHERE faculty_location LIKE '%" + location_filter + "'"
+                select_biodata_sql += " WHERE faculty_location LIKE '%" + location_filter + "%'"
 
-            # print("select_biodata_sql: ", select_biodata_sql)
+            print("select_biodata_sql: ", select_biodata_sql)
 
             c.execute(select_biodata_sql)
             records = c.fetchall()
@@ -392,7 +392,7 @@ if __name__ == '__main__':
     faculty_db.add_records(faculty_data)
 
     # get all biodata
-    records = faculty_db.get_biodata_records()
+    records = faculty_db.get_biodata_records(university_filter='Manipal')
     print("BIODATA RECORDS:    ")
     pprint(records)
 
