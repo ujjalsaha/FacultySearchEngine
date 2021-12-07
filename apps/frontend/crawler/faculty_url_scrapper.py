@@ -24,6 +24,15 @@ def random_str_generator(size=8, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
 
+def __do_db_call__(faculty_list):
+    try:
+        faculty_db = FacultyDB()
+        faculty_db.add_records(faculty_list)
+        print("BIODATA RECORDS:    ", faculty_db.get_biodata_records())
+    except Exception as exc:
+        raise Exception(" Database error occurred = {}".format(exc))
+
+
 class ScrapeFacultyWebPage:
     def __init__(self, faculty_dict):
         self.faculty_dict = faculty_dict
@@ -66,14 +75,18 @@ class ScrapeFacultyWebPage:
                     self.faculty_urls.append(faculty_link)
                     break
         headers = ['uni_url', 'dept_url', 'faculty_url', 'bio']
-        fileName = '../../../data/' + random_str_generator() + '_bio.txt'
-        with open(fileName, mode='w', encoding='utf-8') as temp_file:
-            for url in self.faculty_urls:
-                bio_texts = self.get_bio(url)
-                temp_file.write(bio_texts)
-                temp_file.write("\n")
+        # fileName = '../../../data/' + random_str_generator() + '_bio.txt'
+        # with open(fileName, mode='w+', encoding='utf-8') as temp_file:
+        #     for url in self.faculty_urls:
+        #         bio_texts = self.get_bio(url)
+        #         temp_file.write(bio_texts)
+        #         temp_file.write("\n")
+        bio_dict = dict()
+        for url in self.faculty_urls:
+            bio_texts = self.get_bio(url)
+            bio_dict[url] = bio_texts
         # process the document
-        self.process_document(fileName)
+        self.process_document(bio_dict)
         close_driver()
 
     def __build_a_tags__(self, div_tag_lst, unique_href):
@@ -95,7 +108,7 @@ class ScrapeFacultyWebPage:
             tags = st.tag(tokens)
             full_name = ''
             for tag in tags:
-                #print('tag inside validate method ', tag)
+                # print('tag inside validate method ', tag)
                 if tag[1] == 'PERSON':
                     full_name += tag[0]
                 if tag[0] == '~':
@@ -108,7 +121,7 @@ class ScrapeFacultyWebPage:
         faculty_bio_soup = remove_script(get_js_soup(url))
         div_class = ['content', 'container']
         unique_href = set()
-        all_texts = [url]
+        all_texts = []
         for cls in div_class:
             elements = faculty_bio_soup.find_all(class_=cls)
             if not len(elements):
@@ -118,52 +131,40 @@ class ScrapeFacultyWebPage:
 
         return " ".join(all_texts)
 
-    def process_document(self, file_name):
+    def process_document(self, bio_dict):
         faculty_dict_list = []
-        file_data = None
-        file_line_list = []
-        print('file_name => ', file_name)
-        with open(file_name, 'r',  encoding='utf-8') as file:
-            file_data = file.read().replace('\n', '')
-            lines = file.readlines()
-            file_line_list = [line.rstrip() for line in lines]
-
-        print(file_line_list)
+        count = 0
         for url in self.faculty_urls:
-            for line in file_line_list:
-                if url in line:
-                    bio = line[len(url):]
-                    doc = Document(
-                        doc=bio,
-                        faculty_url=url,
-                        department_url=self.dept_url,
-                        university_url=self.base_url
-                    )
-                    faculty_dict['faculty_name'] = doc.extract_name()
-                    faculty_dict['faculty_department_name'] = doc.extract_department()
-                    faculty_dict['faculty_university_name'] = doc.extract_university()
-                    faculty_dict['faculty_phone'] = doc.extract_phone()
-                    faculty_dict['faculty_email'] = doc.extract_email()
-                    faculty_dict['faculty_expertise'] = doc.extract_expertise()
-                    faculty_dict['faculty_homepage_url'] = url
-                    faculty_dict['faculty_department_url'] = self.dept_url
-                    faculty_dict['faculty_university_url'] = self.base_url
-                    faculty_dict['faculty_biodata'] = bio
-                    faculty_dict_list.append(faculty_dict)
-                    break
+            faculty_dict = dict()
+            count += 1
+            print(f'{count}, {url} ')
 
-        print(__file__, ":: faculty_dict_list: ", faculty_dict_list)
+            bio = bio_dict.get(url)
+            print('bio => ', bio)
+            doc = Document(
+                doc=bio,
+                faculty_url=url,
+                department_url=self.dept_url,
+                university_url=self.base_url
+            )
+            faculty_dict['faculty_name'] = doc.extract_name()
+            print(f'{count}, {faculty_dict["faculty_name"]} ')
+            faculty_dict['faculty_department_name'] = doc.extract_department()
+            faculty_dict['faculty_university_name'] = doc.extract_university()
+            faculty_dict['faculty_phone'] = doc.extract_phone()
+            faculty_dict['faculty_email'] = doc.extract_email()
+            faculty_dict['faculty_expertise'] = doc.extract_expertise()
+            faculty_dict['faculty_homepage_url'] = url
+            faculty_dict['faculty_department_url'] = self.dept_url
+            faculty_dict['faculty_university_url'] = self.base_url
+            faculty_dict['faculty_biodata'] = bio
+            faculty_dict['faculty_location'] = doc.extract_location()
+            faculty_dict_list.append(faculty_dict)
+            if count > 5:
+                break
+        print(__file__, ":: faculty_dict_list: ")
         faculty_list_json = json.dumps(faculty_dict_list)
-        self.__do_db_call__(faculty_dict_list)
-
-    def __do_db_call__(self, faculty_list):
-        try:
-            faculty_db = FacultyDB()
-            faculty_db.add_records(faculty_list)
-            print("BIODATA RECORDS:    ", faculty_db.get_biodata_records())
-        except Exception as exc:
-            raise Exception(" Database error occurred = {}".format(exc))
-
+        __do_db_call__(faculty_dict_list)
 
 if __name__ == '__main__':
     faculty_dict = {

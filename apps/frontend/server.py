@@ -2,15 +2,17 @@ from flask import Flask
 from flask import render_template, request, jsonify
 import json
 import os
-import metapy
 import requests
 import base64
 import sys
 import re
 
 
-app = Flask(__name__) 
-environ = 'development'
+app = Flask(__name__, template_folder='web/templates')
+app.rootpath = "web/templates"
+sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'web/templates'))
+
+'''environ = 'development'
 dataconfig = json.loads(open("config.json", "r").read())
 app.dataenv = dataconfig[environ]
 app.rootpath = dataconfig[environ]["rootpath"]
@@ -20,11 +22,12 @@ index = metapy.index.make_inverted_index(app.searchconfig)
 query = metapy.index.Document()
 uni_list = json.loads(open(dataconfig[environ]["unispath"],'r').read())["unis"]
 loc_list = json.loads(open(dataconfig[environ]["locspath"],'r').read())["locs"]
+'''
 
 
 @app.route('/')
 def home():
-    return render_template('index.html',uni_list= uni_list,loc_list=loc_list)
+    return render_template('index.html')
 
 @app.route('/admin')
 def admin():
@@ -187,11 +190,11 @@ def _get_preview(doc_name,querytext):
 
 if __name__ == '__main__':
     # environ = os.environ.get("APP_ENV")
-    environ = 'development'
+    '''environ = 'development'
     dataconfig = json.loads(open("config.json", "r").read())
     app.dataenv = dataconfig[environ]
     app.rootpath = dataconfig[environ]["rootpath"]
     app.datasetpath = dataconfig[environ]['datasetpath']
-    app.searchconfig = dataconfig[environ]['searchconfig']
+    app.searchconfig = dataconfig[environ]['searchconfig']'''
 
     app.run(debug=True,threaded=True,host='localhost',port=8095)
