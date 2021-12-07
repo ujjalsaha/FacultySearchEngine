@@ -5,7 +5,7 @@ import os
 import logging
 from decouple import config
 
-API_KEY = config('GOOGLE_API_KEY')
+API_KEY = 'AIzaSyCCeZ68tJ1lbKNG6V2WN_M8vp2bxYh2XFc'
 BASE_URL = 'https://maps.googleapis.com/maps/api/place/'
 
 console_format = '%(name)s - %(levelname)s - %(message)s'

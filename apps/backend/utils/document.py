@@ -120,54 +120,47 @@ class Document:
         doc_lda = lda_model[corpus]
         """
 
-        topics = lda_model.print_topics(num_words=3)
+        topics = lda_model.print_topics(num_words=10)
 
-        """
-        for topic in topics:
-            print(topic)
-        """
+
+        '''for topic in topics:
+            print(topic)'''
+
 
         shown_topics = lda_model.show_topics(num_topics=1,
-                                             num_words=3,
+                                             num_words=10,
                                              formatted=False)
+        topic_list = [[word[0] for word in topic[1]] for topic in shown_topics]
+
         # LDA topics
-        seed_topic_list = [[word[0] for word in topic[1]] for topic in shown_topics]
+        """seed_topic_list = [[word[0] for word in topic[1]] for topic in shown_topics]
 
-        """
         # print("LDA Topics: ", seed_topic_list)
-
         token_vectorizer = CountVectorizer(tokenizer=tokenizer,
                                            min_df=1,
                                            max_df=1.0,
                                            ngram_range=(1, 4))
-
         X = token_vectorizer.fit_transform([self.doc])
-
         tf_feature_names = token_vectorizer.get_feature_names()
-
         word2id = dict((v, idx) for idx, v in enumerate(tf_feature_names))
-
         model = guidedlda.GuidedLDA(n_topics=1, n_iter=100, random_state=7, refresh=10)
         seed_topics = {}
-
         for t_id, st in enumerate(seed_topic_list):
             for word in st:
                 seed_topics[word2id[word]] = t_id
-
         model.fit(X, seed_topics=seed_topics, seed_confidence=0.15)
         n_top_words = 10
-
         topic_words = []
         for i, topic_dist in enumerate(model.topic_word_):
             topic_words = np.array(tf_feature_names)[np.argsort(topic_dist)][:-(n_top_words + 1):-1]
             # print('Topic {}: {}'.format(i, ' '.join(topic_words)))
-
         # return unqiue topic words
         return " ".join(list(set(" ".join(topic_words).split())))
         """
         # return unqiue topic words
         # return " ".join(list(set(seed_topic_list)))
-        return "sample topic todo"
+
+        return topic_list
 
     def extract_phone(self):
         if not self.doc:
