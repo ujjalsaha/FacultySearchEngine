@@ -133,12 +133,14 @@ class ScrapeFacultyWebPage:
 
     def process_document(self, bio_dict):
         faculty_dict_list = []
-        file_data = None
-        file_line_list = []
-        count = 10
-        print(file_line_list)
+        count = 0
         for url in self.faculty_urls:
+            faculty_dict = dict()
+            count += 1
+            print(f'{count}, {url} ')
+
             bio = bio_dict.get(url)
+            print('bio => ', bio)
             doc = Document(
                 doc=bio,
                 faculty_url=url,
@@ -146,6 +148,7 @@ class ScrapeFacultyWebPage:
                 university_url=self.base_url
             )
             faculty_dict['faculty_name'] = doc.extract_name()
+            print(f'{count}, {faculty_dict["faculty_name"]} ')
             faculty_dict['faculty_department_name'] = doc.extract_department()
             faculty_dict['faculty_university_name'] = doc.extract_university()
             faculty_dict['faculty_phone'] = doc.extract_phone()
@@ -157,11 +160,11 @@ class ScrapeFacultyWebPage:
             faculty_dict['faculty_biodata'] = bio
             faculty_dict['faculty_location'] = doc.extract_location()
             faculty_dict_list.append(faculty_dict)
-
-        print(__file__, ":: faculty_dict_list: ", faculty_dict_list)
+            if count > 5:
+                break
+        print(__file__, ":: faculty_dict_list: ")
         faculty_list_json = json.dumps(faculty_dict_list)
         __do_db_call__(faculty_dict_list)
-
 
 if __name__ == '__main__':
     faculty_dict = {
