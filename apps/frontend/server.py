@@ -6,6 +6,7 @@ import requests
 import base64
 import sys
 import re
+from apps.backend.utils.facultydb import FacultyDB
 
 
 app = Flask(__name__, template_folder='web/templates')
@@ -23,7 +24,10 @@ query = metapy.index.Document()
 uni_list = json.loads(open(dataconfig[environ]["unispath"],'r').read())["unis"]
 loc_list = json.loads(open(dataconfig[environ]["locspath"],'r').read())["locs"]
 '''
-
+faculty = FacultyDB()
+unis = json.dumps(faculty.get_all_universities())
+locs = json.dumps(faculty.get_all_locations())
+depts = json.dumps(faculty.get_all_departments())
 
 @app.route('/')
 def home():
