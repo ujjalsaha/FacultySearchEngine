@@ -1,7 +1,7 @@
 import logging
 
 from rank_bm25 import BM25Okapi
-
+from apps.backend.utils.nltk_utils import sanitizer
 
 class Ranker:
 
@@ -30,6 +30,7 @@ class Ranker:
         results = []
         try:
             tokenized_corpus = [doc.split(" ") for doc in self.corpus]
+            query = sanitizer(query)
             tokenized_query = query.split(" ")
 
             results = BM25Okapi(tokenized_corpus).get_top_n(tokenized_query, corpus, n=n)
