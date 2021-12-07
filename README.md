@@ -39,8 +39,12 @@ x86 64-bit CPU Multi Core **[Recommended]**
 ## Setup
 
 1. Set Environemnt Variable\
-    `GOOGLE_API_KEY=<Add Google api Key>`
-       
+   [Click Here](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) to get the Google API Key from the [CMT](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) Abstract section (Make sure you are in reviewer role. Credentials required). \
+    Add the below line in your `~/.basrc` or `~/.bash_profile` 
+    ```shell script
+    export GOOGLE_API_KEY=<Add Google api Key from CMT Abstract section>
+    ```
+    If using pycharm, Pycharm Menu --> Preferences --> Build, Execution, Deployment --> Python Console --> Environment Variables: --> Add `GOOGLE_API_KEY=<Add Google api Key from CMT Abstract section>` --> Ok 
 3. 
 
 
