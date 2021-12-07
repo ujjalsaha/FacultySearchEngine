@@ -21,3 +21,12 @@ The UIUC ExpertSearch system (https://github.com/CS410Assignments/ExpertSearch) 
        
 3. 
 
+
+
+
+## Workflows 
+
+![alt text](https://github.com/sudiptobilu/CourseProject/blob/dev/docs/workflows/images/search.jpg?raw=true)
+
+![alt text](https://github.com/sudiptobilu/CourseProject/blob/dev/docs/workflows/images/admin.jpg?raw=true)
+
