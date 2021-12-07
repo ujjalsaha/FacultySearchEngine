@@ -155,7 +155,7 @@ class FacultyDB:
         except Exception as e:
             raise Exception("Unexpected SQLite3 connection close  error: " + str(e))
 
-    def get_biodata_records(self, university_filter=None, location_filter=None):
+    def get_biodata_records(self, university_filter=None, department_filter=None, location_filter=None):
         """
         Get faculty biodata. if ay of the filter parameters are provided, get biodate based on filters
         :param university_filter:
@@ -169,11 +169,21 @@ class FacultyDB:
             select_biodata_sql = 'SELECT id, faculty_biodata FROM faculty_info'
             if university_filter:
                 select_biodata_sql += " WHERE faculty_university_name LIKE '%" + university_filter + "%'"
+                if department_filter:
+                    select_biodata_sql += " OR faculty_department_name LIKE '%" + department_filter + "%'"
+                    if location_filter:
+                        select_biodata_sql += " OR faculty_location LIKE '%" + location_filter + "%'"
+
+            elif department_filter:
+                select_biodata_sql += " WHERE faculty_department_name LIKE '%" + department_filter + "%'"
                 if location_filter:
                     select_biodata_sql += " OR faculty_location LIKE '%" + location_filter + "%'"
 
             elif location_filter:
                 select_biodata_sql += " WHERE faculty_location LIKE '%" + location_filter + "%'"
+
+            else:
+                pass
 
             print("select_biodata_sql: ", select_biodata_sql)
 
@@ -377,7 +387,7 @@ if __name__ == '__main__':
                     {"faculty_name": "Bijoyeta Roy",
                      "faculty_homepage_url": "https://smu.edu.in/smit/dept-faculty/faculty-list/ANOOP-BN.html",
                      "faculty_department_url": "https://smu.edu.in/smit/dept-faculty/dept-list/dept-of-computer-science-engineering-smit-sikkim-manipal-u.html",
-                     "faculty_department_name": "Department of Computer Science & Engineering",
+                     "faculty_department_name": "Department of Electrical Engineering",
                      "faculty_university_url": "https://smu.edu.in/",
                      "faculty_university_name": "Sikkim Manipal Institute of technology",
                      "faculty_email": "bijoyeta.r@smit.smu.edu.in",
@@ -397,6 +407,13 @@ if __name__ == '__main__':
     pprint(records)
 
     print("\n")
+
+    records = faculty_db.get_biodata_records(department_filter="Electrical")
+    print("BIODATA RECORDS:    ")
+    pprint(records)
+
+    print("\n")
+
 
     # get faculty info for ids 2 and 3
     records = faculty_db.get_faculty_records([2, 3])
