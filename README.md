@@ -2,7 +2,10 @@
 
 ## Abstract
 
-The existing ExpertSearch system (https://github.com/CS410Assignments/ExpertSearch) has several features such as faculty search, filtering criterions, search results (with options to open faculty bio pages, emailing, location info), pagination etc. As a team, we did a deep analysis of the ExpertSearch capabilities and found several deficiencies that need to be addressed to make it a better search system. The deficiencies include lack of accuracy, lack of relevant search results and inconsistencies in the search results. These deficiencies can be addressed using the text retrieval and text mining techniques that will improve the overall search experience in the ExpertSearch system. The team will be involved in implementing features such as converting unstructured dataset to structured dataset (e.g., csv, json), identifying the key topics (e.g., areas of interest) for each of the faculties and display in the search result, introducing an admin interface that would classify faculty pages and finally improving some of the existing features in the search page for better search experience.
+The existing ExpertSearch system (https://github.com/CS410Assignments/ExpertSearch) has several features such as faculty search, filtering based search, search results (with options to open faculty bio pages, emailing, location info), pagination etc.
+As a team, we did a deep analysis of the current ExpertSearch capabilities and found several deficiencies that need to be addressed to make it a better search system. 
+The deficiencies include lack of accuracy, lack of relevant search results and inconsistencies in the search results. These deficiencies can be addressed using the right text retrieval and text mining techniques that will improve the overall search experience in the ExpertSearch system. 
+The team involved in implementing features such as converting unstructured dataset to structured dataset (e.g., csv, json), identifying the key topics (e.g., areas of interest) for each of the faculties and display in the search result, introducing an admin interface that would classify faculty pages and finally improving some of the existing features in the search page for better search experience.
 
 ## Hardware Requirements
 1. Modern Operating System  [Minimum]\
@@ -19,6 +22,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 ## Software Requirements
 
 1. Chrome Browser, Version 96+ and above
+    * [Download and Install Chrome](https://www.google.com/chrome/)
  
 2. Python3.9 virtual environment
    * [MacOS Conda Installation Guide](https://www.anaconda.com/products/individual) or [Linux Conda Installation Guide](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
@@ -54,7 +58,6 @@ x86 64-bit CPU Multi Core **[Recommended]**
    git clone https://github.com/sudiptobilu/CourseProject.git
    cd CourseProject
    ```
-
 3. Switch to the Python3.9 virtual environemnt\
    If using Conda,
    ```shell script
@@ -69,17 +72,19 @@ x86 64-bit CPU Multi Core **[Recommended]**
     ```shell script
     pip install -r requirements.txt
     ```
-5. Run the below command to launch the project
+
+## Usage
+1. From the project directory and python3.9 virtual environment, Run the below command 
     ```shell script
    cd apps/frontend
    
     python server.py
     ````
-6. Open Chrome browser and browse the below url
+2. Open Chrome browser and browse the below url
     ```shell script
    http://localhost:8095
     ````
-7. The browser should show up ExpertSearchv2.0 search application 
+3. The browser should show up ExpertSearchv2.0 search application 
 
 
 ## Workflows 
@@ -90,4 +95,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 <br/>
 
 ![alt text](docs/workflows/images/admin.jpg?raw=true)
+
+
+## User Stories and Work Distribution
 

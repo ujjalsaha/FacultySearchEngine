@@ -31,8 +31,7 @@ class Ranker:
         results = []
         try:
             tokenized_corpus = [doc.split(" ") for doc in self.corpus]
-            query = sanitizer(query)
-            tokenized_query = query.split(" ")
+            tokenized_query = sanitizer(query)
 
             results = BM25Okapi(tokenized_corpus).get_top_n(tokenized_query, corpus, n=n)
             results = [int(result.split()[0]) for result in results] if results else []
