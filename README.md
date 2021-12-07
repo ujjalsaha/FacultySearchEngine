@@ -114,6 +114,6 @@ x86 64-bit CPU Multi Core **[Recommended]**
     When admin enters the base url, this module will check if the url is a valid university url. If yes, the module forwards the url for crawling and scraping the faculty pages. If not, the module lets the admin know that base url doesn’t belong to a university or no faculty page found.                 
     
 
-<a href = "https://github.com/Tanu-N-Prabhu/Python/graphs/contributors">
-  <img src = "https://contrib.rocks/image?repo = GitHub_username/repository_name"/>
+<a href = "https://github.com/sudiptobilu/CourseProject/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo = sudiptobilu/CourseProject"/>
 </a>
