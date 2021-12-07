@@ -5,7 +5,10 @@ import os
 import logging
 from decouple import config
 
-API_KEY = 'AIzaSyCCeZ68tJ1lbKNG6V2WN_M8vp2bxYh2XFc'
+API_KEY = os.getenv('GOOGLE_API_KEY')
+if not API_KEY:
+    raise Exception("Google API Key not found. Please update the OS environment Variable GOOGLE_API_KEY.")
+
 BASE_URL = 'https://maps.googleapis.com/maps/api/place/'
 
 console_format = '%(name)s - %(levelname)s - %(message)s'
@@ -30,8 +33,8 @@ class GoogleAPI:
         Get valid component from Google API.
         :return: JSON string of the address
         """
-        url = self.__get_details_url__(field_comp)
         try:
+            url = self.__get_details_url__(field_comp)
             response = requests.get(url)
             response_json = json.loads(response.text)
             components = response_json['result'][field_comp]
@@ -40,6 +43,7 @@ class GoogleAPI:
         return components
 
     def __call__(self):
+
         url = 'findplacefromtext/json?'
         params = {'input': self.place_name, 'fields': 'place_id', 'key': API_KEY, 'inputtype': 'textquery'}
         req_url = BASE_URL + url + urllib.parse.urlencode(params)

@@ -192,11 +192,6 @@ class Document:
     def extract_location(self):
         location = ""
 
-        api_key = os.getenv('GOOGLE_API_KEY')
-
-        if not api_key:
-            return location
-
         googleAPI = GoogleAPI(place_name=self.university_url)
         comps = googleAPI.get_component(field_comp='address_components')
 
