@@ -188,20 +188,20 @@ Sudipto Sarkar       | sudipto2
 
 1. **Epic: Crawling and Scraping**
     - - - -
-    a. <details>
-           <summary><b>User Story: </b> Crawler Implementation for a given webpage url Click for Story Details</summary>
-           <p>In the admin interface when admin inputs an url, this story takes the url as input and scrapes the page and extracts the faculty biodata. We also implemented intelligent logic in scraper to find right faculty page if the base url has links that leads to multiple faculty related pages.</p>
-       </details>     
+    <details>
+       <summary><b>User Story: </b> Crawler Implementation for a given webpage url. Click for Story Details</summary>
+       <br/>
+       <p>In the admin interface when admin inputs an url, this story takes the url as input and scrapes the page and extracts the faculty biodata. We also implemented intelligent logic in scraper to find right faculty page if the base url has links that leads to multiple faculty related pages.</p>
+    </details>     
     
     **Executed by**: _Arnab KarSarkar, Ujjal Saha_
     - - - -
-    b. **User Story**: Adding admin interface for web page indexing  
-    
     <details>
-       <summary>Click for Story Details</summary>
+       <summary><b>User Story: </b> Adding admin interface for web page indexing. Click for Story Details</summary>
+       <br/>
        <p>As our project scope doesn’t include auto crawler features for the entire web, the admin interface we are implementing in ExpertSearch system is to allow the admin to enter base url of the universities and based on valid/invalid university email (different story) the admin interface will fetch the url to the crawler module to scrape faculty data.</p>
     </details>     
-        
+    
     **Executed by**: _Arnab KarSarkar, Ujjal Saha_
     - - - -
     c. **User Story**: Displaying accepted/rejected web page based on url   
