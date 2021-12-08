@@ -322,7 +322,7 @@ Sudipto Sarkar       | sudipto2
 
 ## User Stories and Contributions
 
-1. **Epic: Crawling and Scraping** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _(Contribution :clap: &nbsp;&nbsp;: Arnab KarSarkar, Ujjal Saha)_
+1. **Epic: Crawling and Scraping** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _(Contributions :clap: &nbsp;&nbsp;: Arnab KarSarkar, Ujjal Saha)_
     <details>
        <summary><b>User Story: </b> Crawler Implementation for a given webpage url. Click for Story Details</summary>
        <br/>
@@ -341,13 +341,7 @@ Sudipto Sarkar       | sudipto2
        <p>When admin enters the base url, this module will check if the url is a valid university url. If yes, the module forwards the url for crawling and scraping the faculty pages. If not, the module lets the admin know that base url doesn’t belong to a university or no faculty page found.</p>
     </details>     
     
-    - - - -
-
-2. **Epic: Search Experience Enhancement using Text Retrieval Techniques**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-**Contribution**: _Ujjal Saha, Sudipto Sarkar_
-    - - - -
+2. **Epic: Search Experience Enhancement using Text Retrieval Techniques** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _(Contributions :clap: &nbsp;&nbsp;: Ujjal Saha, Sudipto Sarkar)_
     <details>
        <summary><b>User Story: </b> Build a structured dataset from Unstructured datasets. Click for Story Details</summary>
        <br/>
@@ -366,9 +360,7 @@ Sudipto Sarkar       | sudipto2
        <p>The current expert search system doesn’t show contact info (email, etc.) consistently across the search results even if the faulty page does have the data. Our improved scraping and structured data along with improved data display logic will increase the consistency in displaying the fields in search results.</p>
     </details>     
     
-    - - - -
-    
-3. **Epic: Topic Mining**   
+3. **Epic: Topic Mining** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _(Contributions :clap: &nbsp;&nbsp;: Sudipto Sarkar, Arnab KarSarkar)_   
 
     <details>
        <summary><b>User Story: </b> Using text mining extract interest areas of a faculty. Click for Story Details</summary>
@@ -376,18 +368,13 @@ Sudipto Sarkar       | sudipto2
        <p>Using text mining methods we are planning to generate “Areas of Interests” data from the faculty bio. We are using guided LDA algorithm and Gensim/NLTK libraries to explore other topic mining features and we will be experimenting with parameters to generate relevant topics.</p>
     </details>     
     
-    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar_
-    - - - -
     <details>
        <summary><b>User Story: </b> Display Areas of Interest in the faculty search result. Click for Story Details</summary>
        <br/>
        <p>We are enhancing the front end of ExpertSearch to display faculty search results along with additional relevant fields such as faculty areas of interest and few more.</p>
     </details>     
     
-    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar_
-    - - - -
-    
-4. **Epic: Deployment**   
+4. **Epic: Deployment** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _(Contributions :clap: &nbsp;&nbsp;: Arnab KarSarkar, Ujjal Saha, Sudipto Sarkar)_
 
     <details>
        <summary><b>User Story: </b> Understand and Install current ExpertSearch System. Click for Story Details</summary>
@@ -395,43 +382,28 @@ Sudipto Sarkar       | sudipto2
        <p>Install and explore the ExpertSearch system and understand the features and functionalities (both frontend and backend). Experiment with code changes etc.</p>
     </details>     
  
-    **Executed by**: _Ujjal Saha, Sudipto Sarkar, Arnab KarSarkar_
-    - - - -
     <details>
        <summary><b>User Story: </b> Deploy code into AWS. Click for Story Details</summary>
        <br/>
        <p>Being web-based framework, we will do our deployments in AWS Cloud and make it public. We will also do a git PR on the existing original ExpertSearch repo. But launching as an improved system and others to validate, we will separately host ExpertSearchv2.0 in AWS.</p>
     </details>     
 
-    **Executed by**: _Arnab KarSarkar, Ujjal Saha, Sudipto Sarkar_
-    - - - -
     <details>
        <summary><b>User Story: </b> Validation Exercises. Click for Story Details</summary>
        <br/>
        <p>As we do development and deployment, we are doing multiple rounds of verification and validation and some will require integrated end-to-end validation steps.</p>
     </details>     
-      
-    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar, Ujjal Saha_
-    - - - -
-    
-5. **Epic: Documentation and Presentation**   
+        
+5. **Epic: Documentation and Presentation** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _(Contributions :clap: &nbsp;&nbsp;: Ujjal Saha, Sudipto Sarkar, Arnab KarSarkar)_   
 
     **User Story**: Proposal Documentation 
-    
-    **Executed by**: _Ujjal Saha, Sudipto Sarkar, Arnab KarSarkar_
-    - - - -
+       
     **User Story**: project Progress Documentation
     
-    **Executed by**: _Arnab KarSarkar, Ujjal Saha, Sudipto Sarkar_
-    - - - -
     **User Story**: Final Project Report Documentation  
     
-    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar, Ujjal Saha_
-    - - - -
-    **User Story**: Final Project Report Documentation  
+    **User Story**: Final Project Video Presentation  
     
-    **Executed by**: _Ujjal Saha, Sudipto Sarkar, Arnab KarSarkar_
-    - - - -
 
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
