@@ -113,7 +113,9 @@ Sudipto Sarkar       | sudipto2
 
 1. **Epic: Crawling and Scraping**   
 
-    a. **User Story**: Crawler Implementation for a given webpage url 
+    a. **User Story**: Crawler Implementation for a given webpage url
+     
+    __**Executed by**: Arnab KarSarkar, Ujjal Saha__
 
     In the admin interface when admin inputs an url, this story takes the url as input and scrapes the page and extracts the faculty biodata. We also implemented intelligent logic in scraper to find right faculty page if the base url has links that leads to multiple faculty related pages. 
     
