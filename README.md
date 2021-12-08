@@ -42,7 +42,9 @@
 3. As this is eventual update, user may come back after a while and searching data related to newly entered unisersity serach results should get displayed.
 4. If a faulcty is alrready present in the system, the system wont insert a deplicate record of the same facult and will silently ignore the faculty in the process.
 
-<a href="#top" align="right">Back to top</a>
+<div style="text-align: right"> <a href="#top">Back to top</a> </div>
+
+
 ## Overview
 
 The ExpertSearch v2.0 application is a faculty search webapp that uses NLP and Text Porcessing (Retrieval and Mining) abilties leveraging the modein python NLP libraries.
