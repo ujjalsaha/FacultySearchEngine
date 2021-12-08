@@ -97,6 +97,18 @@ x86 64-bit CPU Multi Core **[Recommended]**
 ![alt text](docs/workflows/images/admin.jpg?raw=true)
 
 
+## Project Team Members
+
+Name             |  Netid 
+| :---  | :--- 
+Ujjal Saha       | ujjals2
+Arnab KarSarkar       | arnabk2
+Sudipto Sarkar       | sudipto2
+
+
+
+
+
 ## User Stories and Team Assignments
 
 1. **Epic: Crawling and Scraping**   
@@ -114,6 +126,18 @@ x86 64-bit CPU Multi Core **[Recommended]**
     When admin enters the base url, this module will check if the url is a valid university url. If yes, the module forwards the url for crawling and scraping the faculty pages. If not, the module lets the admin know that base url doesn’t belong to a university or no faculty page found.                 
     
 
-<a href = "https://github.com/sudiptobilu/CourseProject/graphs/contributors">
-  <img src = "https://contrib.rocks/image?repo = sudiptobilu/CourseProject"/>
-</a>
+1. **Epic: Crawling and Scraping**   
+
+    a. **User Story**: Crawler Implementation for a given webpage url 
+
+    In the admin interface when admin inputs an url, this story takes the url as input and scrapes the page and extracts the faculty biodata. We also implemented intelligent logic in scraper to find right faculty page if the base url has links that leads to multiple faculty related pages. 
+    
+    b. **User Story**: Adding admin interface for web page indexing  
+    
+    As our project scope doesn’t include auto crawler features for the entire web, the admin interface we are implementing in ExpertSearch system is to allow the admin to enter base url of the universities and based on valid/invalid university email (different story) the admin interface will fetch the url to the crawler module to scrape faculty data.
+    
+    c. **User Story**: Displaying accepted/rejected web page based on url   
+    
+    When admin enters the base url, this module will check if the url is a valid university url. If yes, the module forwards the url for crawling and scraping the faculty pages. If not, the module lets the admin know that base url doesn’t belong to a university or no faculty page found.                 
+    
+
