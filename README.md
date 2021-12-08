@@ -14,31 +14,31 @@ As a team, we did a deep analysis of the current ExpertSearch capabilities and f
 The deficiencies include lack of accuracy in the search results, lack of relevant search results and inconsistencies in the search results. These deficiencies can be addressed using the right text retrieval and text mining techniques that will improve the overall search experience in the ExpertSearch system. 
 Our team involved in implementing following features as we fork the existing ExpertSearch System and added/improved core-functionalities as we build on top of it. Below are the core functionalities that we added on the existing ExpertSearch and we called it ExpertSearchv2.0:
 <details>
-   <summary>Converting unstructured dataset to structured dataset. Click here for details.</summary>
+   <summary>Converting unstructured dataset to structured dataset. Click to learn more.</summary>
    <p></p>
    <img/>
 </details>     
  
 <details>
-   <summary>Identifying the key topics (e.g., areas of interest) for faculties and display in the search result. Click here for details.</summary>
+   <summary>Topics extraction (e.g., areas of interest) for faculties and display in search results. Click to learn more.</summary>
    <p></p>
    <img/>
 </details>     
 
 <details>
-   <summary>Introducing revamped admin interface that would crawl and scrape faculty pages based on user input. User can input either university name or URL. Click here for details.</summary>
+   <summary>Rearchitected admin interface that accepts university name/url for crawling/scraping faculty pages async. Click to learn more.</summary>
    <p></p>
    <img/>
 </details>     
 
 <details>
-   <summary>More filter criteria. Click here for details.</summary>
+   <summary>Added more filter criteria. Click to learn more.</summary>
    <p></p>
    <img/>
 </details>     
 
 <details>
-   <summary>Improved search results with consistant display of the faculty attribute such as phone number, email, location etc. Click to learn more.</summary>
+   <summary>Improved search results with consistant display of the faculty attributes. Click to learn more.</summary>
    <p></p>
    <img/>
 </details>     
@@ -50,7 +50,7 @@ Our team involved in implementing following features as we fork the existing Exp
 </details>     
 
 <details>
-   <summary>Documentation and Artifacts. <a href="#">Click to learn more.</a></summary>
+   <summary>Documentation and Artifacts for future development. Click to learn more</summary>
    <p></p>
    <img/>
 </details>     
