@@ -1,20 +1,20 @@
 #  ExpertSearch v2.0
 
 ## Table of contents
-* [Video Presentation](##video-presentation)
-* [Using the ExpertSearch v2.0 Webapp](##using-the-expertsearch-v2.0-webapp)
+* [Video Presentation](#video-presentation)
+* [Using the ExpertSearch v2.0 Webapp](#using-the-expertsearch-v2.0-webapp)
 * [Overview](#overview)
-* [Hardware Requirements](##hardware-requirements)
-* [Access and Permission Requirements](##access-and-permission-requirements)
-* [Software Requirements](##software-requirements)
-* [Setup](##setup)
-* [Deploy](##deploy)
-* [Implementation Details](##-implementation-details) 
-* [Project Team Members](##project-team-members)
-* [User Stories and Contributions](##user-stories-and-contributions)
-* [Improvements Areas](##improvements-areas)
-* [Licensing](##licensing)
-* [Acknowledgements](##acknowledgements)
+* [Hardware Requirements](#hardware-requirements)
+* [Access and Permission Requirements](#access-and-permission-requirements)
+* [Software Requirements](#software-requirements)
+* [Setup](#setup)
+* [Deploy](#deploy)
+* [Implementation Details](#-implementation-details) 
+* [Project Team Members](#project-team-members)
+* [User Stories and Contributions](#user-stories-and-contributions)
+* [Improvements Areas](#improvements-areas)
+* [Licensing](#licensing)
+* [Acknowledgements](#acknowledgements)
 
 ## Video Presentation
 
