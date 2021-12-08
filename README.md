@@ -14,7 +14,7 @@ As a team, we did a deep analysis of the current ExpertSearch capabilities and f
 The deficiencies include lack of accuracy in the search results, lack of relevant search results and inconsistencies in the search results. These deficiencies can be addressed using the right text retrieval and text mining techniques that will improve the overall search experience in the ExpertSearch system. 
 Our team involved in implementing following features as we fork the existing ExpertSearch System and added/improved core-functionalities as we build on top of it. Below are the core functionalities that we added on the existing ExpertSearch and we called it ExpertSearchv2.0:
 <details>
-   <summary>Converting unstructured dataset to structured dataset. Click to learn more.</summary>
+   <summary>Converting unstructured dataset to structured dataset. <font color="#1e90ff"> Click to learn more.</font></summary>
    <br/>
    <p></p>
    <img/>
