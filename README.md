@@ -90,9 +90,13 @@ x86 64-bit CPU Multi Core **[Recommended]**
 ## Implementation Details 
 
 <details>
-           <summary>Title 1</summary>
-           <p>Content 1 Content 1 Content 1 Content 1 Content 1</p>
+   <summary>Click to See the Workflow Diagram of Admin Interface</summary>
+   <img alt="ExpertSearch Admin Functionality Workflow" src="docs/workflows/images/search.jpg?raw=true"/>
 </details>
+
+
+
+
 
 ![alt text](docs/workflows/images/search.jpg?raw=true)
 <br/>
