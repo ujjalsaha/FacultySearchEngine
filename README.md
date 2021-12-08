@@ -305,7 +305,8 @@ x86 64-bit CPU Multi Core **[Recommended]**
 #### ExpertSearchv2.0 Search Functionality
 
 <details>
-   <summary>Click to See the Workflow Diagram of Search Functionalty</summary>
+   <summary>Click to See the Workflow and Implementaion details of Search Functionalty</summary>
+  <br/>
    <ul>
    <li>For search functionality the front end file is located at [web/templates/index.html](web/templates/index.html)</li>
    <li>User enters query to the html file (user can provide filters too) which is passed to the backend Flask server [apps/frontend/server.py::search()](apps/frontend/server.py) as a http request</li>
