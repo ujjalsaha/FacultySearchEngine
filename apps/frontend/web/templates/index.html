@@ -69,9 +69,16 @@
 </h6>
 <select class="search-filter ml-auto"  name="unis[]" multiple="multiple" id="uni_filter">
 </select>
-
-
 </div>
+
+  <div class="row" style="margin:8px;">
+     <h6 class="mr-auto">
+  Departments
+</h6>
+<select class="search-filter ml-auto"  name="depts[]" multiple="multiple" id="dept_filter">
+</select>
+</div>
+
 <div class="row mx-auto" style="margin-top: 10px;">
 <button type="button" class="btn btn-primary btn-sm" id="applyFilters" style="box-shadow: 0 2px 4px rgba(0,0,0,.11)">Apply Filters</button>
 </div>
@@ -89,6 +96,7 @@
       <script type="text/javascript">
         var unis = JSON.stringify(unis);
         var locs = JSON.stringify(locs);
+        var depts = JSON.stringify(depts);
     </script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 

@@ -120,7 +120,8 @@ var doSearch = function() {
         "query": searchTerm,
         "num_results": numResults,
         "selected_loc_filters" : selected_loc_filters,
-        "selected_uni_filters": selected_uni_filters
+        "selected_uni_filters": selected_uni_filters,
+        "selected_dept_filters": selected_dept_filters
     }
     if (searchTerm!='')
     {
@@ -175,7 +176,8 @@ $(window).on("resize",function() {
 
 $(document).ready(function() {
     $('#loc_filter').select2({placeholder: "e.g. United States, California"});
-    $('#uni_filter').select2({placeholder: "e.g. Stanford University"});
+    $('#uni_filter').select2({placeholder: "e.g. University of Illinois Urbana-Champaign"});
+    $('#dept_filter').select2({placeholder: "e.g. Computer Science"});
     $(window).trigger('resize');
 });
 
@@ -195,6 +197,15 @@ window.onload=function(){
         $('#loc_filter').append(newOption).trigger('change');
     }
     selected_loc_filters = locs.slice()
+
+    selected_dept_filters = depts.slice()
+    for (var i=0;i<depts.length;i++){
+         var newOption = new Option(depts[i], i, false, false);
+        // Append it to the select
+        $('#dept_filter').append(newOption).trigger('change');
+    }
+    selected_dept_filters = depts.slice()
+
     $(window).trigger('resize');
  
 };
@@ -246,6 +257,18 @@ $("#applyFilters").click(function() {
     if (selected_loc_filters.length == 0){
         selected_loc_filters = locs.slice()
     }
+
+    var selected_dept_data = $("#dept_filter").select2("data");
+    selected_dept_filters = []
+    selected_dept_data.forEach(s => {
+            selected_dept_filters.push(s['text']);
+
+});
+
+    if (selected_dept_filters.length == 0){
+        selected_dept_filters = depts.slice()
+    }
+
   filters_div = document.getElementById("search-filters")
   filters_div.style.display = 'none'
         doSearch();
