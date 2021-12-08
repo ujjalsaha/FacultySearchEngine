@@ -16,7 +16,7 @@
 * [Improvements Areas](#improvements-areas)
 * [Licensing](#licensing)
 * [Acknowledgements](#acknowledgements)
-* [References][#references]
+* [References](#references)
 
 ## Video Presentation
 
