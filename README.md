@@ -51,8 +51,13 @@ Our team involved in implementing following features as we fork the existing Exp
 
 <details>
    <summary>Documentation and Artifacts for future development. Click to learn more</summary>
-   <p></p>
-   <img/>
+   <p>The new ExpertSearchv2.0 comes with well documented modules, functions and modularized codes that overall improves the readability. 
+   There are also design artifacts in terms of workflow diagrams that were generated for users to understand the features and funciotnality of the code. 
+   This will encourage better participation for future development. 
+   When compared to the existing ExpertSeach the existing web application has almost zero documentaion and artifacts which made it very difficult for code analysis, code reusability and increased the overall development window for enhancements. 
+   Below snapshot demonstrates a good comparison between the existing and new ExpertSearch.</p>
+   <br/>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_documentation.png.jpg?raw=true"/>
 </details>     
 
 
