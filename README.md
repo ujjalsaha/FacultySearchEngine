@@ -204,10 +204,9 @@ Sudipto Sarkar       | sudipto2
     
     **Executed by**: _Arnab KarSarkar, Ujjal Saha_
     - - - -
-    c. **User Story**: Displaying accepted/rejected web page based on url   
-    
     <details>
-       <summary>Click for Story Details</summary>
+       <summary><b>User Story: </b> Displaying accepted/rejected web page based on url. Click for Story Details</summary>
+       <br/>
        <p>When admin enters the base url, this module will check if the url is a valid university url. If yes, the module forwards the url for crawling and scraping the faculty pages. If not, the module lets the admin know that base url doesn’t belong to a university or no faculty page found.</p>
     </details>     
                      
@@ -216,28 +215,25 @@ Sudipto Sarkar       | sudipto2
 
 2. **Epic: Search Experience Enhancement**   
 
-    a. **User Story**: Build a structured dataset from Unstructured datasets 
-
     <details>
-       <summary>Click for Story Details</summary>
+       <summary><b>User Story: </b> Build a structured dataset from Unstructured datasets. Click for Story Details</summary>
+       <br/>
        <p>In current ExpertSearch system the faculty data are stored as unstructured data as a file. We are implementing a functionality that will convert the unstructured data to structured data. For e.g., using text mining and text retrieval techniques we are planning to extract fields like Faculty Name, Department, University, Area of Interests, email, phone, etc, and store them in a structured form (either in csv, or database etc.) This will enhance the overall search experience.</p>
     </details>     
-                     
+     
     **Executed by**: _Ujjal Saha, Sudipto Sarkar_
     - - - -
-    b. **User Story**: Enhance the search experience with relevant search results  
-    
     <details>
-       <summary>Click for Story Details</summary>
+       <summary><b>User Story: </b> Enhance the search experience with relevant search results. Click for Story Details</summary>
+       <br/>
        <p>Based on search input, we will look up all biodata from structured dataset and implement a ranking function using metapy. Based on ranking results we will extract corresponding fields from the structured data and display as search results. We will enhance filter based searching feature too where user can get better accuracy because of structured dataset.</p>
     </details>     
-    
+      
     **Executed by**: _Ujjal Saha, Sudipto Sarkar_
     - - - -
-    c. **User Story**: Better consistency in displaying links such as email, phone etc. leveraging the structured data   
-    
     <details>
-       <summary>Click for Story Details</summary>
+       <summary><b>User Story: </b> Better consistency in displaying attributes leveraging structured data. Click for Story Details</summary>
+       <br/>
        <p>The current expert search system doesn’t show contact info (email, etc.) consistently across the search results even if the faulty page does have the data. Our improved scraping and structured data along with improved data display logic will increase the consistency in displaying the fields in search results.</p>
     </details>     
     
@@ -246,19 +242,17 @@ Sudipto Sarkar       | sudipto2
     
 3. **Epic: Topic Mining**   
 
-    a. **User Story**: Using text mining techniques to extract the Areas of interest for a given faculty based 
-
     <details>
-       <summary>Click for Story Details</summary>
+       <summary><b>User Story: </b> Using text mining techniques to extract the Areas of interest for a given faculty based. Click for Story Details</summary>
+       <br/>
        <p>Using text mining methods we are planning to generate “Areas of Interests” data from the faculty bio. We are using guided LDA algorithm and Gensim/NLTK libraries to explore other topic mining features and we will be experimenting with parameters to generate relevant topics.</p>
     </details>     
     
     **Executed by**: _Sudipto Sarkar, Arnab KarSarkar_
     - - - -
-    b. **User Story**: Display Areas of Interest in the faculty search result  
-    
     <details>
-       <summary>Click for Story Details</summary>
+       <summary><b>User Story: </b> Display Areas of Interest in the faculty search result. Click for Story Details</summary>
+       <br/>
        <p>We are enhancing the front end of ExpertSearch to display faculty search results along with additional relevant fields such as faculty areas of interest and few more.</p>
     </details>     
     
@@ -267,28 +261,25 @@ Sudipto Sarkar       | sudipto2
     
 4. **Epic: Deployment**   
 
-    a. **User Story**: Understand and Install current ExpertSearch System 
-
     <details>
-       <summary>Click for Story Details</summary>
+       <summary><b>User Story: </b> Understand and Install current ExpertSearch System. Click for Story Details</summary>
+       <br/>
        <p>Install and explore the ExpertSearch system and understand the features and functionalities (both frontend and backend). Experiment with code changes etc.</p>
     </details>     
-    
+ 
     **Executed by**: _Ujjal Saha, Sudipto Sarkar, Arnab KarSarkar_
     - - - -
-    b. **User Story**: Deploy code into AWS  
-    
     <details>
-       <summary>Click for Story Details</summary>
-       <p>As ExpertSearch is web-based framework, we will do our deployments in AWS Cloud and make it public. We will also do a git PR on the existing original ExpertSearch repo. But launching as an improved system and others to validate, we will separately host ExpertSearchv2.0 in AWS.</p>
+       <summary><b>User Story: </b> Deploy code into AWS. Click for Story Details</summary>
+       <br/>
+       <p>Being web-based framework, we will do our deployments in AWS Cloud and make it public. We will also do a git PR on the existing original ExpertSearch repo. But launching as an improved system and others to validate, we will separately host ExpertSearchv2.0 in AWS.</p>
     </details>     
-    
+
     **Executed by**: _Arnab KarSarkar, Ujjal Saha, Sudipto Sarkar_
     - - - -
-    c. **User Story**: Validation Exercises  
-    
     <details>
-       <summary>Click for Story Details</summary>
+       <summary><b>User Story: </b> Validation Exercises. Click for Story Details</summary>
+       <br/>
        <p>As we do development and deployment, we are doing multiple rounds of verification and validation and some will require integrated end-to-end validation steps.</p>
     </details>     
       
@@ -297,20 +288,21 @@ Sudipto Sarkar       | sudipto2
     
 5. **Epic: Documentation and Presentation**   
 
-    a. **User Story**: Proposal Documentation 
+    **User Story**: Proposal Documentation 
     
     **Executed by**: _Ujjal Saha, Sudipto Sarkar, Arnab KarSarkar_
     - - - -
-    b. **User Story**: project Progress Documentation
+    **User Story**: project Progress Documentation
     
     **Executed by**: _Arnab KarSarkar, Ujjal Saha, Sudipto Sarkar_
     - - - -
-    c. **User Story**: Final Project Report Documentation  
+    **User Story**: Final Project Report Documentation  
     
     **Executed by**: _Sudipto Sarkar, Arnab KarSarkar, Ujjal Saha, _
     - - - -
-    c. **User Story**: Final Project Report Documentation  
+    **User Story**: Final Project Report Documentation  
     
     **Executed by**: _Ujjal Saha, Sudipto Sarkar, Arnab KarSarkar_
+    - - - -
 
 ## Improvements Areas
