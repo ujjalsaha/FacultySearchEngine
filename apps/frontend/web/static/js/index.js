@@ -32,15 +32,17 @@ var docDiv = (doc) => {
        <div style="display: flex;">
 
         
-                 <b style="font-size:14pt">${fac_name} - ${univ_name}</b>
+                 <b style="font-size:14pt">${fac_name}</b>
                  <a style="margin-left:auto;color:black;" href=${fac_url} target="_blank"><i class="material-icons">launch</i></a>
                  </div>
-
+            <div>
+                    University - ${univ_name}
+                </div>
             <div class="header-item">
             <div class="tag">
             <i class='fas fa-university' ></i>
                   ${uni_dept}
-            </div>
+            </div>                
                 <div class="tag">
                   <i class="material-icons">location_on</i>
                    ${loc}
@@ -53,9 +55,13 @@ var docDiv = (doc) => {
            
 
               <div class="card-body">
-                <span id='docPrev-${name}'><b>Department URL : - </b>${dept_url}</span>
+                <span id='docPrev-${name}'><b>Department URL 
+                    <a style="margin-left:auto;color:black;" href=${dept_url} target="_blank"><i class="material-icons">launch</i></a>
+                </b></span>
                 <br>
-                <span id='docPrev-${name}'><b>University URL : - </b>${univ_url}</span>
+                <span id='docPrev-${name}'><b>University URL
+                    <a style="margin-left:auto;color:black;" href=${univ_url} target="_blank"><i class="material-icons">launch</i></a>
+                </b></span>
                 <br>
                 <span id='docPrev-${name}'><b>Expertise : - </b>${expertise}</span>
                 <br>
@@ -69,11 +75,13 @@ var docDiv = (doc) => {
        <div style="display: flex;">
 
         
-                 <b style="font-size:14pt">${fac_name} - ${univ_name}</b>
+                 <b style="font-size:14pt">${fac_name}</b>
                  <a style="margin-left:auto;color:black;margin-right:20px;" href='mailto:${email}' "><i class="material-icons">email</i></a>
                  <a style="color:black;" href=${fac_url} target="_blank"><i class="material-icons">launch</i></a>
                  </div>
-
+            <div>
+                    University - ${univ_name}
+                </div>
             <div class="header-item">
             <div class="tag">
             <i class='fas fa-university' ></i>
@@ -91,9 +99,13 @@ var docDiv = (doc) => {
          
 
               <div class="card-body">
-                <span id='docPrev-${name}'><b>Department URL : - </b>${dept_url}</span>
+                <span id='docPrev-${name}'><b>Department URL 
+                    <a style="margin-left:auto;color:black;" href=${dept_url} target="_blank"><i class="material-icons">launch</i></a>
+                </b></span>
                 <br>
-                <span id='docPrev-${name}'><b>University URL : - </b>${univ_url}</span>
+                <span id='docPrev-${name}'><b>University URL
+                    <a style="margin-left:auto;color:black;" href=${univ_url} target="_blank"><i class="material-icons">launch</i></a>
+                </b></span>
                 <br>
                 <span id='docPrev-${name}'><b>Expertise : - </b>${expertise}</span>
                 <br>                
