@@ -3,8 +3,8 @@
 ## Video Presentation
 
 #### [Software usage tutorial presentation](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw) 
-MacOS   To open in a new tab: Cmd <kbd>⌘</kbd> + Click      
-Windows To open in a new tab: Control <kbd>⌃</kbd> + Click 
+<sub><sup>MacOS   To open in a new tab: Cmd </sup></sub><kbd>⌘</kbd><sub><sup> + Click</sup></sub>      
+<sub><sup>Windows   To open in a new tab: Cmd </sup></sub><kbd>⌃</kbd><sub><sup> + Click</sup></sub>      
 
 
 ## Abstract
