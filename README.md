@@ -295,32 +295,37 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 #### ExpertSearchv2.0 Admin Functionality
 
-<details>
-   <summary>Click to See the Workflow Diagram of Search Functionalty</summary>
-   <br/>
-   <img alt="ExpertSearch Admin Functionality Workflow" src="docs/workflows/images/search.jpg?raw=true"/>
-</details>
-
-#### ExpertSearchv2.0 Search Functionality
-
-* For search functionality the front end file is located at [web/templates/index.html](web/templates/index.html)
-* User enters query to the html file (user can provide filters too) which is passed to the backend Flask server [apps/frontend/server.py::search()](apps/frontend/server.py) as a http request
-* The server receives the query string and calls [apps/frontend/server.py::search()](apps/frontend/server.py)
-* The `search` inturn calls an orchestration function [apps/backend/api/search.py::get_search_results()](apps/backend/api/search.py)
-* The `get_search_results` is an orchestration function and calls different backend systems to retrieve the data
-    * The call first goes to [apps/backend/utils/facultydb.py::get_biodata_records()](apps/backend/utils/facultydb.py) and grabs all scrpaed biodata stored in a database table column andlong with correspinding structured data id.
-    * Then the corpus data is passed to [apps/backend/utils/ranker.py::score()](apps/backend/utils/ranker.py) to score the corpus biodate dataset based on search query. The function used BM25 as text retrieval alogorithm to rank corpus documents.
-    * Once ranking is done the corresponding structured data ids were returned as a ranked list of faculty ids 
-    * The ranked ids were taken and passed to [apps/backend/utils/facultydb.py::get_faculty_records()](apps/backend/utils/facultydb.py) to get the structured data from database
-* The results dataset is now a structured data with key pair values and being disp;ayed in the front end accordingly
-* The benefit of diplaying structured data is consistancy in displaying results and all the attributes and allowing actions on them. (for e.g. send email, explore location etc.)
-* :warning: The entire workflow and code discussed above is all new work in the ExpertSearch v2.0 that has been done. Tasks involved adapting new libraries for Python3.9, explorations, PoCs, and then designining an effctive workflow and implementing it.   
        
 <details>
    <summary>Click to See the Workflow Diagram of Admin Functionalty</summary>
    <br/>
    <img alt="ExpertSearch Admin Functionality Workflow" src="docs/workflows/images/admin.jpg?raw=true"/>
 </details>
+
+#### ExpertSearchv2.0 Search Functionality
+
+<details>
+   <summary>Click to See the Workflow Diagram of Search Functionalty</summary>
+   <ul>
+   <li>For search functionality the front end file is located at [web/templates/index.html](web/templates/index.html)</li>
+   <li>User enters query to the html file (user can provide filters too) which is passed to the backend Flask server [apps/frontend/server.py::search()](apps/frontend/server.py) as a http request</li>
+   <li>The server receives the query string and calls [apps/frontend/server.py::search()](apps/frontend/server.py)</li>
+   <li>The `search` inturn calls an orchestration function [apps/backend/api/search.py::get_search_results()](apps/backend/api/search.py)</li>
+   <li>The `get_search_results` is an orchestration function and calls different backend systems to retrieve the data</li>
+        <ul>
+            <li>The call first goes to [apps/backend/utils/facultydb.py::get_biodata_records()](apps/backend/utils/facultydb.py) and grabs all scrpaed biodata stored in a database table column andlong with correspinding structured data id.</li>
+            <li>Then the corpus data is passed to [apps/backend/utils/ranker.py::score()](apps/backend/utils/ranker.py) to score the corpus biodate dataset based on search query. The function used BM25 as text retrieval alogorithm to rank corpus documents.</li>
+            <li>Once ranking is done the corresponding structured data ids were returned as a ranked list of faculty ids </li>
+            <li>The ranked ids were taken and passed to [apps/backend/utils/facultydb.py::get_faculty_records()](apps/backend/utils/facultydb.py) to get the structured data from database</li>
+        </ul>
+   <li>The results dataset is now a structured data with key pair values and being disp;ayed in the front end accordingly</li>
+   <li>The benefit of diplaying structured data is consistancy in displaying results and all the attributes and allowing actions on them. (for e.g. send email, explore location etc.)</li>
+   </ul>
+    <p>The entire workflow and code discussed above is all new work in the ExpertSearch v2.0 that has been done. Tasks involved adapting new libraries for Python3.9, explorations, PoCs, and then designining an effctive workflow and implementing it.</p>   
+   <br/>
+   <img alt="ExpertSearch Admin Functionality Workflow" src="docs/workflows/images/search.jpg?raw=true"/>
+</details>
+
 
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
