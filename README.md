@@ -87,7 +87,12 @@ x86 64-bit CPU Multi Core **[Recommended]**
 3. The browser should show up ExpertSearchv2.0 search application 
 
 
-## Workflows 
+## Implementation Details 
+
+<details>
+           <summary>Title 1</summary>
+           <p>Content 1 Content 1 Content 1 Content 1 Content 1</p>
+</details>
 
 ![alt text](docs/workflows/images/search.jpg?raw=true)
 <br/>
@@ -115,7 +120,10 @@ Sudipto Sarkar       | sudipto2
     - - - -
     a. **User Story**: Crawler Implementation for a given webpage url
      
-    In the admin interface when admin inputs an url, this story takes the url as input and scrapes the page and extracts the faculty biodata. We also implemented intelligent logic in scraper to find right faculty page if the base url has links that leads to multiple faculty related pages. 
+        <details>
+           <summary>Details</summary>
+           <p>In the admin interface when admin inputs an url, this story takes the url as input and scrapes the page and extracts the faculty biodata. We also implemented intelligent logic in scraper to find right faculty page if the base url has links that leads to multiple faculty related pages.</p>
+         </details>     
 
     **Executed by**: _Arnab KarSarkar, Ujjal Saha_
     - - - -
