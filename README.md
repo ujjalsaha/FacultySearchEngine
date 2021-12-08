@@ -1,8 +1,8 @@
 #  ExpertSearch v2.0
 
-## Video Presentation  :movie_camera:
+## Video Presentation
 
-[Software usage tutorial presentation](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw) 
+#### [Software usage tutorial presentation](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw) 
 
 ## Abstract
 
