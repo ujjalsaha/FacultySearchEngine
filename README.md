@@ -26,7 +26,7 @@ Our team involved in implementing following features as we fork the existing Exp
 </details>     
 
 <details>
-   <summary>Rearchitected admin interface that accepts university name/url for crawling/scraping faculty pages async. Click to learn more.</summary>
+   <summary>Rearchitected admin interface for auto crawling amd scraping faculty pages async. Click to learn more.</summary>
    <p></p>
    <img/>
 </details>     
