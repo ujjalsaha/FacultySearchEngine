@@ -3,7 +3,8 @@
 ## Video Presentation
 
 #### [Software usage tutorial presentation](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw) 
-To open in a new tab: Cmd <kbd>⌘</kbd> + Click      or  Control <kbd>⌃</kbd> + Click 
+MacOS   To open in a new tab: Cmd <kbd>⌘</kbd> + Click      
+Windows To open in a new tab: Control <kbd>⌃</kbd> + Click 
 
 <a href="https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw" target="_blank">Software usage tutorial presentation (New Tab)</a>
 
