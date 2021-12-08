@@ -88,7 +88,8 @@ var doSearch = function() {
         "query": searchTerm,
         "num_results": numResults,
         "selected_loc_filters" : selected_loc_filters,
-        "selected_uni_filters": selected_uni_filters
+        "selected_uni_filters": selected_uni_filters,
+        "selected_dept_filters": selected_dept_filters
     }
     if (searchTerm!='')
     {
@@ -213,6 +214,18 @@ $("#applyFilters").click(function() {
     if (selected_loc_filters.length == 0){
         selected_loc_filters = locs.slice()
     }
+
+    var selected_dept_data = $("#dept_filter").select2("data");
+    selected_dept_filters = []
+    selected_dept_data.forEach(s => {
+            selected_dept_filters.push(s['text']);
+
+});
+
+    if (selected_dept_filters.length== 0){
+        selected_dept_filters = depts.slice()
+    }
+
   filters_div = document.getElementById("search-filters")
   filters_div.style.display = 'none'
         doSearch();
