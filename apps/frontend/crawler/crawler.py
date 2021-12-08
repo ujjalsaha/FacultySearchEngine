@@ -43,16 +43,26 @@ class Crawler:
         self.key_words = self.get_key_words()
         self.faculty_links = []
         self.logger = logging.getLogger('Crawler')
-        self.return_dict = {'dept_url': base_url}
+        self.extract = tldextract.extract(self.base_url)
+        self.return_dict = dict()
+        self.get_dept_url()
 
     def get_base_url(self):
         """
         Get the base URL using tldextract library.
         :return:None
         """
-        extract = tldextract.extract(self.base_url)
-        uni_url = "https://www." + extract.domain + "." + extract.suffix
+        uni_url = "https://www." + self.extract.domain + "." + self.extract.suffix
         self.return_dict['base_url'] = uni_url
+
+    def get_dept_url(self):
+        """
+           Get the department URL using tldextract library.
+           :return:None
+       """
+        dept_url = "https://" + self.extract.subdomain +  "." + self.extract.domain + "." + self.extract.suffix
+        self.base_url = dept_url
+        self.return_dict['dept_url'] = dept_url
 
     def get_key_words(self):
         """
@@ -100,14 +110,18 @@ class Crawler:
                 if url.endswith('/faculty'):
                     final_link = url
                     break
-                # print('url in max count => ', url)
+                # print('url in faculty_links => ', url)
                 faculty_link_soup = remove_script(get_js_soup(url))
+                # print(faculty_link_soup)
                 faculty_page_html = faculty_link_soup.find_all(text=True)
+                # print(faculty_page_html)
                 visible_texts = filter(tag_visible, faculty_page_html)
                 faculty_count = 0
                 for text in visible_texts:
+                    # print(f"{url} => {faculty_count} => {text}")
                     if 'PROFESSOR' in text.upper() or 'LECTURER' in text.upper():
                         faculty_count += 1
+
                 if faculty_count >= max_count and faculty_count > 0:
                     max_count = faculty_count
                     final_link = url
@@ -139,7 +153,6 @@ class ExtractFacultyURL:
         self.uni_name = uni_name
         self.log = logging.getLogger('Extract_Faculty_URL')
         self.base_url = self.get_base_url()
-        print("Found Base Url => ", self.base_url)
         self.crawler = None
         if self.base_url:
             self.crawler = Crawler(base_url=self.base_url)
@@ -179,7 +192,7 @@ class ExtractFacultyURL:
 
 
 if __name__ == '__main__':
-    uni = "University Of Utah, computer science"
+    uni = "Harvard University, School of Engineering and Applied Sciences"
     print(uni)
     extractURL = ExtractFacultyURL(uni)
     print('Faculty Page found = ', extractURL.has_valid_faculty_link())
