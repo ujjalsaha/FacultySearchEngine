@@ -293,6 +293,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 ## Implementation Details 
 
+:pushpin: :pushpin:     
 #### ExpertSearchv2.0 Admin Functionality
 
 * Admin interface is primarily responsible for receiving university/department/faculty name or urls as input from user to parse, crawl, scrape data, retrieve fields using various text mining approaches and insert structured data to database.
@@ -315,7 +316,6 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 :bangbang: The entire workflow and code discussed above is all new work in the ExpertSearch v2.0 that has been done. Tasks involved adapting new libraries for Python3.9, explorations, PoCs, and then designining an effctive workflow and implementing it.   
 
-:pushpin: :pushpin:     
 <details>
    <summary>Click to See the Workflow Diagram of Admin Functionalty</summary>
    <br/>
@@ -324,6 +324,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 - - - - 
 
+:pushpin: :pushpin:     
 #### ExpertSearchv2.0 Search Functionality
 
 * For search functionality the front end file is located at [web/templates/index.html](web/templates/index.html)
@@ -340,7 +341,6 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 :bangbang: The entire workflow and code discussed above is all new work in the ExpertSearch v2.0 that has been done. Tasks involved adapting new libraries for Python3.9, explorations, PoCs, and then designining an effctive workflow and implementing it.   
 
-:pushpin: :pushpin:
 <details>
    <summary>Click to See the Workflow Diagram of Search Functionalty</summary>
    <br/>
