@@ -44,7 +44,6 @@
 
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
-
 ## Overview
 
 The ExpertSearch v2.0 application is a faculty search webapp that uses NLP and Text Porcessing (Retrieval and Mining) abilties leveraging the modein python NLP libraries.
@@ -138,6 +137,7 @@ Below are the core functionalities that we added/improved on the existing Expert
    <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_documentation.png?raw=true"/>
 </details>     
 
+<div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
 ## Hardware Requirements
 1. Modern Operating System  [Minimum]\
@@ -151,11 +151,15 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 4. 5 GB free disk space
 
+<div style="text-align: right"> <a href="#top">Back to top</a> </div>
+
 ## Access and Permission Requirements
 
 1. Access to the terminal window
 
 2. A user with admin-level privileges
+
+<div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
 ## Software Requirements
 
@@ -180,6 +184,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 4. git cli tool
     * [Install git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)   
 
+<div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
 ## Setup
 
@@ -231,6 +236,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
     ```shell script
     pip install -r requirements.txt
     ```
+<div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
 ## Deploy
 1. Start Redis Server
@@ -262,6 +268,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 :exclamation: A comprehensive software usage [video presentation](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw) is also available. [Click Here](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw)
 
+<div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
 ## Implementation Details 
 
@@ -281,6 +288,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
    <img alt="ExpertSearch Admin Functionality Workflow" src="docs/workflows/images/admin.jpg?raw=true"/>
 </details>
 
+<div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
 ## Project Team Members
 
@@ -290,9 +298,7 @@ Ujjal Saha       | ujjals2
 Arnab KarSarkar       | arnabk2
 Sudipto Sarkar       | sudipto2
 
-
-
-
+<div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
 ## User Stories and Contributions
 
@@ -414,6 +420,8 @@ Sudipto Sarkar       | sudipto2
     
     **Executed by**: _Ujjal Saha, Sudipto Sarkar, Arnab KarSarkar_
     - - - -
+
+<div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
 ## Improvements Areas
 * Crawling and Scraping activites can be tracked if implemeted a publisher and subscriber. We didn't do it as it wont add much value of our goal and focus on Text Retrieval and Mining techniques.  
