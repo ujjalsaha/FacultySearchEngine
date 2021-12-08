@@ -38,10 +38,23 @@ Our team involved in implementing following features as we fork the existing Exp
 </details>     
 
 <details>
-   <summary>Also improving in consistency in the search page for displaying the faculty fields such as phone number, email, location etc. Click here for details.</summary>
+   <summary>Improved search results with consistant display of the faculty attribute such as phone number, email, location etc. Click to learn more.</summary>
    <p></p>
    <img/>
 </details>     
+
+<details>
+   <summary>Major System upgrade from Python2.7 to Python3.9. Click to learn more.</summary>
+   <p></p>
+   <img/>
+</details>     
+
+<details>
+   <summary>Documentation and Artifacts. <a>Click to learn more.</a></summary>
+   <p></p>
+   <img/>
+</details>     
+
 
 ## Hardware Requirements
 1. Modern Operating System  [Minimum]\
