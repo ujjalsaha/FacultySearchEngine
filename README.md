@@ -349,30 +349,28 @@ Sudipto Sarkar       | sudipto2
     - - - -
 
 2. **Epic: Search Experience Enhancement using Text Retrieval Techniques**   
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+**Contribution**: _Ujjal Saha, Sudipto Sarkar_
+    - - - -
     <details>
        <summary><b>User Story: </b> Build a structured dataset from Unstructured datasets. Click for Story Details</summary>
        <br/>
        <p>In current ExpertSearch system the faculty data are stored as unstructured data as a file. We are implementing a functionality that will convert the unstructured data to structured data. For e.g., using text mining and text retrieval techniques we are planning to extract fields like Faculty Name, Department, University, Area of Interests, email, phone, etc, and store them in a structured form (either in csv, or database etc.) This will enhance the overall search experience.</p>
     </details>     
      
-    **Executed by**: _Ujjal Saha, Sudipto Sarkar_
-    - - - -
     <details>
        <summary><b>User Story: </b> Enhance the search experience with relevant search results. Click for Story Details</summary>
        <br/>
        <p>Based on search input, we will look up all biodata from structured dataset and implement a ranking function using metapy. Based on ranking results we will extract corresponding fields from the structured data and display as search results. We will enhance filter based searching feature too where user can get better accuracy because of structured dataset.</p>
     </details>     
       
-    **Executed by**: _Ujjal Saha, Sudipto Sarkar_
-    - - - -
     <details>
        <summary><b>User Story: </b> Better consistency in displaying attributes leveraging structured data. Click for Story Details</summary>
        <br/>
        <p>The current expert search system doesn’t show contact info (email, etc.) consistently across the search results even if the faulty page does have the data. Our improved scraping and structured data along with improved data display logic will increase the consistency in displaying the fields in search results.</p>
     </details>     
-    
-    **Executed by**: _Ujjal Saha, Sudipto Sarkar_
     - - - -
     
 3. **Epic: Topic Mining**   
