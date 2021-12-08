@@ -89,14 +89,17 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 ## Implementation Details 
 
+### ExpertSearchv2.0 Admin Functionality
+- - - - 
 <details>
-   <summary>Click to See the Workflow Diagram of Search Functionalty Workflow Diagram</summary>
+   <summary>Click to See the Workflow Diagram of Search Functionalty</summary>
    <img alt="ExpertSearch Admin Functionality Workflow" src="docs/workflows/images/search.jpg?raw=true"/>
 </details>
 
-
+### ExpertSearchv2.0 Search Functionality
+- - - - 
 <details>
-   <summary>Click to See the Workflow Diagram of Admin Functionalty Workflow Diagram</summary>
+   <summary>Click to See the Workflow Diagram of Admin Functionalty</summary>
    <img alt="ExpertSearch Admin Functionality Workflow" src="docs/workflows/images/admin.jpg?raw=true"/>
 </details>
 
