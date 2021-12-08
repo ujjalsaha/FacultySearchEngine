@@ -189,7 +189,7 @@ Sudipto Sarkar       | sudipto2
     **Executed by**: _Sudipto Sarkar, Arnab KarSarkar, Ujjal Saha, _
     - - - -
     
-5. **Epic: Documentation**   
+5. **Epic: Documentation and Presentation**   
 
     a. **User Story**: Proposal Documentation 
     
