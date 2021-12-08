@@ -77,8 +77,8 @@ def search():
     num_results = data['num_results']
 
     search_obj = Search()
-    search_result = search_obj.get_search_results(querytext, "Manipal", "Computer", "Sikkim")
-    #search_result = search_obj.get_search_results(querytext, unifilter, deptfilter, locfilter)
+    #search_result = search_obj.get_search_results(querytext, "Manipal", "Computer", "Sikkim")
+    search_result = search_obj.get_search_results(querytext, unifilter, deptfilter, locfilter)
 
     print(search_result)
     faculty_names = []
