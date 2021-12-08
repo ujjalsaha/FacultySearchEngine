@@ -351,7 +351,7 @@ Sudipto Sarkar       | sudipto2
 2. **Epic: Search Experience Enhancement using Text Retrieval Techniques**   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 **Contribution**: _Ujjal Saha, Sudipto Sarkar_
     - - - -
     <details>
@@ -371,6 +371,7 @@ Sudipto Sarkar       | sudipto2
        <br/>
        <p>The current expert search system doesn’t show contact info (email, etc.) consistently across the search results even if the faulty page does have the data. Our improved scraping and structured data along with improved data display logic will increase the consistency in displaying the fields in search results.</p>
     </details>     
+    
     - - - -
     
 3. **Epic: Topic Mining**   
