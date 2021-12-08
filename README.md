@@ -29,10 +29,10 @@
 ## Overview
 
 The ExpertSearch v2.0 application is a faculty search webapp that uses NLP and Text Porcessing (Retrieval and Mining) abilties leveraging the modein python NLP libraries.
-The ExpertSearch v2.0 application was build on top the [existing ExpertSearch web application](https://github.com/CS410Assignments/ExpertSearch) that has features such as faculty search, filtering based search, displaying search results (with options to open faculty bio pages, emailing, location info), pagination etc.
+The ExpertSearch v2.0 application was build on top the [existing ExpertSearch web application](https://github.com/CS410Assignments/ExpertSearch) that has features such as faculty search, filtering based search, displaying search results (with options to open faculty bio pages, emailing, location info), pagination etc.\
 As a team, we did a deep analysis of the current ExpertSearch capabilities and found several deficiencies that can be addressed to make it a better search system. 
-The deficiencies include lack of accuracy in the search results, lack of relevant search results and inconsistencies in the search results, old and out of support python library usages, undocumented code and repo etc. 
-These deficiencies can be addressed using the right text retrieval and text mining techniques along with some good pratices that will improve the overall search experience in the ExpertSearch system. 
+The deficiencies include lack of accuracy in the search results, lack of relevant search results and inconsistencies in the search results, old and out of support python library usages, undocumented code and repo etc.\
+These deficiencies can be addressed using the right text retrieval and text mining techniques along with some good pratices that will improve the overall search experience in the ExpertSearch system.  
 Our team involved in implementing following features as we fork the existing ExpertSearch System and added/improved core-functionalities as we build on top of it. 
 Below are the core functionalities that we added/improved on the existing ExpertSearch and we called it **ExpertSearchv2.0**:
 <details>
