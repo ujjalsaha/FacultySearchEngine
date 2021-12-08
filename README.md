@@ -1,5 +1,9 @@
 #  ExpertSearch v2.0
 
+## Video Presentation
+
+:movie_camera: [Software usage tutorial presentation](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw) 
+
 ## Abstract
 
 The existing ExpertSearch system (https://github.com/CS410Assignments/ExpertSearch) has several features such as faculty search, filtering based search, search results (with options to open faculty bio pages, emailing, location info), pagination etc.
