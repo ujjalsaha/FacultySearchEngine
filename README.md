@@ -297,6 +297,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 #### ExpertSearchv2.0 Admin Functionality
 
 * Admin interface is primarily responsible for receiving university/department/faculty name or urls as input from user to parse, crawl, scrape data, retrieve fields using various text mining approaches and insert structured data to database.
+* The purpose of Admin is t oadd more data from admin provided urls to broader the search results and more data availability. This is also an continuous process to enrich the system with more and more data as they are available or explored.
 * For admin functionality the front end file is located at [web/templates/admin.html](web/templates/admin.html)
 * User provides either univseristy name or university url or department url. User can also specify University Name and Department name together.
 * The Admin interface receives input from user and asynchronously responds to user that the database will be updated eventually. This is `eventual consistancy` model. If user closes browser backend server will still be processing the the crawling and scraping.
