@@ -315,6 +315,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
     * The ranked ids were taken and passed to [apps/backend/utils/facultydb.py::get_faculty_records()](apps/backend/utils/facultydb.py) to get the structured data from database
 * The results dataset is now a structured data with key pair values and being disp;ayed in the front end accordingly
 * The benefit of diplaying structured data is consistancy in displaying results and all the attributes and allowing actions on them. (for e.g. send email, explore location etc.)
+
 :exclamation: The entire workflow and code discussed above is all new work in the ExpertSearch v2.0 that has been done. Tasks involved adapting new libraries for Python3.9, explorations, PoCs, and then designining an effctive workflow and implementing it.   
 
 <details>
