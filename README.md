@@ -30,7 +30,17 @@ Our team involved in implementing following features as we fork the existing Exp
 <details>
    <summary>Rearchitected admin interface for auto crawling amd scraping faculty pages async. Click to learn more.</summary>
    <br/>
-   <p></p>
+   <p>In the new ExpertSearch v2.0 system the admin interface has ben reengineered with many improvemtest and upgrades.
+   Admin interface is primarily responsible to receive university input from user to parse, crawl, scrpe data and insert structured data to database.
+   elow are few major upgrades in the Admin interface:
+   </p>
+   <ul>
+       <li>User can now provide either univseristy name or university url or department url. User can also specify University Name and Department name together.</li>
+       <li>The Admin interface receives input from user and asynchronously responds to user that the database will be updated eventually. This is `eventual consistancy` model. If user closes browser backend server will still be processing the the crawling and scraping.</li>
+       <li>User can keep entering multiple requests one after another and system will eventually process one after another in the background. There is no dependency with browser session. Although the system overall performance and security loopholes are out of scope for this project.</li>
+       <li>As soon system extract biodata for the faculty url, it then extracts structured data using text retrieval and topic mining techniques and saves in database as structured data.</li>
+   </ul>
+   <p>The existing ExpertSearch system doesn't have these robust, user friendly functionalities. The existing system doesn't also have mechanism to extract structured data from unstructured dataset.</p>
    <img/>
 </details>     
 
@@ -172,7 +182,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
     pip install -r requirements.txt
     ```
 
-## Usage
+## Deploy
 1. Start Redis Server
 
     For MacOS or Linux 
