@@ -16,6 +16,7 @@
 * [Improvements Areas](#improvements-areas)
 * [Licensing](#licensing)
 * [Acknowledgements](#acknowledgements)
+* [References][#references]
 
 ## Video Presentation
 
@@ -55,7 +56,7 @@ While developing the ExpertSearch v2.0 we considered to develop the prototype an
 ## Overview
 
 The ExpertSearch v2.0 application is a faculty search webapp that uses NLP and Text Porcessing (Retrieval and Mining) abilties leveraging the modein python NLP libraries.
-The ExpertSearch v2.0 application was build on top the [existing ExpertSearch web application](https://github.com/CS410Assignments/ExpertSearch) that has features such as faculty search, filtering based search, displaying search results (with options to open faculty bio pages, emailing, location info), pagination etc.\
+The ExpertSearch v2.0 application was build on top the existing ExpertSearch web application [[1]](https://github.com/CS410Assignments/ExpertSearch) that has features such as faculty search, filtering based search, displaying search results (with options to open faculty bio pages, emailing, location info), pagination etc.\
 As a team, we did a deep analysis of the current ExpertSearch capabilities and found several deficiencies that can be addressed to make it a better search system. 
 The deficiencies include lack of accuracy in the search results, lack of relevant search results and inconsistencies in the search results, old and out of support python library usages, undocumented code and repo etc.\
 These deficiencies can be addressed using the right text retrieval and text mining techniques along with some good pratices that will improve the overall search experience in the ExpertSearch system.  
@@ -301,6 +302,21 @@ x86 64-bit CPU Multi Core **[Recommended]**
 </details>
 
 #### ExpertSearchv2.0 Search Functionality
+
+* For search functionality the front end file is located at [web/templates/index.html](web/templates/index.html)
+* User enters query to the html file (user can provide filters too) which is passed to the backend Flask server [apps/frontend/server.py::search()](apps/frontend/server.py) as a http request
+* The server receives the query string and calls [apps/frontend/server.py::search()](apps/frontend/server.py)
+* The `search` inturn calls an orchestration function [apps/backend/api/search.py::get_search_results()](apps/backend/api/search.py)
+* The `get_search_results` is an orchestration function and calls different backend systems to retrieve the data
+    * The call first goes to [apps/backend/utils/facultydb.py::get_biodata_records()](apps/backend/utils/facultydb.py) and grabs all scrpaed biodata stored in a database table column andlong with correspinding structured data id.
+    * Then the corpus data is passed to [apps/backend/utils/ranker.py::score()](apps/backend/utils/ranker.py) to score the corpus biodate dataset based on search query. The function used BM25 as text retrieval alogorithm to rank corpus documents.
+    * Once ranking is done the corresponding structured data ids were returned as a ranked list of faculty ids 
+    * The ranked ids were taken and passed to [apps/backend/utils/facultydb.py::get_faculty_records()](apps/backend/utils/facultydb.py) to get the structured data from database
+* The results dataset is now a structured data with key pair values and being disp;ayed in the front end accordingly
+* The benefit of diplaying structured data is consistancy in displaying results and all the attributes and allowing actions on them. (for e.g. send email, explore location etc.)
+* :warning: The entire workflow and code discussed above is all new work in the ExpertSearch v2.0 that has been done. Tasks involved adapting new libraries for Python3.9, explorations, PoCs, and then designining an effctive workflow and implementing it.   
+       
+   
 - - - - 
 <details>
    <summary>Click to See the Workflow Diagram of Admin Functionalty</summary>
@@ -427,12 +443,22 @@ Sudipto Sarkar | sudipto2 | sudipto2@illinois.edu
  
 
 ## Licensing
-The ExpoertSearch v2.0 was build upon [existing ExpertSearch web application](https://github.com/CS410Assignments/ExpertSearch) and thus will inherit the original licensing terms and condistions of the original ExpertSearch system.  
+The ExpoertSearch v2.0 was build upon existing ExpertSearch web application [[1]](https://github.com/CS410Assignments/ExpertSearch) and thus will inherit the original licensing terms and condistions of the original ExpertSearch system.  
 
 ## Acknowledgements
-* Our special thanks to [Prof. Cheng Zhai](http://czhai.cs.illinois.edu/) and all the TAs in CS410 Text Information Systems Course.
-* Many thanks to original creators of [existing ExpertSearch web application](https://github.com/CS410Assignments/ExpertSearch) application and letting others build on top of it.
-* Also thanks to our open source community for so many contributions in NLP, Text Retrieval and tect Mining based python packages which are free to use.
-* Thanks to the our project team members and project reviewers too for wonderful collboration and feedback.     
+* Our special thanks to [Prof. Cheng Zhai](http://czhai.cs.illinois.edu/) and all the TAs in CS410 Text Information Systems Course for making the course engaging and help with all the queries.
+* Many thanks to original creators of existing ExpertSearch web application [[1]](https://github.com/CS410Assignments/ExpertSearch) application and letting others build on top of it.
+* Also thanks to our open source community contributors for so many contributions in NLP, Text Retrieval and Text Mining based python packages which are effective, efficient and free to use.
+* Thanks to our project team members and project reviewers too for wonderful collboration and feedback and making the project successful.      
+* Special thanks for University of Illinois - Urbana Champaign for providing students with endless software tools, collaboration mediums and resources such as box, sharepoint, google drive, library, zoom, slack, campuswire and many more. The availability of these tools help online students a lot.      
+## References
+[1] [Existing ExpertSearch web application](https://github.com/CS410Assignments/ExpertSearch)\
+[2] [Coursera - CS410 Text information Systems - Course Project Overview](https://www.coursera.org/learn/cs-410/supplement/fTuOi/course-project-overview)\
+[3] [NLTK API Reference](https://www.nltk.org/api/nltk.html)\
+[4] [Gensim API Reference](https://radimrehurek.com/gensim/apiref.html)\
+[5] [BM25 Ranker](https://github.com/dorianbrown/rank_bm25)\
+[6] [Flask + Bootstrap. HTML interface for effortless Python projects](https://diyprojects.io/flask-bootstrap-html-interface-effortless-python-projects/#.YbEIE33MLok)\
+[7] [AWS Cloud Hosting Service - EC2](https://aws.amazon.com/application-hosting/)\
+[8] [Github ReadMe - Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
