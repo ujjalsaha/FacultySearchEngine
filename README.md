@@ -433,6 +433,9 @@ Sudipto Sarkar       | sudipto2
 The ExpoertSearch v2.0 was build upon [existing ExpertSearch web application](https://github.com/CS410Assignments/ExpertSearch) and thus will inherit the original licensing terms and condistions of the original ExpertSearch system.  
 
 ## Acknowledgements
-Our special thanks to [Prof. Cheng Zhai](http://czhai.cs.illinois.edu/) and all the TAs in CS410 Text Information Systems Course.   
+* Our special thanks to [Prof. Cheng Zhai](http://czhai.cs.illinois.edu/) and all the TAs in CS410 Text Information Systems Course.
+* Many thanks to original creators of [existing ExpertSearch web application](https://github.com/CS410Assignments/ExpertSearch) application and letting others build on top of it.
+* Also thanks to our open source community for so many contributions in NLP, Text Retrieval and tect Mining based python packages which are free to use.
+* Thanks to the our project team members and project reviewers too for wonderful collboration and feedback.     
 
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
