@@ -24,7 +24,8 @@
 
 ## Using the ExpertSearch v2.0 Webapp
 - - - - 
-:warning: The team put all emphasis on the NLP, text retrieval, text mining techniques and aspects for faculty search. 
+:warning: \
+The team put all emphasis on the NLP, text retrieval, text mining techniques and aspects for faculty search. 
 The webapp is the platform to display the outcomes of the implementation while putting everything together for demostration purposes. 
 However, making the webapp perfect in terms of end-to-end best user experience was not part of the goal for this project. 
 The webapp still has got many improvement areas in terms of UX, UI display, communication, request response, completeness which could be a separate project by itself.
