@@ -348,7 +348,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
    <img alt="ExpertSearch Admin Functionality Workflow" src="docs/workflows/images/search.jpg?raw=true"/>
 </details>
 
-
+- - - - 
 
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
