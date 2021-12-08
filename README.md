@@ -23,9 +23,13 @@
 <sub><sup>Windows   To open in a new tab: Cmd </sup></sub><kbd>⌃</kbd><sub><sup> + Click</sup></sub>      
 
 ## Using the ExpertSearch v2.0 Webapp
-
+- - - - 
+:warning: The team put all emphasis on the NLP portion and concepts for faculty search. The webapp is is platform to display the outcomes of the implementation. 
+Making the webapp perfect in terms of end-to-end best user experience was not part of the goal for this project. 
+The webapp still has got many improvement areas in terms of UX, UI display, communication, request response, completeness which could be a separate project by itself.     
+- - - - 
 #### Using Search Feature
-1. Run the Demo URL in your browser: 
+1. Launch the app in your Chrome browser using the URL: 
 2. The ExpertSearch v2.0 Home Page should be displayed.
 3. Now try searching a faculty by entering queries like: 
     * names can be provided such as Matt Caesar, Cheng Zhai, John Hart etc.
@@ -164,7 +168,8 @@ x86 64-bit CPU Multi Core **[Recommended]**
 ## Software Requirements
 
 1. Chrome Browser, Version 96+ and above
-   * [Download and Install Chrome](https://www.google.com/chrome/)
+   * [Download and Install Chrome on MacOS](https://www.google.com/chrome/)
+   * [Download and Install Chrome on Linux](https://linuxconfig.org/how-to-install-google-chrome-browser-on-linux)
  
 2. Python3.9. 
    * Virtual environment is recommended.
