@@ -31,7 +31,7 @@ $("#crawl_uni").click(function() {
                 $("div.spanner").removeClass("show");
         $("div.overlay").removeClass("show");
                 $("#backdrop").modal("show");
-                $("#modalBody").text(JSON.stringify(data))
+                $("#modalBody").text(data["msg"])
                 $("#backdrop").appendTo("body");
         })
     });

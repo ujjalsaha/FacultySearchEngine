@@ -54,7 +54,7 @@ def doCrawl():
         search_str = data["searchText"]
         print(type(data))
         print(data)
-        queue = rq.Queue('crawler-worker', connection=redis_server)
+        queue = rq.Queue('crawler-worker', connection=redis_server, default_timeout=3600)
         job = queue.enqueue(run_task, search_str)
         print('job id = ', job.get_id())
         return jsonify({
@@ -63,7 +63,7 @@ def doCrawl():
     else:
         return jsonify(
             {
-                "error": "An error occurred. Please contact system administrators for more details."
+                "msg": "An error occurred. Please contact system administrators for more details."
             }
         )
 
