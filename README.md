@@ -15,25 +15,30 @@ The deficiencies include lack of accuracy in the search results, lack of relevan
 Our team involved in implementing following features as we fork the existing ExpertSearch System and added/improved core-functionalities as we build on top of it. Below are the core functionalities that we added on the existing ExpertSearch and we called it ExpertSearchv2.0:
 <details>
    <summary>Converting unstructured dataset to structured dataset. Click to learn more.</summary>
+   <br/>
    <p></p>
    <img/>
 </details>     
  
 <details>
    <summary>Topics extraction (e.g., areas of interest) for faculties and display in search results. Click to learn more.</summary>
+   <br/>
    <p></p>
    <img/>
 </details>     
 
 <details>
    <summary>Rearchitected admin interface for auto crawling amd scraping faculty pages async. Click to learn more.</summary>
+   <br/>
    <p></p>
    <img/>
 </details>     
 
 <details>
    <summary>Added more filter criteria. Click to learn more.</summary>
-   <p></p>
+   <br/>
+   <p>ExpertSearch v2.0 maintains strictured data set in database. Based on search query with filters we can retrieve all saved biodata matching the filters and apply ranking to only filtered biodata set for a specific query. 
+   Hence the new system able to offer more filter criterias comapared to the existing ExpertSearch system</p>
    <img/>
 </details>     
 
@@ -86,6 +91,12 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 4. 5 GB free disk space
 
+## Access and Permission Requirements
+
+1. Access to the terminal window
+
+2. A user with admin-level privileges
+
 ## Software Requirements
 
 1. Chrome Browser, Version 96+ and above
@@ -112,21 +123,41 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 ## Setup
 
-1. Set Environemnt Variable\
-   [Click Here](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) to get the Google API Key from the [CMT](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) Abstract section (Make sure you are in reviewer role. Credentials required). \
-    Add the below line in your `~/.basrc` or `~/.bash_profile` 
-    ```shell script
-    export GOOGLE_API_KEY=<Add Google api Key from CMT Abstract section>
-    ```
-    If using PyCharm, Pycharm Menu --> Preferences --> Build, Execution, Deployment --> Python Console --> Environment Variables: --> Add `GOOGLE_API_KEY=<Add Google api Key from CMT Abstract section>` --> Ok  
+1. Using Redis
 
+   Installing Redis on MacOS or Linux
+   ```shell script
+   # get the stable version of redis 
+   wget http://download.redis.io/redis-stable.tar.gz
+  
+   # extract 
+   tar xvzf redis-stable.tar.gz
+   cd redis-stable
+  
+   # install 
+   make
+   ```
+      
 2. Using git clone the repository to a path
    ```shell script
    cd <desired path where you want to download the project>
    git clone https://github.com/sudiptobilu/CourseProject.git
    cd CourseProject
-   ```
-3. Switch to the Python3.9 virtual environemnt\
+
+3. Set Environemnt Variable\
+   [Click Here](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) to get the Google API Key from the [CMT](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) Abstract section (Make sure you are in reviewer role. Credentials required). \
+    Add the below line in your `~/.basrc` or `~/.bash_profile` 
+    ```shell script
+    export GOOGLE_API_KEY=<Add Google api Key from CMT Abstract section>
+    ```
+    Also create a `.env` file in project root directory and add the GOOGLE_API_KEY. Run the below commands
+    ```shell script
+    cd <path to CourseProject repo>
+   
+    echo "GOOGLE_API_KEY='<Add Google api Key from CMT Abstract section>'" > .env   
+    ```  
+    
+4. Switch to the Python3.9 virtual environemnt\
    If using Conda,
    ```shell script
    # TIP: Show all conda environemt
@@ -136,23 +167,38 @@ x86 64-bit CPU Multi Core **[Recommended]**
    conda activate <python3.9 virtual environment name> 
    ```
 
-4. Install the project requirements file on Python3.9 virtual environment
+5. Install the project requirements file on Python3.9 virtual environment
     ```shell script
     pip install -r requirements.txt
     ```
 
 ## Usage
-1. From the project directory and python3.9 virtual environment, Run the below command 
+1. Start Redis Server
+
+    For MacOS or Linux 
     ```shell script
-   cd apps/frontend
+    cd <path to redis-stable>
+    redis-server
+    ````
+
+2. Make sure you are on the Python3.9 environment. 
+    ```shell script
+   python --version
+    ````
+
+3. From the project directory, Run the below command 
+    ```shell script
+    # go to project directory root level
+    cd <path to CourseProject repo>
+    cd apps/frontend
    
     python server.py
     ````
-2. Open Chrome browser and browse the below url
+4. Open Chrome browser and browse the below url
     ```shell script
    http://localhost:8095
     ````
-3. The browser should show up ExpertSearchv2.0 search application 
+5. The browser should show up ExpertSearchv2.0 search application 
 
 :exclamation: A comprehensive software usage [video presentation](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw) is also available. [Click Here](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw)
 
@@ -163,6 +209,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 - - - - 
 <details>
    <summary>Click to See the Workflow Diagram of Search Functionalty</summary>
+   <br/>
    <img alt="ExpertSearch Admin Functionality Workflow" src="docs/workflows/images/search.jpg?raw=true"/>
 </details>
 
@@ -170,6 +217,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 - - - - 
 <details>
    <summary>Click to See the Workflow Diagram of Admin Functionalty</summary>
+   <br/>
    <img alt="ExpertSearch Admin Functionality Workflow" src="docs/workflows/images/admin.jpg?raw=true"/>
 </details>
 
