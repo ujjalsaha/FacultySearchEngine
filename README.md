@@ -24,11 +24,11 @@
 
 ## Using the ExpertSearch v2.0 Webapp
 - - - - 
-:warning: The team put all emphasis on the NLP, text retrieval, text mining techniques and concepts for faculty search. 
+:warning: The team put all emphasis on the NLP, text retrieval, text mining techniques and aspects for faculty search. 
 The webapp is the platform to display the outcomes of the implementation while putting everything together for demostration purposes. 
 However, making the webapp perfect in terms of end-to-end best user experience was not part of the goal for this project. 
 The webapp still has got many improvement areas in terms of UX, UI display, communication, request response, completeness which could be a separate project by itself.
-While developing the ExpertSearch v2.0 we considered to develop the prototype and opportunity to build on top of this.      
+While developing the ExpertSearch v2.0 we considered to develop the prototype and leave opportunity to build things on top of this.      
 - - - - 
 #### Using Search Feature
 1. Launch the app in your Chrome browser using the URL: 
@@ -60,7 +60,7 @@ These deficiencies can be addressed using the right text retrieval and text mini
 Our team involved in implementing following features as we fork the existing ExpertSearch System and added/improved core-functionalities as we build on top of it. 
 Below are the core functionalities that we added/improved on the existing ExpertSearch and hence we called it **ExpertSearchv2.0**:
 <details>
-   <summary>Converting unstructured dataset to structured dataset. <font color="#1e90ff"> Click to learn more.</font></summary>
+   <summary>Converting unstructured dataset to structured dataset. Click to learn more</summary>
    <br/>
    <p>The new ExpertSearch v2.0 system can scrapes faulty pages and using text retrieval techniques extracts structured data such as Name, email, departname name, university name, phone number, email, location, areas of interests etc and saves in the database along with the scrpaed biodata. 
    Whenver a user enters a search query, based on filter used or not with the search qury, the system grabs the biodata from the database and ranks them using BM25 ranking algorithm.
