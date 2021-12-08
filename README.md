@@ -341,6 +341,7 @@ Sudipto Sarkar       | sudipto2
        <br/>
        <p>When admin enters the base url, this module will check if the url is a valid university url. If yes, the module forwards the url for crawling and scraping the faculty pages. If not, the module lets the admin know that base url doesn’t belong to a university or no faculty page found.</p>
     </details>     
+    
     - - - -
 
 2. **Epic: Search Experience Enhancement using Text Retrieval Techniques**   
