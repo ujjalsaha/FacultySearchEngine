@@ -77,6 +77,36 @@ def search():
     search_result = search_obj.get_search_results(querytext, "Manipal", "Computer", "Sikkim")
 
     print(search_result)
+    faculty_names = []
+    faculty_homepage_url = []
+    faculty_department_url = []
+    faculty_department_name = []
+    faculty_university_url = []
+    faculty_university_name = []
+    faculty_email = []
+    faculty_phone = []
+    faculty_location = []
+    faculty_expertise = []
+
+    for v in search_result:
+        faculty_names.append(v['faculty_name'])
+        faculty_homepage_url.append(v['faculty_homepage_url'])
+        faculty_department_url.append(v['faculty_department_url'])
+        faculty_department_name.append(v['faculty_department_name'])
+        faculty_university_url.append(v['faculty_university_url'])
+        faculty_university_name.append(v['faculty_university_name'])
+        faculty_email.append(v['faculty_email'])
+        faculty_phone.append(v['faculty_phone'])
+        faculty_location.append(v['faculty_location'])
+        faculty_expertise.append(v['faculty_expertise'])
+
+    results = list(zip(faculty_names, faculty_homepage_url, faculty_department_url, faculty_department_name,
+                       faculty_university_url, faculty_university_name, faculty_email, faculty_phone, faculty_location,
+                       faculty_expertise))
+    # search_result = [('2216.txt', '...homepage. this is just a <b>test</b> page.', 'None', 'Stony Brook University', 'Computer Science', '', 'http://www.cs.stonybrook.edu/~shuai/', 'New York', 'United States')]
+    return jsonify({
+        "docs": results
+    })
 
 
 def is_redis_available(r):
