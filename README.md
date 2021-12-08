@@ -322,7 +322,11 @@ Sudipto Sarkar       | sudipto2
 
 ## User Stories and Contributions
 
-1. **Epic: Crawling and Scraping** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Contribution**: _Arnab KarSarkar, Ujjal Saha_
+1. **Epic: Crawling and Scraping** 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+**Contribution**: _Arnab KarSarkar, Ujjal Saha_
     - - - -
     <details>
        <summary><b>User Story: </b> Crawler Implementation for a given webpage url. Click for Story Details</summary>
