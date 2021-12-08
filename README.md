@@ -213,7 +213,7 @@ Sudipto Sarkar       | sudipto2
     **Executed by**: _Arnab KarSarkar, Sudipto Sarkar_
     - - - -
 
-2. **Epic: Search Experience Enhancement**   
+2. **Epic: Search Experience Enhancement using Text Retrieval Techniques**   
 
     <details>
        <summary><b>User Story: </b> Build a structured dataset from Unstructured datasets. Click for Story Details</summary>
