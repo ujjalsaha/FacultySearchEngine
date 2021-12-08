@@ -322,15 +322,14 @@ Sudipto Sarkar       | sudipto2
 
 ## User Stories and Contributions
 
-1. **Epic: Crawling and Scraping**
+1. **Epic: Crawling and Scraping** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Executed by**: _Arnab KarSarkar, Ujjal Saha_
     - - - -
     <details>
        <summary><b>User Story: </b> Crawler Implementation for a given webpage url. Click for Story Details</summary>
        <br/>
        <p>In the admin interface when admin inputs an url, this story takes the url as input and scrapes the page and extracts the faculty biodata. We also implemented intelligent logic in scraper to find right faculty page if the base url has links that leads to multiple faculty related pages.</p>
     </details>     
-    
-    **Executed by**: _Arnab KarSarkar, Ujjal Saha_
+        
     - - - -
     <details>
        <summary><b>User Story: </b> Adding admin interface for web page indexing. Click for Story Details</summary>
@@ -419,7 +418,7 @@ Sudipto Sarkar       | sudipto2
        <p>As we do development and deployment, we are doing multiple rounds of verification and validation and some will require integrated end-to-end validation steps.</p>
     </details>     
       
-    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar, Ujjal Saha, _
+    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar, Ujjal Saha_
     - - - -
     
 5. **Epic: Documentation and Presentation**   
@@ -434,7 +433,7 @@ Sudipto Sarkar       | sudipto2
     - - - -
     **User Story**: Final Project Report Documentation  
     
-    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar, Ujjal Saha, _
+    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar, Ujjal Saha_
     - - - -
     **User Story**: Final Project Report Documentation  
     
