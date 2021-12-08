@@ -1,5 +1,11 @@
 #  ExpertSearch v2.0
 
+## Table of contents
+* [Video Presentation](##video-presentation)
+* [Using the ExpertSearch v2.0 Webapp](##using-the-expertsearch-v2.0-webapp)
+* [Overview](#overview)
+
+
 ## Video Presentation
 
 #### [Software usage tutorial presentation](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw) 
@@ -34,7 +40,7 @@ As a team, we did a deep analysis of the current ExpertSearch capabilities and f
 The deficiencies include lack of accuracy in the search results, lack of relevant search results and inconsistencies in the search results, old and out of support python library usages, undocumented code and repo etc.\
 These deficiencies can be addressed using the right text retrieval and text mining techniques along with some good pratices that will improve the overall search experience in the ExpertSearch system.  
 Our team involved in implementing following features as we fork the existing ExpertSearch System and added/improved core-functionalities as we build on top of it. 
-Below are the core functionalities that we added/improved on the existing ExpertSearch and we called it **ExpertSearchv2.0**:
+Below are the core functionalities that we added/improved on the existing ExpertSearch and hence we called it **ExpertSearchv2.0**:
 <details>
    <summary>Converting unstructured dataset to structured dataset. <font color="#1e90ff"> Click to learn more.</font></summary>
    <br/>
@@ -397,3 +403,14 @@ Sudipto Sarkar       | sudipto2
     - - - -
 
 ## Improvements Areas
+* Crawling and Scraping activites can be tracked if implemeted a publisher and subscriber. We didn't do it as it wont add much value of our goal and focus on Text Retrieval and Mining techniques.  
+* GuidedLDA couldn't be used for specialized topic mining and we settled with general LDA. Specialized Topic mining could result is more relevant topic wouds for a faculty.
+* Admin interface repeated entry can be malacious and need to implement some sort of restrictions
+* The overall User Experience (UX) and User Interface (UI) can be improved which we didn't do as it was out of our focus area of Text Retrieval and Mining techniques and capabilities. 
+
+## Licensing
+The ExpoertSearch v2.0 was build upon [existing ExpertSearch web application](https://github.com/CS410Assignments/ExpertSearch) and thus will inherit the original licensing terms and condistions of the original ExpertSearch system.  
+
+## Acknowledgements
+Our special thanks to [Prof. Cheng Zhai](http://czhai.cs.illinois.edu/) and all the TAs in CS410 Text Information Systems Course.   
+
