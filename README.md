@@ -40,10 +40,12 @@ Our team involved in implementing following features as we fork the existing Exp
 <details>
    <summary>Improved search results with consistant display of the faculty attributes. Click to learn more.</summary>
    <br/>
-   <p>New ExpertSearch v2.0 is build on latest Python3.9 and dependent packages compared to the existing ExpertSearch that is build on old and out of support Python2.7.
-   With that said the team went through many research and exploration phases as few of the NLP / Text Processing libraries from old system aren't supported in Python3.9 version.
-   New and modern standard libraries were tested and adopted (such as nltk, gensim etc.) and then enginnered to fit the logic of ranking, scoring, topic mining and text retrieval techniques in the new ExpertSearch v2.0 system.
-   In summary, all capabilities of existing ExpertSearch system have been covered by ExpertSearch v2.0 plus additional features also offered all with new set of Python3.9 libraries which by itself is a great achievement.       
+   <p>New ExpertSearch v2.0 leverages the structured data to display faculty attributes in the search results display page. 
+   The old ExpertSearch did runtime operations which A. makes the system slower for heavy text retrival techniques and B. missed few modern text retrival techniques for extracting fields such as department name, phone number etc.  
+   We leveraged both browser provided information in html element such as "title" which mostly provides unique info. 
+   We also improved the regex for extracting accurate phone numbers, email etc. 
+   Since these operations are done during crawling and scraping and saved into database as structured data, hence during actual query based on the ranking results the data is fetched from database. 
+   The overall improved process resulted in improved search results and faculty attributes display with no missing information thus improving consistancy.
    </p>
    <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_python_version.png?raw=true"/>
 </details>     

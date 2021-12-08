@@ -187,7 +187,7 @@ class Document:
         return self.__extract_title(self.department_url)
 
     def extract_biodata(self):
-        return " ".join(sanitizer(self.doc)) if self.doc else ""
+        return " ".join(sanitizer(self.doc)) if self.doc else None
 
     def extract_location(self):
         location = ""

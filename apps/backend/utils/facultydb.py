@@ -51,7 +51,7 @@ class FacultyDB:
             faculty_phone text,
             faculty_location text,
             faculty_expertise text NOT NULL,
-            faculty_biodata,
+            faculty_biodata NOT NULL,
             last_modified_date text NOT NULL,
             created_date text NOT NULL
         );"""
