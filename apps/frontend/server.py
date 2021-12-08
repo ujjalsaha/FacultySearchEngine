@@ -7,6 +7,7 @@ import base64
 import sys
 import re
 from apps.backend.utils.facultydb import FacultyDB
+from apps.backend.api.search import Search
 
 
 app = Flask(__name__, template_folder='web/templates')
@@ -64,8 +65,17 @@ def search():
     data = json.loads(request.data.decode("utf-8"))
     querytext = data['query']
     num_results = data['num_results']
+
+    search_obj = Search()
+    search_result = search_obj.get_search_results(querytext, "Manipal", "Computer", "Sikkim")
+
+    print(search_result)
+
+    '''
     selected_loc_filters = data['selected_loc_filters']
     selected_uni_filters = data['selected_uni_filters']
+
+    
 
     query = metapy.index.Document()
     query.content(querytext)
@@ -93,9 +103,9 @@ def search():
 
 
     docs = list(zip(doc_names, previews, emails,universities,depts,fac_names,fac_urls,states,countries))
-
+    '''
     return jsonify({
-        "docs": docs
+        "docs": search_result
     })
 
 
