@@ -45,7 +45,12 @@ Our team involved in implementing following features as we fork the existing Exp
 
 <details>
    <summary>Major System upgrade from Python2.7 to Python3.9. Click to learn more.</summary>
-   <p></p>
+   <br/>>
+   <p>New ExpertSearch v2.0 is build on latest Python3.9 and dependent packages compared to the existing ExpertSearch that is build on old and out of support Python2.7.
+   With that said the team went through many research and exploration phases as few of the NLP / Text Processing libraries from old system aren't supported in Python3.9 version.
+   New and modern standard libraries were tested and adopted (such as nltk, gensim etc.) and then enginnered to fit the logic of ranking, scoring, topic mining and text retrieval techniques in the new ExpertSearch v2.0 system.
+   In summary, all capabilities of existing ExpertSearch system have been covered by ExpertSearch v2.0 plus additional features also offered all with new set of Python3.9 libraries which by itself is a great achievement.       
+   </p>
    <img/>
 </details>     
 
@@ -56,7 +61,8 @@ Our team involved in implementing following features as we fork the existing Exp
    There are also design artifacts in terms of workflow diagrams that were generated for users to understand the features and funciotnality of the code. 
    This will encourage better participation for future development. 
    When compared to the existing ExpertSeach the existing web application has almost zero documentaion and artifacts which made it very difficult for code analysis, code reusability and increased the overall development window for enhancements. 
-   Below snapshot demonstrates a good comparison between the existing and new ExpertSearch.</p>
+   Below snapshot demonstrates a good comparison between the existing and new ExpertSearch.
+   </p>
    <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_documentation.png?raw=true"/>
 </details>     
 
@@ -78,7 +84,8 @@ x86 64-bit CPU Multi Core **[Recommended]**
 1. Chrome Browser, Version 96+ and above
    * [Download and Install Chrome](https://www.google.com/chrome/)
  
-2. Python3.9 virtual environment
+2. Python3.9. 
+   * Virtual environment is recommended.
    * [MacOS Conda Installation Guide](https://www.anaconda.com/products/individual) or [Linux Conda Installation Guide](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
    * [Managing Conda - Install python virtual environment using Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) 
    
