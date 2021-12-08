@@ -51,6 +51,7 @@ Our team involved in implementing following features as we fork the existing Exp
 
 <details>
    <summary>Documentation and Artifacts for future development. Click to learn more</summary>
+   <br/>
    <p>The new ExpertSearchv2.0 comes with well documented modules, functions and modularized codes that overall improves the readability. 
    There are also design artifacts in terms of workflow diagrams that were generated for users to understand the features and funciotnality of the code. 
    This will encourage better participation for future development. 
