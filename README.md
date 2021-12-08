@@ -50,7 +50,7 @@ Our team involved in implementing following features as we fork the existing Exp
 </details>     
 
 <details>
-   <summary>Documentation and Artifacts. <a>Click to learn more.</a></summary>
+   <summary>Documentation and Artifacts. <a href="#">Click to learn more.</a></summary>
    <p></p>
    <img/>
 </details>     
