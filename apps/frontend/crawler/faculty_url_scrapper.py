@@ -6,6 +6,7 @@ import sys, os
 import re
 import random
 import json
+from pathlib import Path
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'lib'))
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
@@ -16,8 +17,15 @@ from apps.frontend.crawler.crawler import build_url
 from apps.backend.utils.document import Document
 from apps.backend.utils.facultydb import FacultyDB
 
-st = StanfordNERTagger('../../../lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz',
-                       '../../../lib/stanford-ner-2020-11-17/stanford-ner.jar')
+print('pwd ', os.getcwd())
+dirname = os.path.dirname(__file__)
+model_file = os.path.join(dirname,
+                          '../../../lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz')
+jar_file = os.path.join(dirname, '../../../lib/stanford-ner-2020-11-17/stanford-ner.jar')
+
+st = StanfordNERTagger(model_file, jar_file, encoding='utf-8')
+# st = StanfordNERTagger('../../lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz',
+#                        '../../lib/stanford-ner-2020-11-17/stanford-ner.jar')
 
 
 def random_str_generator(size=8, chars=string.ascii_lowercase + string.digits):
@@ -83,8 +91,12 @@ class ScrapeFacultyWebPage:
         #         temp_file.write("\n")
         bio_dict = dict()
         for url in self.faculty_urls:
-            bio_texts = self.get_bio(url)
-            bio_dict[url] = bio_texts
+            try:
+                bio_texts = self.get_bio(url)
+                bio_dict[url] = bio_texts
+            except:
+                pass
+
         # process the document
         self.process_document(bio_dict)
         close_driver()
@@ -136,11 +148,7 @@ class ScrapeFacultyWebPage:
         count = 0
         for url in self.faculty_urls:
             faculty_dict = dict()
-            count += 1
-            print(f'{count}, {url} ')
-
             bio = bio_dict.get(url)
-            print('bio => ', bio)
             doc = Document(
                 doc=bio,
                 faculty_url=url,
@@ -160,17 +168,17 @@ class ScrapeFacultyWebPage:
             faculty_dict['faculty_biodata'] = bio
             faculty_dict['faculty_location'] = doc.extract_location()
             faculty_dict_list.append(faculty_dict)
-            if count > 5:
-                break
+
         print(__file__, ":: faculty_dict_list: ")
         faculty_list_json = json.dumps(faculty_dict_list)
         __do_db_call__(faculty_dict_list)
 
+
 if __name__ == '__main__':
     faculty_dict = {
-        'dept_url': "https://cs.indiana.edu/",
-        'faculty_link': "https://cs.indiana.edu/faculty-directory/index.html?&type=2&aca_dept=1&alpha=asc",
-        'base_url': "https://www.indiana.edu/",
+        'dept_url': "http://www.cs.utah.edu/",
+        'faculty_link': "http://www.cs.utah.edu/people/faculty/",
+        'base_url': "https://www.utah.edu/",
     }
     scrapper = ScrapeFacultyWebPage(faculty_dict=faculty_dict)
     scrapper.get_faculty_urls()

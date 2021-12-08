@@ -22,6 +22,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 s = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=s, options=options)
 
+
 # driver = webdriver.Chrome('../../../lib/chromedriver', options=options)
 
 
@@ -31,10 +32,13 @@ def get_js_soup(base_url):
     return build_soup(res_html)
 
 
+
+
 def get_all_page(base_url):
     response = requests.get(base_url)
     html_doc = response.text
     return build_soup(html_doc)
+
 
 def build_soup(html):
     soup = BeautifulSoup(html, 'html.parser')  # beautiful soup object to be used for parsing html content

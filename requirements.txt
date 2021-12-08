@@ -12,3 +12,5 @@ selenium~=4.1.0
 bs4~=0.0.1
 python-decouple
 webdriver-manager
+redis
+rq

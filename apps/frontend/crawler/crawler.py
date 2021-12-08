@@ -114,7 +114,6 @@ class Crawler:
                     final_link_js_soup = faculty_link_soup
         self.logger.info('Found faculty url as => %s', final_link)
         self.return_dict['faculty_link'] = final_link
-        self.return_dict['faculty_link_soup'] = final_link_js_soup
 
     def valid_faculty_page_found(self):
         """
@@ -140,6 +139,7 @@ class ExtractFacultyURL:
         self.uni_name = uni_name
         self.log = logging.getLogger('Extract_Faculty_URL')
         self.base_url = self.get_base_url()
+        print("Found Base Url => ", self.base_url)
         self.crawler = None
         if self.base_url:
             self.crawler = Crawler(base_url=self.base_url)
@@ -179,7 +179,7 @@ class ExtractFacultyURL:
 
 
 if __name__ == '__main__':
-    uni = sys.argv[1]
+    uni = "University Of Utah, computer science"
     print(uni)
     extractURL = ExtractFacultyURL(uni)
     print('Faculty Page found = ', extractURL.has_valid_faculty_link())

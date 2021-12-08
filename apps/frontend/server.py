@@ -7,8 +7,15 @@ import base64
 import sys
 import re
 
+from redis import Redis
+import redis
+import rq
 
-app = Flask(__name__, template_folder='web/templates')
+sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
+
+from apps.frontend.utils.background_task import run_task
+
+app = Flask(__name__, template_folder='web/templates', static_folder='web/static')
 app.rootpath = "web/templates"
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'web/templates'))
 
@@ -29,22 +36,26 @@ loc_list = json.loads(open(dataconfig[environ]["locspath"],'r').read())["locs"]
 def home():
     return render_template('index.html')
 
+
 @app.route('/admin')
 def admin():
+
     return render_template('admin.html')
 
-def filtered_results(results,num_results,min_score,selected_uni_filters,selected_loc_filters):
+
+def filtered_results(results, num_results, min_score, selected_uni_filters, selected_loc_filters):
     filtered_results = []
     universities = []
-    states =[]
+    states = []
     countries = []
     res_cnt = 0
     # print (selected_uni_filters,selected_loc_filters)
     for res in results:
         university = index.metadata(res[0]).get('university')
         state = index.metadata(res[0]).get('state')
-        country = index.metadata(res[0]).get('country') 
-        if (res[1]>min_score) and (state in selected_loc_filters or country in selected_loc_filters) and (university in selected_uni_filters) :
+        country = index.metadata(res[0]).get('country')
+        if (res[1] > min_score) and (state in selected_loc_filters or country in selected_loc_filters) and (
+                university in selected_uni_filters):
             filtered_results.append(res)
             res_cnt += 1
             universities.append(university)
@@ -52,7 +63,7 @@ def filtered_results(results,num_results,min_score,selected_uni_filters,selected
             countries.append(country)
             if res_cnt == num_results:
                 break
-    return filtered_results,universities,states,countries
+    return filtered_results, universities, states, countries
 
 
 @app.route('/search', methods=['POST'])
@@ -74,36 +85,47 @@ def search():
 
     ranker = load_ranker(app.searchconfig)
 
-    results = ranker.score(index, query, 100) 
+    results = ranker.score(index, query, 100)
 
-    results,universities,states,countries = filtered_results(results,num_results,min_score,selected_uni_filters,selected_loc_filters)
+    results, universities, states, countries = filtered_results(results, num_results, min_score, selected_uni_filters,
+                                                                selected_loc_filters)
 
     doc_names = [index.metadata(res[0]).get('doc_name') for res in results]
     depts = [index.metadata(res[0]).get('department') for res in results]
     fac_names = [index.metadata(res[0]).get('fac_name') for res in results]
     fac_urls = [index.metadata(res[0]).get('fac_url') for res in results]
-   
 
-    previews = _get_doc_previews(doc_names,querytext)
+    previews = _get_doc_previews(doc_names, querytext)
     emails = [index.metadata(res[0]).get('email') for res in results]
 
-
-    docs = list(zip(doc_names, previews, emails,universities,depts,fac_names,fac_urls,states,countries))
+    docs = list(zip(doc_names, previews, emails, universities, depts, fac_names, fac_urls, states, countries))
 
     return jsonify({
         "docs": docs
     })
 
 
+@app.route("/admin/crawl", methods=['POST'])
+def doCrawl():
+    redis_server = Redis(host='localhost', port=6379, db=0)
+    if is_redis_available(redis_server):
+        data = json.loads(request.data.decode("utf-8"))
+        search_str = data["searchText"]
+        print(type(data))
+        print(data)
+        queue = rq.Queue('crawler-worker', connection=redis_server)
+        job = queue.enqueue(run_task, search_str)
+        print('job id = ', job.get_id())
+        return jsonify({
+            "msg": "Your request has been accepted. We will process the request asynchronously"
+        })
+    else:
+        return jsonify(
+            {
+                "error": "An error occurred. Please contact system administrators for more details."
+            }
+        )
 
-@app.route("/admin/ranker/get")
-def get_ranker():
-    ranker_path = app.rootpath + "/expertsearch/ranker.py"
-    ranker_contents = open(ranker_path, 'r').read()
-
-    return jsonify({
-        "ranker_contents": ranker_contents
-    })
 
 @app.route("/admin/ranker/set", methods=["POST"])
 def set_ranker():
@@ -124,14 +146,16 @@ def set_ranker():
 
     return "200"
 
-def _get_doc_previews(doc_names,querytext):
-    return list(map(lambda d: _get_preview(d,querytext), doc_names))
+
+def _get_doc_previews(doc_names, querytext):
+    return list(map(lambda d: _get_preview(d, querytext), doc_names))
+
 
 def format_string(matchobj):
-    
-    return '<b>'+matchobj.group(0)+'</b>'
+    return '<b>' + matchobj.group(0) + '</b>'
 
-def _get_preview(doc_name,querytext):
+
+def _get_preview(doc_name, querytext):
     preview = ""
     num_lines = 0
     preview_length = 2
@@ -146,46 +170,52 @@ def _get_preview(doc_name,querytext):
             formatted_line = str(line.lower())
             for w in querytext.lower().split():
 
-                (sub_str,cnt) = re.subn(re.compile(r"\b{}\b".format(w)),format_string,formatted_line)
+                (sub_str, cnt) = re.subn(re.compile(r"\b{}\b".format(w)), format_string, formatted_line)
 
-                if cnt>0:
+                if cnt > 0:
                     formatted_line = sub_str
-                    found_phrase = True 
+                    found_phrase = True
 
             if found_phrase:
                 preview += formatted_line
 
                 num_lines += 1
         fp.close()
- 
+
     short_preview = ''
     prev_i = 0
     start = 0
     words = preview.split()
     cnt = 0
-    i=0
-   
-    while i<len(words):
-        
+    i = 0
 
-        
+    while i < len(words):
+
         if '<b>' in words[i]:
-            start = min(i-prev_i,5)
-            
-            if  i-start>0:
-                short_preview += '...'
-            short_preview += ' '.join(words[i-start:i+5])
-            i+=5
-            prev_i = i
-            cnt +=1
-        else:
-            i+=1
-        if cnt==3:
-            break
+            start = min(i - prev_i, 5)
 
+            if i - start > 0:
+                short_preview += '...'
+            short_preview += ' '.join(words[i - start:i + 5])
+            i += 5
+            prev_i = i
+            cnt += 1
+        else:
+            i += 1
+        if cnt == 3:
+            break
 
     return short_preview
 
+
+def is_redis_available(r):
+    try:
+        r.ping()
+        print("Successfully connected to redis")
+    except (redis.exceptions.ConnectionError, ConnectionRefusedError):
+        print("Redis connection error!")
+        return False
+    return True
 
 
 if __name__ == '__main__':
@@ -197,4 +227,4 @@ if __name__ == '__main__':
     app.datasetpath = dataconfig[environ]['datasetpath']
     app.searchconfig = dataconfig[environ]['searchconfig']'''
 
-    app.run(debug=True,threaded=True,host='localhost',port=8095)
+    app.run(debug=True, threaded=True, host='localhost', port=8095)
