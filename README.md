@@ -10,7 +10,7 @@
 
 #### Using Search Feature
 1. Run the Demo URL in your browser: 
-2. The ExpertSearch v2.0 should be displayed.
+2. The ExpertSearch v2.0 Home Page should be displayed.
 3. Now try searching a faculty by entering queries like: 
     * names can be provided such as Matt Caesar, Cheng Zhai, John Hart etc.
     * location can be provided such as Illinois, Utah etc
@@ -19,6 +19,8 @@
 5. Few of the faculty attributes that wil be displayed, user can perform action on them such as clicking the email should open the local outlook composer, or clicking location shall opt in for google maps etc.
     
 #### Using Admin Feature
+1. Go to the Admin interface.
+2. Admin interface is a way for admin users (currently open for all users) to add universities, department and faculty urls for the system to be able to store and append more and more faculty data to its database. This will result in broader seach results and more data availability. This is also an continuous process to enrich the system with more and more data as they are available or explored.  
 1. User can provide either univseristy name or university url or department url. User can also specify University Name and Department name together
 2. The ExpertSearch v2.0 system should asynchronoulsy start crawling and scraping data on the backedn system but letting the user know that the data will be added eventually. 
 3. As this is eventual update, user may come back after a while and searching data related to newly entered unisersity serach results should get displayed.
