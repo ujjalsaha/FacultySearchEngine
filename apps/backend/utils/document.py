@@ -1,20 +1,19 @@
-import sys, os
+import re, os, logging
+
 from urllib import request
 
 import gensim
 import gensim.corpora as corpora
-# import guidedlda
-import logging
-import numpy as np
-import requests
-import json
-import urllib.parse
-from bs4 import BeautifulSoup
+import nltk
 from nltk.tag import StanfordNERTagger
-from sklearn.feature_extraction.text import CountVectorizer
+from nltk.tokenize import word_tokenize
+from bs4 import BeautifulSoup
+
+# import guidedlda
+# from sklearn.feature_extraction.text import CountVectorizer
 
 from apps.backend.api.googleapi import GoogleAPI
-from apps.backend.utils.nltk_utils import *
+from apps.backend.utils.nltk_utils import sanitizer, tokenizer, stopwords
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -24,6 +23,7 @@ nltk.downloader.download('maxent_ne_chunker')
 nltk.downloader.download('words')
 nltk.downloader.download('treebank')
 nltk.downloader.download('maxent_treebank_pos_tagger')
+
 
 class Document:
 
@@ -160,7 +160,7 @@ class Document:
         # return unqiue topic words
         # return " ".join(list(set(seed_topic_list)))
 
-        return topic_list
+        return " ".join(topic_list[0]) if topic_list and topic_list[0] else ""
 
     def extract_phone(self):
         if not self.doc:
@@ -180,7 +180,6 @@ class Document:
     def extract_name(self):
         return self.__extract_ner(tag="PERSON")
 
-
     def extract_university(self):
         return self.__extract_title(self.university_url)
 
@@ -188,15 +187,10 @@ class Document:
         return self.__extract_title(self.department_url)
 
     def extract_biodata(self):
-        return " ".join(tokenizer(self.doc, remove_email=False)) if self.doc else ""
+        return " ".join(sanitizer(self.doc)) if self.doc else ""
 
     def extract_location(self):
         location = ""
-
-        api_key = os.getenv('GOOGLE_API_KEY')
-
-        if not api_key:
-            return location
 
         googleAPI = GoogleAPI(place_name=self.university_url)
         comps = googleAPI.get_component(field_comp='address_components')

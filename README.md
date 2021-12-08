@@ -1,23 +1,308 @@
 #  ExpertSearch v2.0
 
-## Abstract
+## Video Presentation
 
-The UIUC ExpertSearch system (https://github.com/CS410Assignments/ExpertSearch) has several features such as faculty search, filtering criterions, search results (with options to open faculty bio pages, emailing, location info), pagination etc. As a team, we did a deep analysis of the ExpertSearch capabilities and found several deficiencies that need to be addressed to make it a better search system. The deficiencies include lack of accuracy, lack of relevant search results and inconsistencies in the search results. These deficiencies can be addressed using the text retrieval and text mining techniques that will improve the overall search experience in the ExpertSearch system. The team will be involved in implementing features such as converting unstructured dataset to structured dataset (e.g., csv, json), identifying the key topics (e.g., areas of interest) for each of the faculties and display in the search result, introducing an admin interface that would classify faculty pages and finally improving some of the existing features in the search page for better search experience.
-
-
-## Installation Requirements
-
-1. Python3.5 [Recommended]
-2. Linux or MacOS [Recommended]
-3. All packages must be installed from requirements.txt
+#### [Software usage tutorial presentation](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw) 
+<sub><sup>MacOS   To open in a new tab: Cmd </sup></sub><kbd>⌘</kbd><sub><sup> + Click</sup></sub>      
+<sub><sup>Windows   To open in a new tab: Cmd </sup></sub><kbd>⌃</kbd><sub><sup> + Click</sup></sub>      
 
 
-## Execution Instructions
+## Overview
 
-1. Install python3.5. Preferably a virtual environemnt. See conda socumentation how to install python virtual environemnt.  
+The existing ExpertSearch web application (https://github.com/CS410Assignments/ExpertSearch) has features such as faculty search, filtering based search, displaying search results (with options to open faculty bio pages, emailing, location info), pagination etc.
+As a team, we did a deep analysis of the current ExpertSearch capabilities and found several deficiencies that can be addressed to make it a better search system. 
+The deficiencies include lack of accuracy in the search results, lack of relevant search results and inconsistencies in the search results. These deficiencies can be addressed using the right text retrieval and text mining techniques that will improve the overall search experience in the ExpertSearch system. 
+Our team involved in implementing following features as we fork the existing ExpertSearch System and added/improved core-functionalities as we build on top of it. Below are the core functionalities that we added on the existing ExpertSearch and we called it ExpertSearchv2.0:
+<details>
+   <summary>Converting unstructured dataset to structured dataset. Click to learn more.</summary>
+   <p></p>
+   <img/>
+</details>     
+ 
+<details>
+   <summary>Topics extraction (e.g., areas of interest) for faculties and display in search results. Click to learn more.</summary>
+   <p></p>
+   <img/>
+</details>     
 
-2. Set Environemnt Variable\
-    `GOOGLE_API_KEY=<Add Google api Key>`
-       
-3. 
+<details>
+   <summary>Rearchitected admin interface for auto crawling amd scraping faculty pages async. Click to learn more.</summary>
+   <p></p>
+   <img/>
+</details>     
 
+<details>
+   <summary>Added more filter criteria. Click to learn more.</summary>
+   <p></p>
+   <img/>
+</details>     
+
+<details>
+   <summary>Improved search results with consistant display of the faculty attributes. Click to learn more.</summary>
+   <br/>
+   <p>New ExpertSearch v2.0 is build on latest Python3.9 and dependent packages compared to the existing ExpertSearch that is build on old and out of support Python2.7.
+   With that said the team went through many research and exploration phases as few of the NLP / Text Processing libraries from old system aren't supported in Python3.9 version.
+   New and modern standard libraries were tested and adopted (such as nltk, gensim etc.) and then enginnered to fit the logic of ranking, scoring, topic mining and text retrieval techniques in the new ExpertSearch v2.0 system.
+   In summary, all capabilities of existing ExpertSearch system have been covered by ExpertSearch v2.0 plus additional features also offered all with new set of Python3.9 libraries which by itself is a great achievement.       
+   </p>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_python_version.png?raw=true"/>
+</details>     
+
+<details>
+   <summary>Major System upgrade from Python2.7 to Python3.9. Click to learn more.</summary>
+   <br/>
+   <p>New ExpertSearch v2.0 is build on latest Python3.9 and dependent packages compared to the existing ExpertSearch that is build on old and out of support Python2.7.
+   With that said the team went through many research and exploration phases as few of the NLP / Text Processing libraries from old system aren't supported in Python3.9 version.
+   New and modern standard libraries were tested and adopted (such as nltk, gensim etc.) and then enginnered to fit the logic of ranking, scoring, topic mining and text retrieval techniques in the new ExpertSearch v2.0 system.
+   In summary, all capabilities of existing ExpertSearch system have been covered by ExpertSearch v2.0 plus additional features also offered all with new set of Python3.9 libraries which by itself is a great achievement.       
+   </p>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_python_version.png?raw=true"/>
+</details>     
+
+<details>
+   <summary>Documentation and Artifacts for future development. Click to learn more</summary>
+   <br/>
+   <p>The new ExpertSearchv2.0 comes with well documented modules, functions and modularized codes that overall improves the readability. 
+   There are also design artifacts in terms of workflow diagrams that were generated for users to understand the features and funciotnality of the code. 
+   This will encourage better participation for future development. 
+   When compared to the existing ExpertSeach the existing web application has almost zero documentaion and artifacts which made it very difficult for code analysis, code reusability and increased the overall development window for enhancements. 
+   Below snapshot demonstrates a good comparison between the existing and new ExpertSearch.
+   </p>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_documentation.png?raw=true"/>
+</details>     
+
+
+## Hardware Requirements
+1. Modern Operating System  [Minimum]\
+Linux or MacOS  **[Recommended]**
+
+2. x86 64-bit CPU  [Minimum] \
+x86 64-bit CPU Multi Core **[Recommended]** 
+
+3. 8 GB RAM  [Minimum]\
+16 GB RAM  **[Recommended]**
+
+4. 5 GB free disk space
+
+## Software Requirements
+
+1. Chrome Browser, Version 96+ and above
+   * [Download and Install Chrome](https://www.google.com/chrome/)
+ 
+2. Python3.9. 
+   * Virtual environment is recommended.
+   * [MacOS Conda Installation Guide](https://www.anaconda.com/products/individual) or [Linux Conda Installation Guide](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
+   * [Managing Conda - Install python virtual environment using Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) 
+   
+   Run the below command in virtual environment and Make sure you have installed Python3.9.X.
+   ```shell script
+   python --version
+   ````
+      
+3. `pip` package installed in python3.9 virtual environment  - _Should be default wiith Python3.9_   
+   * To install pip on your virtual environment run below command
+   ```shell script
+   conda install pip 
+    ````
+4. git cli tool
+    * [Install git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)   
+
+
+## Setup
+
+1. Set Environemnt Variable\
+   [Click Here](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) to get the Google API Key from the [CMT](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) Abstract section (Make sure you are in reviewer role. Credentials required). \
+    Add the below line in your `~/.basrc` or `~/.bash_profile` 
+    ```shell script
+    export GOOGLE_API_KEY=<Add Google api Key from CMT Abstract section>
+    ```
+    If using PyCharm, Pycharm Menu --> Preferences --> Build, Execution, Deployment --> Python Console --> Environment Variables: --> Add `GOOGLE_API_KEY=<Add Google api Key from CMT Abstract section>` --> Ok  
+
+2. Using git clone the repository to a path
+   ```shell script
+   cd <desired path where you want to download the project>
+   git clone https://github.com/sudiptobilu/CourseProject.git
+   cd CourseProject
+   ```
+3. Switch to the Python3.9 virtual environemnt\
+   If using Conda,
+   ```shell script
+   # TIP: Show all conda environemt
+   conda env list   
+   
+   # pick the Python3.9 environment name from the above output. Then run
+   conda activate <python3.9 virtual environment name> 
+   ```
+
+4. Install the project requirements file on Python3.9 virtual environment
+    ```shell script
+    pip install -r requirements.txt
+    ```
+
+## Usage
+1. From the project directory and python3.9 virtual environment, Run the below command 
+    ```shell script
+   cd apps/frontend
+   
+    python server.py
+    ````
+2. Open Chrome browser and browse the below url
+    ```shell script
+   http://localhost:8095
+    ````
+3. The browser should show up ExpertSearchv2.0 search application 
+
+:exclamation: A comprehensive software usage [video presentation](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw) is also available. [Click Here](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw)
+
+
+## Implementation Details 
+
+#### ExpertSearchv2.0 Admin Functionality
+- - - - 
+<details>
+   <summary>Click to See the Workflow Diagram of Search Functionalty</summary>
+   <img alt="ExpertSearch Admin Functionality Workflow" src="docs/workflows/images/search.jpg?raw=true"/>
+</details>
+
+#### ExpertSearchv2.0 Search Functionality
+- - - - 
+<details>
+   <summary>Click to See the Workflow Diagram of Admin Functionalty</summary>
+   <img alt="ExpertSearch Admin Functionality Workflow" src="docs/workflows/images/admin.jpg?raw=true"/>
+</details>
+
+
+## Project Team Members
+
+Name             |  Netid 
+| :---  | :--- 
+Ujjal Saha       | ujjals2
+Arnab KarSarkar       | arnabk2
+Sudipto Sarkar       | sudipto2
+
+
+
+
+
+## User Stories and Contributions
+
+1. **Epic: Crawling and Scraping**
+    - - - -
+    <details>
+       <summary><b>User Story: </b> Crawler Implementation for a given webpage url. Click for Story Details</summary>
+       <br/>
+       <p>In the admin interface when admin inputs an url, this story takes the url as input and scrapes the page and extracts the faculty biodata. We also implemented intelligent logic in scraper to find right faculty page if the base url has links that leads to multiple faculty related pages.</p>
+    </details>     
+    
+    **Executed by**: _Arnab KarSarkar, Ujjal Saha_
+    - - - -
+    <details>
+       <summary><b>User Story: </b> Adding admin interface for web page indexing. Click for Story Details</summary>
+       <br/>
+       <p>As our project scope doesn’t include auto crawler features for the entire web, the admin interface we are implementing in ExpertSearch system is to allow the admin to enter base url of the universities and based on valid/invalid university email (different story) the admin interface will fetch the url to the crawler module to scrape faculty data.</p>
+    </details>     
+    
+    **Executed by**: _Arnab KarSarkar, Ujjal Saha_
+    - - - -
+    <details>
+       <summary><b>User Story: </b> Displaying accepted/rejected web page based on url. Click for Story Details</summary>
+       <br/>
+       <p>When admin enters the base url, this module will check if the url is a valid university url. If yes, the module forwards the url for crawling and scraping the faculty pages. If not, the module lets the admin know that base url doesn’t belong to a university or no faculty page found.</p>
+    </details>     
+                     
+    **Executed by**: _Arnab KarSarkar, Sudipto Sarkar_
+    - - - -
+
+2. **Epic: Search Experience Enhancement using Text Retrieval Techniques**   
+
+    <details>
+       <summary><b>User Story: </b> Build a structured dataset from Unstructured datasets. Click for Story Details</summary>
+       <br/>
+       <p>In current ExpertSearch system the faculty data are stored as unstructured data as a file. We are implementing a functionality that will convert the unstructured data to structured data. For e.g., using text mining and text retrieval techniques we are planning to extract fields like Faculty Name, Department, University, Area of Interests, email, phone, etc, and store them in a structured form (either in csv, or database etc.) This will enhance the overall search experience.</p>
+    </details>     
+     
+    **Executed by**: _Ujjal Saha, Sudipto Sarkar_
+    - - - -
+    <details>
+       <summary><b>User Story: </b> Enhance the search experience with relevant search results. Click for Story Details</summary>
+       <br/>
+       <p>Based on search input, we will look up all biodata from structured dataset and implement a ranking function using metapy. Based on ranking results we will extract corresponding fields from the structured data and display as search results. We will enhance filter based searching feature too where user can get better accuracy because of structured dataset.</p>
+    </details>     
+      
+    **Executed by**: _Ujjal Saha, Sudipto Sarkar_
+    - - - -
+    <details>
+       <summary><b>User Story: </b> Better consistency in displaying attributes leveraging structured data. Click for Story Details</summary>
+       <br/>
+       <p>The current expert search system doesn’t show contact info (email, etc.) consistently across the search results even if the faulty page does have the data. Our improved scraping and structured data along with improved data display logic will increase the consistency in displaying the fields in search results.</p>
+    </details>     
+    
+    **Executed by**: _Ujjal Saha, Sudipto Sarkar_
+    - - - -
+    
+3. **Epic: Topic Mining**   
+
+    <details>
+       <summary><b>User Story: </b> Using text mining extract interest areas of a faculty. Click for Story Details</summary>
+       <br/>
+       <p>Using text mining methods we are planning to generate “Areas of Interests” data from the faculty bio. We are using guided LDA algorithm and Gensim/NLTK libraries to explore other topic mining features and we will be experimenting with parameters to generate relevant topics.</p>
+    </details>     
+    
+    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar_
+    - - - -
+    <details>
+       <summary><b>User Story: </b> Display Areas of Interest in the faculty search result. Click for Story Details</summary>
+       <br/>
+       <p>We are enhancing the front end of ExpertSearch to display faculty search results along with additional relevant fields such as faculty areas of interest and few more.</p>
+    </details>     
+    
+    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar_
+    - - - -
+    
+4. **Epic: Deployment**   
+
+    <details>
+       <summary><b>User Story: </b> Understand and Install current ExpertSearch System. Click for Story Details</summary>
+       <br/>
+       <p>Install and explore the ExpertSearch system and understand the features and functionalities (both frontend and backend). Experiment with code changes etc.</p>
+    </details>     
+ 
+    **Executed by**: _Ujjal Saha, Sudipto Sarkar, Arnab KarSarkar_
+    - - - -
+    <details>
+       <summary><b>User Story: </b> Deploy code into AWS. Click for Story Details</summary>
+       <br/>
+       <p>Being web-based framework, we will do our deployments in AWS Cloud and make it public. We will also do a git PR on the existing original ExpertSearch repo. But launching as an improved system and others to validate, we will separately host ExpertSearchv2.0 in AWS.</p>
+    </details>     
+
+    **Executed by**: _Arnab KarSarkar, Ujjal Saha, Sudipto Sarkar_
+    - - - -
+    <details>
+       <summary><b>User Story: </b> Validation Exercises. Click for Story Details</summary>
+       <br/>
+       <p>As we do development and deployment, we are doing multiple rounds of verification and validation and some will require integrated end-to-end validation steps.</p>
+    </details>     
+      
+    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar, Ujjal Saha, _
+    - - - -
+    
+5. **Epic: Documentation and Presentation**   
+
+    **User Story**: Proposal Documentation 
+    
+    **Executed by**: _Ujjal Saha, Sudipto Sarkar, Arnab KarSarkar_
+    - - - -
+    **User Story**: project Progress Documentation
+    
+    **Executed by**: _Arnab KarSarkar, Ujjal Saha, Sudipto Sarkar_
+    - - - -
+    **User Story**: Final Project Report Documentation  
+    
+    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar, Ujjal Saha, _
+    - - - -
+    **User Story**: Final Project Report Documentation  
+    
+    **Executed by**: _Ujjal Saha, Sudipto Sarkar, Arnab KarSarkar_
+    - - - -
+
+## Improvements Areas
