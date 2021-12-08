@@ -9,10 +9,39 @@
 
 ## Overview
 
-The existing ExpertSearch system (https://github.com/CS410Assignments/ExpertSearch) has several features such as faculty search, filtering based search, search results (with options to open faculty bio pages, emailing, location info), pagination etc.
-As a team, we did a deep analysis of the current ExpertSearch capabilities and found several deficiencies that need to be addressed to make it a better search system. 
-The deficiencies include lack of accuracy, lack of relevant search results and inconsistencies in the search results. These deficiencies can be addressed using the right text retrieval and text mining techniques that will improve the overall search experience in the ExpertSearch system. 
-The team involved in implementing features such as converting unstructured dataset to structured dataset (e.g., csv, json), identifying the key topics (e.g., areas of interest) for each of the faculties and display in the search result, introducing an admin interface that would classify faculty pages and finally improving some of the existing features in the search page for better search experience.
+The existing ExpertSearch web application (https://github.com/CS410Assignments/ExpertSearch) has features such as faculty search, filtering based search, displaying search results (with options to open faculty bio pages, emailing, location info), pagination etc.
+As a team, we did a deep analysis of the current ExpertSearch capabilities and found several deficiencies that can be addressed to make it a better search system. 
+The deficiencies include lack of accuracy in the search results, lack of relevant search results and inconsistencies in the search results. These deficiencies can be addressed using the right text retrieval and text mining techniques that will improve the overall search experience in the ExpertSearch system. 
+Our team involved in implementing following features as we fork the existing ExpertSearch System and added/improved core-functionalities as we build on top of it. Below are the core functionalities that we added on the existing ExpertSearch and we called it ExpertSearchv2.0:
+<details>
+   <summary>Converting unstructured dataset to structured dataset</summary>
+   <p></p>
+   <img/>
+</details>     
+ 
+<details>
+   <summary>Identifying the key topics (e.g., areas of interest) for each of the faculties and display in the search result</summary>
+   <p></p>
+   <img/>
+</details>     
+
+<details>
+   <summary>Introducing revamped admin interface that would crawl and scrape faculty pages based on user input. User can input either university name or URL.</summary>
+   <p></p>
+   <img/>
+</details>     
+
+<details>
+   <summary>Increasing filter criteria.</summary>
+   <p></p>
+   <img/>
+</details>     
+
+<details>
+   <summary>Also improving in consistency in the search page for displaying the faculty fields such as phone number, email, location etc.</summary>
+   <p></p>
+   <img/>
+</details>     
 
 ## Hardware Requirements
 1. Modern Operating System  [Minimum]\
