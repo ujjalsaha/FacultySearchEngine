@@ -39,13 +39,18 @@ Our team involved in implementing following features as we fork the existing Exp
 
 <details>
    <summary>Improved search results with consistant display of the faculty attributes. Click to learn more.</summary>
-   <p></p>
-   <img/>
+   <br/>
+   <p>New ExpertSearch v2.0 is build on latest Python3.9 and dependent packages compared to the existing ExpertSearch that is build on old and out of support Python2.7.
+   With that said the team went through many research and exploration phases as few of the NLP / Text Processing libraries from old system aren't supported in Python3.9 version.
+   New and modern standard libraries were tested and adopted (such as nltk, gensim etc.) and then enginnered to fit the logic of ranking, scoring, topic mining and text retrieval techniques in the new ExpertSearch v2.0 system.
+   In summary, all capabilities of existing ExpertSearch system have been covered by ExpertSearch v2.0 plus additional features also offered all with new set of Python3.9 libraries which by itself is a great achievement.       
+   </p>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_python_version.png?raw=true"/>
 </details>     
 
 <details>
    <summary>Major System upgrade from Python2.7 to Python3.9. Click to learn more.</summary>
-   <br/>>
+   <br/>
    <p>New ExpertSearch v2.0 is build on latest Python3.9 and dependent packages compared to the existing ExpertSearch that is build on old and out of support Python2.7.
    With that said the team went through many research and exploration phases as few of the NLP / Text Processing libraries from old system aren't supported in Python3.9 version.
    New and modern standard libraries were tested and adopted (such as nltk, gensim etc.) and then enginnered to fit the logic of ranking, scoring, topic mining and text retrieval techniques in the new ExpertSearch v2.0 system.
@@ -183,10 +188,9 @@ Sudipto Sarkar       | sudipto2
 
 1. **Epic: Crawling and Scraping**
     - - - -
-    a. **User Story**: Crawler Implementation for a given webpage url
-     
+    a. 
     <details>
-       <summary>Click for Story Details</summary>
+       <summary>Crawler Implementation for a given webpage url Click for Story Details</summary>
        <p>In the admin interface when admin inputs an url, this story takes the url as input and scrapes the page and extracts the faculty biodata. We also implemented intelligent logic in scraper to find right faculty page if the base url has links that leads to multiple faculty related pages.</p>
     </details>     
     
