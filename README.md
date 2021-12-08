@@ -20,7 +20,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 4. 5 GB free disk space
 
 ## Software Requirements
-
+:exclamation: - Shows one way of installing required software. But there could be other different ways.
 1. Chrome Browser, Version 96+ and above
 
    :exclamation: [Download and Install Chrome](https://www.google.com/chrome/)
