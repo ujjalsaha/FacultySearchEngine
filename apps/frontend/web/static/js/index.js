@@ -4,6 +4,7 @@ var incResults = 5;
 
 var selected_loc_filters = []
 var selected_uni_filters = []
+var selected_dept_filters = []
 var searchTerm = ''
 
 
@@ -11,12 +12,17 @@ var searchTerm = ''
 var docDiv = (doc) => {
     const name = doc[0];
     const prev = doc[1];
-    const email = doc[2];
-    const uni_dept = doc[4]+', '+doc[3]
-    const fac_name = doc[5]
-    const fac_url = doc[6]
-    const loc = doc[7]+', '+doc[8]
-
+    const email = doc[6];
+    const uni_dept = doc[3]
+    const fac_name = doc[0]
+    const fac_url = doc[1]
+    const loc = doc[8]
+    //More Features
+    const expertise = doc[9]
+    const dept_url = doc[2]
+    const univ_url = doc[4]
+    const univ_name = doc[5]
+    const fac_phone = doc[7]
 
 
     if (email =='None') {
@@ -26,7 +32,7 @@ var docDiv = (doc) => {
        <div style="display: flex;">
 
         
-                 <b style="font-size:14pt">${fac_name}</b>
+                 <b style="font-size:14pt">${fac_name} - ${univ_name}</b>
                  <a style="margin-left:auto;color:black;" href=${fac_url} target="_blank"><i class="material-icons">launch</i></a>
                  </div>
 
@@ -39,12 +45,19 @@ var docDiv = (doc) => {
                   <i class="material-icons">location_on</i>
                    ${loc}
                  </div>
-            </div>
+                 <div>
+                    Phone - ${fac_phone}
+                </div>
+            </div>            
             </div>
            
 
               <div class="card-body">
-                <span id='docPrev-${name}'>${prev}</span>
+                <span id='docPrev-${name}'><b>Department URL : - </b>${dept_url}</span>
+                <br>
+                <span id='docPrev-${name}'><b>University URL : - </b>${univ_url}</span>
+                <br>
+                <span id='docPrev-${name}'><b>Expertise : - </b>${expertise}</span>
                 <br>
             </div>
             </div>`
@@ -56,7 +69,7 @@ var docDiv = (doc) => {
        <div style="display: flex;">
 
         
-                 <b style="font-size:14pt">${fac_name}</b>
+                 <b style="font-size:14pt">${fac_name} - ${univ_name}</b>
                  <a style="margin-left:auto;color:black;margin-right:20px;" href='mailto:${email}' "><i class="material-icons">email</i></a>
                  <a style="color:black;" href=${fac_url} target="_blank"><i class="material-icons">launch</i></a>
                  </div>
@@ -70,13 +83,20 @@ var docDiv = (doc) => {
                   <i class="material-icons">location_on</i>
                    ${loc}
                  </div>
-            </div>
+                 <div>
+                    Phone - ${fac_phone}
+                </div>
+            </div>            
             </div>
          
 
               <div class="card-body">
-                <span id='docPrev-${name}'>${prev}</span>
+                <span id='docPrev-${name}'><b>Department URL : - </b>${dept_url}</span>
                 <br>
+                <span id='docPrev-${name}'><b>University URL : - </b>${univ_url}</span>
+                <br>
+                <span id='docPrev-${name}'><b>Expertise : - </b>${expertise}</span>
+                <br>                
             </div>
             </div>`
         );
@@ -148,6 +168,7 @@ $(document).ready(function() {
 });
 
 window.onload=function(){
+    console.log("Hello")
     for (var i=0;i<unis.length;i++){
          var newOption = new Option(unis[i], i, false, false);
         // Append it to the select

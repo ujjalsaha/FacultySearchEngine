@@ -39,7 +39,7 @@ depts = json.dumps(faculty.get_all_departments())
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html',unis= unis,locs=locs)
 
 @app.route('/admin')
 def admin():
@@ -103,7 +103,9 @@ def search():
     results = list(zip(faculty_names, faculty_homepage_url, faculty_department_url, faculty_department_name,
                        faculty_university_url, faculty_university_name, faculty_email, faculty_phone, faculty_location,
                        faculty_expertise))
-    # search_result = [('2216.txt', '...homepage. this is just a <b>test</b> page.', 'None', 'Stony Brook University', 'Computer Science', '', 'http://www.cs.stonybrook.edu/~shuai/', 'New York', 'United States')]
+    for r in results:
+        print(r)
+
     return jsonify({
         "docs": results
     })
