@@ -51,7 +51,7 @@ Our team involved in implementing following features as we fork the existing Exp
    New and modern standard libraries were tested and adopted (such as nltk, gensim etc.) and then enginnered to fit the logic of ranking, scoring, topic mining and text retrieval techniques in the new ExpertSearch v2.0 system.
    In summary, all capabilities of existing ExpertSearch system have been covered by ExpertSearch v2.0 plus additional features also offered all with new set of Python3.9 libraries which by itself is a great achievement.       
    </p>
-   <img/>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_python_version.png?raw=true"/>
 </details>     
 
 <details>
