@@ -56,7 +56,6 @@ Our team involved in implementing following features as we fork the existing Exp
    This will encourage better participation for future development. 
    When compared to the existing ExpertSeach the existing web application has almost zero documentaion and artifacts which made it very difficult for code analysis, code reusability and increased the overall development window for enhancements. 
    Below snapshot demonstrates a good comparison between the existing and new ExpertSearch.</p>
-   <br/>
    <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_documentation.png?raw=true"/>
 </details>     
 
