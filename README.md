@@ -6,7 +6,7 @@
 <sub><sup>MacOS   To open in a new tab: Cmd </sup></sub><kbd>⌘</kbd><sub><sup> + Click</sup></sub>      
 <sub><sup>Windows   To open in a new tab: Cmd </sup></sub><kbd>⌃</kbd><sub><sup> + Click</sup></sub>      
 
-## Using the ExpertSearch v2.0
+## Using the ExpertSearch v2.0 Webapp
 
 #### Using Search Feature
 1. Run the Demo URL in your browser: 
