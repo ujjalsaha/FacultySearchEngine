@@ -295,7 +295,27 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 #### ExpertSearchv2.0 Admin Functionality
 
-       
+* Admin interface is primarily responsible for receiving university/department/faculty name or urls as input from user to parse, crawl, scrape data, retrieve fields using various text mining approaches and insert structured data to database.
+* For admin functionality the front end file is located at [web/templates/admin.html](web/templates/admin.html)
+* User provides either univseristy name or university url or department url. User can also specify University Name and Department name together.
+* The Admin interface receives input from user and asynchronously responds to user that the database will be updated eventually. This is `eventual consistancy` model. If user closes browser backend server will still be processing the the crawling and scraping.
+* For this we have two instances of server running at the front end. 
+    1. [apps/frontend/server.py::crawl()](apps/frontend/server.py) that accepts university crawl/scrape requests from the user and lets the user know it will eventually process the data this closing the seesion.  
+    2. A resdis instance runs that queues the actual crawl requests ans passes the requests to TODO
+* If user passed a name and not a url we are using Google API service [apps/backend/api/googleapi.py](apps/backend/api/googleapi.py) to exract the url from university and department name.
+* Once the URL is extarcted, the crawler [apps/frontend/crawler/crawler.py](apps/frontend/crawler/crawler.py) crawls and finds all the faculty home page urls
+* The faculty homepage urls are then provided to [apps/frontend/crawler/faculty_url_scrapper.py](apps/frontend/crawler/faculty_url_scrapper.py) for scraping the data and save data into database as strctured data. The `faculty_url_scrapper` is a orchestration module that performs multipel steps for extrating structured data from the unstructured data and saving in database. Below are few major tasks it perfoms:
+    * Once the faculty data are scraped, it is then passed to [apps/backend/utils/document.py](apps/backend/utils/document.py). the `Document` class has then call he text retrieval and text mining extraction functions to extract Faculty Name, Faculty Contact Number, email, department name, university name, location, areas of interests etc. 
+        * Phone number, Email is being extracted using regex technique
+        * Department name, University Name and Faculty Name are being extracted from html `title` element from their corresponding urls page source code
+        * Location data is being extracted using the Google API Service
+        * Faculty area of interest are being extracted using the Gensim LDA Topic mining method (Text Mining technique)
+    * At this stage we have both A. the structured data and also B. Scrape data (as unstructured data) for each faculty
+    * Both structured data along with the raw biodata are then inserted to [data/sqlite3/faculty.db](data/sqlite3/) database using the class [apps/backend/utils/facultydb.py::add_records()](apps/backend/utils/facultydb.py) 
+
+:bangbang: The entire workflow and code discussed above is all new work in the ExpertSearch v2.0 that has been done. Tasks involved adapting new libraries for Python3.9, explorations, PoCs, and then designining an effctive workflow and implementing it.   
+
+:pushpin: :pushpin:     
 <details>
    <summary>Click to See the Workflow Diagram of Admin Functionalty</summary>
    <br/>
