@@ -14,31 +14,31 @@ As a team, we did a deep analysis of the current ExpertSearch capabilities and f
 The deficiencies include lack of accuracy in the search results, lack of relevant search results and inconsistencies in the search results. These deficiencies can be addressed using the right text retrieval and text mining techniques that will improve the overall search experience in the ExpertSearch system. 
 Our team involved in implementing following features as we fork the existing ExpertSearch System and added/improved core-functionalities as we build on top of it. Below are the core functionalities that we added on the existing ExpertSearch and we called it ExpertSearchv2.0:
 <details>
-   <summary>Converting unstructured dataset to structured dataset</summary>
+   <summary>Converting unstructured dataset to structured dataset. Click here for details.</summary>
    <p></p>
    <img/>
 </details>     
  
 <details>
-   <summary>Identifying the key topics (e.g., areas of interest) for each of the faculties and display in the search result</summary>
+   <summary>Identifying the key topics (e.g., areas of interest) for faculties and display in the search result. Click here for details.</summary>
    <p></p>
    <img/>
 </details>     
 
 <details>
-   <summary>Introducing revamped admin interface that would crawl and scrape faculty pages based on user input. User can input either university name or URL.</summary>
+   <summary>Introducing revamped admin interface that would crawl and scrape faculty pages based on user input. User can input either university name or URL. Click here for details.</summary>
    <p></p>
    <img/>
 </details>     
 
 <details>
-   <summary>Increasing filter criteria.</summary>
+   <summary>More filter criteria. Click here for details.</summary>
    <p></p>
    <img/>
 </details>     
 
 <details>
-   <summary>Also improving in consistency in the search page for displaying the faculty fields such as phone number, email, location etc.</summary>
+   <summary>Also improving in consistency in the search page for displaying the faculty fields such as phone number, email, location etc. Click here for details.</summary>
    <p></p>
    <img/>
 </details>     
