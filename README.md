@@ -4,6 +4,7 @@
 * [Video Presentation](#video-presentation)
 * [Using the ExpertSearch v2.0 Webapp](#using-the-expertsearch-v2.0-webapp)
 * [Overview](#overview)
+* [Technologies](#technologies)
 * [Hardware Requirements](#hardware-requirements)
 * [Access and Permission Requirements](#access-and-permission-requirements)
 * [Software Requirements](#software-requirements)
@@ -26,7 +27,7 @@
 - - - - 
 :warning: \
 The team put all emphasis on the NLP, text retrieval, text mining techniques and aspects for faculty search. 
-The webapp is the platform to display the outcomes of the implementation while putting everything together for demostration purposes. 
+The webapp is the platform to display the outcomes of the implementation while putting everything together for demonstration purposes. 
 However, making the webapp perfect in terms of end-to-end best user experience was not part of the goal for this project. 
 The webapp still has got many improvement areas in terms of UX, UI display, communication, request response, completeness which could be a separate project by itself.
 While developing the ExpertSearch v2.0 we considered to develop the prototype and leave opportunity to build things on top of this.      
@@ -146,6 +147,17 @@ Below are the core functionalities that we added/improved on the existing Expert
 
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
+## Technologies
+Below are the main technologies that were used to build ExpertSearch v2.0 
+* Python3.9
+* Modern text Retrieval and Text Mining techniques
+* Webpages crawling and scraping
+* NLP Libraries - NLTK, Gensim
+* Redis Cluster
+* Sqlite3 Database
+* Web technologies like HTML, CSS, JQuery
+* Flask based web server
+ 
 ## Hardware Requirements
 1. Modern Operating System  [Minimum]\
 Linux or MacOS  **[Recommended]**
