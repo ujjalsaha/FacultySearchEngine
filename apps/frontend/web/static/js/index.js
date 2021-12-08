@@ -32,15 +32,17 @@ var docDiv = (doc) => {
        <div style="display: flex;">
 
         
-                 <b style="font-size:14pt">${fac_name} - ${univ_name}</b>
+                 <b style="font-size:14pt">${fac_name}</b>
                  <a style="margin-left:auto;color:black;" href=${fac_url} target="_blank"><i class="material-icons">launch</i></a>
                  </div>
-
+            <div>
+                    University - ${univ_name}
+                </div>
             <div class="header-item">
             <div class="tag">
             <i class='fas fa-university' ></i>
                   ${uni_dept}
-            </div>
+            </div>                
                 <div class="tag">
                   <i class="material-icons">location_on</i>
                    ${loc}
@@ -53,9 +55,13 @@ var docDiv = (doc) => {
            
 
               <div class="card-body">
-                <span id='docPrev-${name}'><b>Department URL : - </b>${dept_url}</span>
+                <span id='docPrev-${name}'><b>Department URL 
+                    <a style="margin-left:auto;color:black;" href=${dept_url} target="_blank"><i class="material-icons">launch</i></a>
+                </b></span>
                 <br>
-                <span id='docPrev-${name}'><b>University URL : - </b>${univ_url}</span>
+                <span id='docPrev-${name}'><b>University URL
+                    <a style="margin-left:auto;color:black;" href=${univ_url} target="_blank"><i class="material-icons">launch</i></a>
+                </b></span>
                 <br>
                 <span id='docPrev-${name}'><b>Expertise : - </b>${expertise}</span>
                 <br>
@@ -69,11 +75,13 @@ var docDiv = (doc) => {
        <div style="display: flex;">
 
         
-                 <b style="font-size:14pt">${fac_name} - ${univ_name}</b>
+                 <b style="font-size:14pt">${fac_name}</b>
                  <a style="margin-left:auto;color:black;margin-right:20px;" href='mailto:${email}' "><i class="material-icons">email</i></a>
                  <a style="color:black;" href=${fac_url} target="_blank"><i class="material-icons">launch</i></a>
                  </div>
-
+            <div>
+                    University - ${univ_name}
+                </div>
             <div class="header-item">
             <div class="tag">
             <i class='fas fa-university' ></i>
@@ -91,9 +99,13 @@ var docDiv = (doc) => {
          
 
               <div class="card-body">
-                <span id='docPrev-${name}'><b>Department URL : - </b>${dept_url}</span>
+                <span id='docPrev-${name}'><b>Department URL 
+                    <a style="margin-left:auto;color:black;" href=${dept_url} target="_blank"><i class="material-icons">launch</i></a>
+                </b></span>
                 <br>
-                <span id='docPrev-${name}'><b>University URL : - </b>${univ_url}</span>
+                <span id='docPrev-${name}'><b>University URL
+                    <a style="margin-left:auto;color:black;" href=${univ_url} target="_blank"><i class="material-icons">launch</i></a>
+                </b></span>
                 <br>
                 <span id='docPrev-${name}'><b>Expertise : - </b>${expertise}</span>
                 <br>                
@@ -108,7 +120,8 @@ var doSearch = function() {
         "query": searchTerm,
         "num_results": numResults,
         "selected_loc_filters" : selected_loc_filters,
-        "selected_uni_filters": selected_uni_filters
+        "selected_uni_filters": selected_uni_filters,
+        "selected_dept_filters": selected_dept_filters
     }
     if (searchTerm!='')
     {
@@ -163,7 +176,8 @@ $(window).on("resize",function() {
 
 $(document).ready(function() {
     $('#loc_filter').select2({placeholder: "e.g. United States, California"});
-    $('#uni_filter').select2({placeholder: "e.g. Stanford University"});
+    $('#uni_filter').select2({placeholder: "e.g. University of Illinois Urbana-Champaign"});
+    $('#dept_filter').select2({placeholder: "e.g. Computer Science"});
     $(window).trigger('resize');
 });
 
@@ -183,6 +197,15 @@ window.onload=function(){
         $('#loc_filter').append(newOption).trigger('change');
     }
     selected_loc_filters = locs.slice()
+
+    selected_dept_filters = depts.slice()
+    for (var i=0;i<depts.length;i++){
+         var newOption = new Option(depts[i], i, false, false);
+        // Append it to the select
+        $('#dept_filter').append(newOption).trigger('change');
+    }
+    selected_dept_filters = depts.slice()
+
     $(window).trigger('resize');
  
 };
@@ -234,6 +257,18 @@ $("#applyFilters").click(function() {
     if (selected_loc_filters.length == 0){
         selected_loc_filters = locs.slice()
     }
+
+    var selected_dept_data = $("#dept_filter").select2("data");
+    selected_dept_filters = []
+    selected_dept_data.forEach(s => {
+            selected_dept_filters.push(s['text']);
+
+});
+
+    if (selected_dept_filters.length == 0){
+        selected_dept_filters = depts.slice()
+    }
+
   filters_div = document.getElementById("search-filters")
   filters_div.style.display = 'none'
         doSearch();

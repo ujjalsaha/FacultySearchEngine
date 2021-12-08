@@ -39,7 +39,7 @@ depts = json.dumps(faculty.get_all_departments())
 
 @app.route('/')
 def home():
-    return render_template('index.html',unis= unis,locs=locs)
+    return render_template('index.html',unis= unis,locs=locs, depts=depts)
 
 @app.route('/admin')
 def admin():
