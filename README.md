@@ -22,7 +22,8 @@ x86 64-bit CPU Multi Core **[Recommended]**
 ## Software Requirements
 
 1. Chrome Browser, Version 96+ and above
-    * [Download and Install Chrome](https://www.google.com/chrome/)
+
+   :exclamation: [Download and Install Chrome](https://www.google.com/chrome/)
  
 2. Python3.9 virtual environment
    * [MacOS Conda Installation Guide](https://www.anaconda.com/products/individual) or [Linux Conda Installation Guide](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
@@ -110,8 +111,9 @@ Sudipto Sarkar       | sudipto2
 
 
 ## User Stories and Team Assignments
+
+1. **Epic: Crawling and Scraping**
     - - - -
-1. Epic: Crawling and Scraping
     a. **User Story**: Crawler Implementation for a given webpage url
      
     In the admin interface when admin inputs an url, this story takes the url as input and scrapes the page and extracts the faculty biodata. We also implemented intelligent logic in scraper to find right faculty page if the base url has links that leads to multiple faculty related pages. 
@@ -121,22 +123,28 @@ Sudipto Sarkar       | sudipto2
     b. **User Story**: Adding admin interface for web page indexing  
     
     As our project scope doesn’t include auto crawler features for the entire web, the admin interface we are implementing in ExpertSearch system is to allow the admin to enter base url of the universities and based on valid/invalid university email (different story) the admin interface will fetch the url to the crawler module to scrape faculty data.
+    **Executed by**: _Arnab KarSarkar, Ujjal Saha_
     - - - -
     c. **User Story**: Displaying accepted/rejected web page based on url   
     
     When admin enters the base url, this module will check if the url is a valid university url. If yes, the module forwards the url for crawling and scraping the faculty pages. If not, the module lets the admin know that base url doesn’t belong to a university or no faculty page found.                 
+    **Executed by**: _Arnab KarSarkar, Sudipto Sarkar_
     - - - -
 
-1. **Epic: Crawling and Scraping**   
+2. **Epic: Search Experience Enhancement**   
 
-    a. **User Story**: Crawler Implementation for a given webpage url 
+    a. **User Story**: Build a structured dataset from Unstructured datasets 
 
-    In the admin interface when admin inputs an url, this story takes the url as input and scrapes the page and extracts the faculty biodata. We also implemented intelligent logic in scraper to find right faculty page if the base url has links that leads to multiple faculty related pages. 
+    In current ExpertSearch system the faculty data are stored as unstructured data as a file. We are implementing a functionality that will convert the unstructured data to structured data. For e.g., using text mining and text retrieval techniques we are planning to extract fields like Faculty Name, Department, University, Area of Interests, email, phone, etc, and store them in a structured form (either in csv, or database etc.) This will enhance the overall search experience. 
     
+    **Executed by**: _Sudipto Sarkar, Ujjal Saha_
+    - - - -
     b. **User Story**: Adding admin interface for web page indexing  
     
     As our project scope doesn’t include auto crawler features for the entire web, the admin interface we are implementing in ExpertSearch system is to allow the admin to enter base url of the universities and based on valid/invalid university email (different story) the admin interface will fetch the url to the crawler module to scrape faculty data.
     
+    **Executed by**: _Arnab KarSarkar, Ujjal Saha_
+    - - - -
     c. **User Story**: Displaying accepted/rejected web page based on url   
     
     When admin enters the base url, this module will check if the url is a valid university url. If yes, the module forwards the url for crawling and scraping the faculty pages. If not, the module lets the admin know that base url doesn’t belong to a university or no faculty page found.                 
