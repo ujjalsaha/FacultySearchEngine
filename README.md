@@ -313,7 +313,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 ## Project Team Members
 
 Name             |  NetID  |  Email
-| :---  | :--- 
+| :---  | :--- | :---  
 Ujjal Saha  | ujjals2 | ujjals2@illinois.edu 
 Arnab KarSarkar | arnabk2 | arnabk2@illinois.edu
 Sudipto Sarkar | sudipto2 | sudipto2 @illinois.edu
