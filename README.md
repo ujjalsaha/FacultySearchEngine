@@ -435,3 +435,4 @@ The ExpoertSearch v2.0 was build upon [existing ExpertSearch web application](ht
 ## Acknowledgements
 Our special thanks to [Prof. Cheng Zhai](http://czhai.cs.illinois.edu/) and all the TAs in CS410 Text Information Systems Course.   
 
+<div style="text-align: right"> <a href="#top">Back to top</a> </div>
