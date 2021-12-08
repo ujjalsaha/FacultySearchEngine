@@ -6,7 +6,6 @@
 MacOS   To open in a new tab: Cmd <kbd>⌘</kbd> + Click      
 Windows To open in a new tab: Control <kbd>⌃</kbd> + Click 
 
-<a href="https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw" target="_blank">Software usage tutorial presentation (New Tab)</a>
 
 ## Abstract
 
