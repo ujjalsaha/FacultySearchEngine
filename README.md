@@ -312,11 +312,11 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 ## Project Team Members
 
-Name             |  Netid 
+Name             |  NetID  |  Email
 | :---  | :--- 
-Ujjal Saha       | ujjals2
-Arnab KarSarkar       | arnabk2
-Sudipto Sarkar       | sudipto2
+Ujjal Saha  | ujjals2 | ujjals2@illinois.edu 
+Arnab KarSarkar | arnabk2 | arnabk2@illinois.edu
+Sudipto Sarkar | sudipto2 | sudipto2 @illinois.edu
 
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
@@ -423,7 +423,8 @@ Sudipto Sarkar       | sudipto2
 * Crawling and Scraping activites can be tracked if implemeted a publisher and subscriber. We didn't do it as it wont add much value of our goal and focus on Text Retrieval and Mining techniques.  
 * GuidedLDA couldn't be used for specialized topic mining and we settled with general LDA. Specialized Topic mining could result is more relevant topic wouds for a faculty.
 * Admin interface repeated entry can be malacious and need to implement some sort of restrictions
-* The overall User Experience (UX) and User Interface (UI) can be improved which we didn't do as it was out of our focus area of Text Retrieval and Mining techniques and capabilities. 
+* Making the webapp perfect in terms of end-to-end best user experience was not part of the goal for this project. The webapp still has got many improvement areas in terms of UX, UI display, communication, request response, industry standards, completeness which could be a separate project by itself.
+ 
 
 ## Licensing
 The ExpoertSearch v2.0 was build upon [existing ExpertSearch web application](https://github.com/CS410Assignments/ExpertSearch) and thus will inherit the original licensing terms and condistions of the original ExpertSearch system.  
