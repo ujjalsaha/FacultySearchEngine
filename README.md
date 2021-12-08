@@ -318,6 +318,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 :exclamation: The entire workflow and code discussed above is all new work in the ExpertSearch v2.0 that has been done. Tasks involved adapting new libraries for Python3.9, explorations, PoCs, and then designining an effctive workflow and implementing it.   
 
+:pushpin: :pushpin:
 <details>
    <summary>Click to See the Workflow Diagram of Search Functionalty</summary>
    <br/>
