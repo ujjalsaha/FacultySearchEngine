@@ -62,7 +62,6 @@ class Crawler:
        """
         dept_url = "https://" + self.extract.subdomain +  "." + self.extract.domain + "." + self.extract.suffix
         self.base_url = dept_url
-        print(dept_url)
         self.return_dict['dept_url'] = dept_url
 
     def get_key_words(self):
