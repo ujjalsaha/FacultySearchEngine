@@ -243,7 +243,7 @@ Sudipto Sarkar       | sudipto2
 3. **Epic: Topic Mining**   
 
     <details>
-       <summary><b>User Story: </b> Using text mining techniques to extract the Areas of interest for a given faculty based. Click for Story Details</summary>
+       <summary><b>User Story: </b> Using text mining extract interest areas of a faculty. Click for Story Details</summary>
        <br/>
        <p>Using text mining methods we are planning to generate “Areas of Interests” data from the faculty bio. We are using guided LDA algorithm and Gensim/NLTK libraries to explore other topic mining features and we will be experimenting with parameters to generate relevant topics.</p>
     </details>     
