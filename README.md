@@ -20,10 +20,9 @@ x86 64-bit CPU Multi Core **[Recommended]**
 4. 5 GB free disk space
 
 ## Software Requirements
-:exclamation: - Shows one way of installing required software. But there could be other different ways.
-1. Chrome Browser, Version 96+ and above
 
-   :exclamation: [Download and Install Chrome](https://www.google.com/chrome/)
+1. Chrome Browser, Version 96+ and above
+   * [Download and Install Chrome](https://www.google.com/chrome/)
  
 2. Python3.9 virtual environment
    * [MacOS Conda Installation Guide](https://www.anaconda.com/products/individual) or [Linux Conda Installation Guide](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
@@ -123,11 +122,13 @@ Sudipto Sarkar       | sudipto2
     b. **User Story**: Adding admin interface for web page indexing  
     
     As our project scope doesn’t include auto crawler features for the entire web, the admin interface we are implementing in ExpertSearch system is to allow the admin to enter base url of the universities and based on valid/invalid university email (different story) the admin interface will fetch the url to the crawler module to scrape faculty data.
+    
     **Executed by**: _Arnab KarSarkar, Ujjal Saha_
     - - - -
     c. **User Story**: Displaying accepted/rejected web page based on url   
     
-    When admin enters the base url, this module will check if the url is a valid university url. If yes, the module forwards the url for crawling and scraping the faculty pages. If not, the module lets the admin know that base url doesn’t belong to a university or no faculty page found.                 
+    When admin enters the base url, this module will check if the url is a valid university url. If yes, the module forwards the url for crawling and scraping the faculty pages. If not, the module lets the admin know that base url doesn’t belong to a university or no faculty page found.
+                     
     **Executed by**: _Arnab KarSarkar, Sudipto Sarkar_
     - - - -
 
@@ -137,16 +138,72 @@ Sudipto Sarkar       | sudipto2
 
     In current ExpertSearch system the faculty data are stored as unstructured data as a file. We are implementing a functionality that will convert the unstructured data to structured data. For e.g., using text mining and text retrieval techniques we are planning to extract fields like Faculty Name, Department, University, Area of Interests, email, phone, etc, and store them in a structured form (either in csv, or database etc.) This will enhance the overall search experience. 
     
-    **Executed by**: _Sudipto Sarkar, Ujjal Saha_
+    **Executed by**: _Ujjal Saha, Sudipto Sarkar_
     - - - -
-    b. **User Story**: Adding admin interface for web page indexing  
+    b. **User Story**: Enhance the search experience with relevant search results  
     
-    As our project scope doesn’t include auto crawler features for the entire web, the admin interface we are implementing in ExpertSearch system is to allow the admin to enter base url of the universities and based on valid/invalid university email (different story) the admin interface will fetch the url to the crawler module to scrape faculty data.
+    Based on search input, we will look up all biodata from structured dataset and implement a ranking function using metapy. Based on ranking results we will extract corresponding fields from the structured data and display as search results. We will enhance filter based searching feature too where user can get better accuracy because of structured dataset.
     
-    **Executed by**: _Arnab KarSarkar, Ujjal Saha_
+    **Executed by**: _Ujjal Saha, Sudipto Sarkar_
     - - - -
-    c. **User Story**: Displaying accepted/rejected web page based on url   
+    c. **User Story**: Better consistency in displaying links such as email, phone etc. leveraging the structured data   
     
-    When admin enters the base url, this module will check if the url is a valid university url. If yes, the module forwards the url for crawling and scraping the faculty pages. If not, the module lets the admin know that base url doesn’t belong to a university or no faculty page found.                 
+    The current expert search system doesn’t show contact info (email, etc.) consistently across the search results even if the faulty page does have the data. Our improved scraping and structured data along with improved data display logic will increase the consistency in displaying the fields in search results.                 
     
+    **Executed by**: _Ujjal Saha, Sudipto Sarkar_
+    - - - -
+    
+3. **Epic: Topic Mining**   
+
+    a. **User Story**: Using text mining techniques to extract the Areas of interest for a given faculty based 
+
+    Using text mining methods we are planning to generate “Areas of Interests” data from the faculty bio. We are using guided LDA algorithm and Gensim/NLTK libraries to explore other topic mining features and we will be experimenting with parameters to generate relevant topics. 
+    
+    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar_
+    - - - -
+    b. **User Story**: Display Areas of Interest in the faculty search result  
+    
+    We are enhancing the front end of ExpertSearch to display faculty search results along with additional relevant fields such as faculty areas of interest and few more.
+    
+    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar_
+    - - - -
+    
+4. **Epic: Deployment**   
+
+    a. **User Story**: Understand and Install current ExpertSearch System 
+
+    Install and explore the ExpertSearch system and understand the features and functionalities (both frontend and backend). Experiment with code changes etc.  
+    
+    **Executed by**: _Ujjal Saha, Sudipto Sarkar, Arnab KarSarkar_
+    - - - -
+    b. **User Story**: Deploy code into AWS  
+    
+    As ExpertSearch is web-based framework, we will do our deployments in AWS Cloud and make it public. We will also do a git PR on the existing original ExpertSearch repo. But launching as an improved system and others to validate, we will separately host ExpertSearchv2.0 in Heroku. 
+    
+    **Executed by**: _Arnab KarSarkar, Ujjal Saha, Sudipto Sarkar_
+    - - - -
+    c. **User Story**: Validation Exercises  
+    
+    As we do development and deployment, we are doing multiple rounds of verification and validation and some will require integrated end-to-end validation steps.  
+    
+    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar, Ujjal Saha, _
+    - - - -
+    
+5. **Epic: Documentation**   
+
+    a. **User Story**: Proposal Documentation 
+    
+    **Executed by**: _Ujjal Saha, Sudipto Sarkar, Arnab KarSarkar_
+    - - - -
+    b. **User Story**: project Progress Documentation
+    
+    **Executed by**: _Arnab KarSarkar, Ujjal Saha, Sudipto Sarkar_
+    - - - -
+    c. **User Story**: Final Project Report Documentation  
+    
+    **Executed by**: _Sudipto Sarkar, Arnab KarSarkar, Ujjal Saha, _
+    - - - -
+    c. **User Story**: Final Project Report Documentation  
+    
+    **Executed by**: _Ujjal Saha, Sudipto Sarkar, Arnab KarSarkar_
 
