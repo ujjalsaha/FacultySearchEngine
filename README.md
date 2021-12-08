@@ -7,7 +7,7 @@
 <sub><sup>Windows   To open in a new tab: Cmd </sup></sub><kbd>⌃</kbd><sub><sup> + Click</sup></sub>      
 
 
-## Abstract
+## Overview
 
 The existing ExpertSearch system (https://github.com/CS410Assignments/ExpertSearch) has several features such as faculty search, filtering based search, search results (with options to open faculty bio pages, emailing, location info), pagination etc.
 As a team, we did a deep analysis of the current ExpertSearch capabilities and found several deficiencies that need to be addressed to make it a better search system. 
@@ -93,6 +93,8 @@ x86 64-bit CPU Multi Core **[Recommended]**
     ````
 3. The browser should show up ExpertSearchv2.0 search application 
 
+:exclamation: A comprehensive software usage [video presentation](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw) is also available. [Click Here](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw)
+
 
 ## Implementation Details 
 
@@ -123,7 +125,7 @@ Sudipto Sarkar       | sudipto2
 
 
 
-## User Stories and Team Assignments
+## User Stories and Contributions
 
 1. **Epic: Crawling and Scraping**
     - - - -
@@ -254,3 +256,4 @@ Sudipto Sarkar       | sudipto2
     
     **Executed by**: _Ujjal Saha, Sudipto Sarkar, Arnab KarSarkar_
 
+## Improvements Areas
