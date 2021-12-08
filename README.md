@@ -16,14 +16,23 @@ Our team involved in implementing following features as we fork the existing Exp
 <details>
    <summary>Converting unstructured dataset to structured dataset. <font color="#1e90ff"> Click to learn more.</font></summary>
    <br/>
-   <p></p>
+   <p>The new ExpertSearch v2.0 system can scrapes faulty pages and using text retrieval techniques extracts structured data such as Name, email, departname name, university name, phone number, email, location, areas of interests etc and saves in the database along with the scrpaed biodata. 
+   Whenver a user enters a search query, based on filter used or not with the search qury, the system grabs the biodata from the database and ranks them using BM25 ranking algorithm.
+   After the ranking, the system granbs the ranked data and gets corresponding faculty attributes from the structured database entry for the faculties.
+   This makes the new system much more organized with data while maintaining consistancy in displaying search results with unniformity in data.
+   The existing ExpertSearch system doesn't have the structured data implementation and search results displays and very inconsistant. 
+   </p>
    <img/>
 </details>     
  
 <details>
    <summary>Topics extraction (e.g., areas of interest) for faculties and display in search results. Click to learn more.</summary>
    <br/>
-   <p></p>
+   <p>The new ExpertSearch v2.0 implemented the innovative feature of displaying areas of interest for each faculty in the search results. 
+   This was achieved by performing topic mining techniques on the faculty bioodata to extract most relevant topic.
+   The areas of interests filed which is being displayed in the search results of faculty is the outcome of this inovative approach.
+   The existing ExpertSearch application doesn't have this feature.
+   </p>
    <img/>
 </details>     
 
