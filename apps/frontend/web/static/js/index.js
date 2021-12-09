@@ -9,7 +9,7 @@ var searchTerm = ''
 
 
 
-var docDiv = (doc) => {
+var docDiv = (doc, phone_id) => {
     const name = doc[0];
     const prev = doc[1];
     const email = doc[6];
@@ -24,95 +24,44 @@ var docDiv = (doc) => {
     const univ_name = doc[5]
     const fac_phone = doc[7]
 
-
-    if (email =='None') {
-        return (
-             `<div class="card">
+    expertise_list = expertise.split(" ")
+    items = []
+    expertise_list.forEach(item => {
+       items.push(`<span class="badge badge-pill badge-secondary">${item}</span>`)
+     });
+    items = items.join(" ")
+    return (
+        `<div class="card">
              <div class="card-header">
-       <div style="display: flex;">
-
-        
-                 <b style="font-size:14pt">${fac_name}</b>
-                 <a style="margin-left:auto;color:black;" href=${fac_url} target="_blank"><i class="material-icons">launch</i></a>
-                 </div>
-            <div>
-                    University - ${univ_name}
-                </div>
-            <div class="header-item">
-            <div class="tag">
-            <i class='fas fa-university' ></i>
-                  ${uni_dept}
-            </div>                
-                <div class="tag">
-                  <i class="material-icons">location_on</i>
-                   ${loc}
-                 </div>
-                 <div>
-                    Phone - ${fac_phone}
-                </div>
-            </div>            
-            </div>
-           
-
-              <div class="card-body">
-                <span id='docPrev-${name}'><b>Department URL 
-                    <a style="margin-left:auto;color:black;" href=${dept_url} target="_blank"><i class="material-icons">launch</i></a>
-                </b></span>
-                <br>
-                <span id='docPrev-${name}'><b>University URL
-                    <a style="margin-left:auto;color:black;" href=${univ_url} target="_blank"><i class="material-icons">launch</i></a>
-                </b></span>
-                <br>
-                <span id='docPrev-${name}'><b>Expertise : - </b>${expertise}</span>
-                <br>
-            </div>
-            </div>`
-        );
-    } else {
-        return (
-            `<div class="card">
-             <div class="card-header">
-       <div style="display: flex;">
-
-        
-                 <b style="font-size:14pt">${fac_name}</b>
+             <div style="display: flex;">
+                 <h5 class="card-title">${fac_name}</h5>
+                 <span style="margin-left: 26em;" id="${phone_id}"><i class="material-icons " style="vertical-align: bottom">phone</i> ${fac_phone}</span>
                  <a style="margin-left:auto;color:black;margin-right:20px;" href='mailto:${email}' "><i class="material-icons">email</i></a>
                  <a style="color:black;" href=${fac_url} target="_blank"><i class="material-icons">launch</i></a>
-                 </div>
-            <div>
-                    University - ${univ_name}
-                </div>
+             </div>
             <div class="header-item">
             <div class="tag">
-            <i class='fas fa-university' ></i>
-                  ${uni_dept}
+            <i class="fas fa-school"></i>
+            <a href=${univ_url} target="_blank">${univ_name}</a>
             </div>
-                <div class="tag">
-                  <i class="material-icons">location_on</i>
-                   ${loc}
-                 </div>
-                 <div>
-                    Phone - ${fac_phone}
-                </div>
+            <div class="tag">
+            <i class='fas fa-university' ></i>
+               <a href=${dept_url} target="_blank">${uni_dept}</a>    
+            </div>
             </div>            
             </div>
-         
-
-              <div class="card-body">
-                <span id='docPrev-${name}'><b>Department URL 
-                    <a style="margin-left:auto;color:black;" href=${dept_url} target="_blank"><i class="material-icons">launch</i></a>
-                </b></span>
-                <br>
-                <span id='docPrev-${name}'><b>University URL
-                    <a style="margin-left:auto;color:black;" href=${univ_url} target="_blank"><i class="material-icons">launch</i></a>
-                </b></span>
-                <br>
-                <span id='docPrev-${name}'><b>Expertise : - </b>${expertise}</span>
-                <br>                
-            </div>
+          <div class="card-body">
+            <span id='docPrev-${name}'><b>Expertise : - </b>${items}</span>
+            <br>  
+            <div class="header-item">
+            <div class="tag" style="margin-left: auto; font-size: 10px;">
+              <i class="material-icons">location_on</i>
+               ${loc}
+             </div>                 
+            </div>                
+        </div>
             </div>`
-        );
-    }
+    );
 }
 
 var doSearch = function() {
@@ -138,15 +87,20 @@ var doSearch = function() {
             const docs = data.docs;
             $("#docs-div").empty();
 
-            docs.forEach(doc => {
-            
+            docs.forEach((doc, count) => {
+                phone_id = doc[7].replace(/\D/g, '') + count
                 $("#docs-div").append(
-                    docDiv(doc)
+                    docDiv(doc, phone_id)
                 );
                     num_fetched_res = num_fetched_res+1;
 
+
+                if(doc[7] ==''){
+                    $("#" + phone_id).addClass("hide")
+                }
             });
-          
+
+
             if (num_fetched_res==numResults){
 
             $("#loadMoreButton").css("display", "block")
