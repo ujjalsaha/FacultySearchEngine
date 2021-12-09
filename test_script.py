@@ -103,6 +103,5 @@ for uni in uni_list:
                 print('total faculty page found = ', len(scrape_page.faculty_urls))
             except:
                 print('Ignoring university = ', uni)
-                pass
 
 close_driver()
