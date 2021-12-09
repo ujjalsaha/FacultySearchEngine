@@ -6,15 +6,18 @@ import requests
 import base64
 import sys
 import re
-from apps.backend.utils.facultydb import FacultyDB
-from apps.backend.api.search import Search
 
-from apps.frontend.crawler.crawler import ExtractFacultyURL
 from redis import Redis
 import redis
 import rq
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
+
+from apps.backend.utils.facultydb import FacultyDB
+from apps.backend.api.search import Search
+
+from apps.frontend.crawler.crawler import ExtractFacultyURL
+
 
 from apps.frontend.utils.background_task import run_task
 
