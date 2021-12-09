@@ -36,7 +36,6 @@ def __do_db_call__(faculty_list):
     try:
         faculty_db = FacultyDB()
         faculty_db.add_records(faculty_list)
-        print("BIODATA RECORDS:    ", faculty_db.get_biodata_records())
     except Exception as exc:
         raise Exception(" Database error occurred = {}".format(exc))
 
@@ -146,28 +145,40 @@ class ScrapeFacultyWebPage:
     def process_document(self, bio_dict):
         faculty_dict_list = []
         count = 0
-        for url in self.faculty_urls:
-            faculty_dict = dict()
-            bio = bio_dict.get(url)
-            doc = Document(
-                doc=bio,
-                faculty_url=url,
-                department_url=self.dept_url,
-                university_url=self.base_url
-            )
-            faculty_dict['faculty_name'] = doc.extract_name()
-            print(f'{count}, {faculty_dict["faculty_name"]} ')
-            faculty_dict['faculty_department_name'] = doc.extract_department()
-            faculty_dict['faculty_university_name'] = doc.extract_university()
-            faculty_dict['faculty_phone'] = doc.extract_phone()
-            faculty_dict['faculty_email'] = doc.extract_email()
-            faculty_dict['faculty_expertise'] = doc.extract_expertise()
-            faculty_dict['faculty_homepage_url'] = url
-            faculty_dict['faculty_department_url'] = self.dept_url
-            faculty_dict['faculty_university_url'] = self.base_url
-            faculty_dict['faculty_biodata'] = bio
-            faculty_dict['faculty_location'] = doc.extract_location()
-            faculty_dict_list.append(faculty_dict)
+        print(f"{'*' * 50}")
+        for i, url in enumerate(self.faculty_urls):
+            print(f"Processing Faculty #{i+1}")
+            print(f"Base URL (University URL: {self.base_url}")
+            print(f"Department URL: {self.dept_url}")
+            print(f"Faculty URL: {url}")
+            try:
+                faculty_dict = dict()
+                bio = bio_dict.get(url)
+                doc = Document(
+                    doc=bio,
+                    faculty_url=url,
+                    department_url=self.dept_url,
+                    university_url=self.base_url
+                )
+                faculty_dict['faculty_name'] = doc.extract_name()
+                print(f'{count}, {faculty_dict["faculty_name"]} ')
+                faculty_dict['faculty_department_name'] = doc.extract_department()
+                faculty_dict['faculty_university_name'] = doc.extract_university()
+                faculty_dict['faculty_phone'] = doc.extract_phone()
+                faculty_dict['faculty_email'] = doc.extract_email()
+                faculty_dict['faculty_expertise'] = doc.extract_expertise()
+                faculty_dict['faculty_homepage_url'] = url
+                faculty_dict['faculty_department_url'] = self.dept_url
+                faculty_dict['faculty_university_url'] = self.base_url
+                faculty_dict['faculty_biodata'] = bio
+                faculty_dict['faculty_location'] = doc.extract_location()
+                faculty_dict_list.append(faculty_dict)
+
+            except Exception as e:
+                print(f"(IGNORING) Exception encountered for Faculty URL: {url}", "\n", str(e))
+                pass
+
+            print(f"{'*' * 50}")
 
         print(__file__, ":: faculty_dict_list: ")
         faculty_list_json = json.dumps(faculty_dict_list)

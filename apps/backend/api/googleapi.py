@@ -78,3 +78,10 @@ class GoogleAPI:
             self.logger.exception(exc.__cause__)
             raise Exception("Error occurred while calling Google API : " + repr(exc))
         return response_json
+
+
+if __name__ == '__main__':
+    uni = "University of California Los Angeles, Computer Science Department"
+    print(uni)
+    extractURL = GoogleAPI(uni).get_component(field_comp="website")
+    print('extractURL = ', extractURL)

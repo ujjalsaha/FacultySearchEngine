@@ -185,7 +185,7 @@ class FacultyDB:
             else:
                 pass
 
-            print("select_biodata_sql: ", select_biodata_sql)
+            # print("select_biodata_sql: ", select_biodata_sql)
 
             c.execute(select_biodata_sql)
             records = c.fetchall()
