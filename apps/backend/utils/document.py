@@ -80,6 +80,38 @@ class Document:
 
         return " ".join(matched_tokens)
 
+    def extract_expert_ner(self):
+        """
+        Using StanfordNERTagger finds name entity recognition
+        """
+        if not self.doc:
+            return ""
+
+        matched_tokens = []
+
+        try:
+            dirname = os.path.dirname(__file__)
+            model_file = os.path.join(dirname,
+                                      '../../../lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz')
+            jar_file = os.path.join(dirname, '../../../lib/stanford-ner-2020-11-17/stanford-ner.jar')
+
+            st = StanfordNERTagger(model_file, jar_file, encoding='utf-8')
+
+            tokenized_text = word_tokenize(self.doc)
+            classified_text = st.tag(tokenized_text)
+
+            noname = ''
+            for tup in classified_text:
+                if tup[1] != 'PERSON':
+                    noname += ' ' + tup[0].title()
+
+            matched_tokens.append(noname)
+        except Exception as e:
+            print("Exception encouneted while extracting nonames: " + str(e))
+            pass
+
+        return " ".join(matched_tokens)
+
     def __extract_title(self, url):
         if not url:
             return ""
@@ -98,7 +130,7 @@ class Document:
         if not self.doc:
             return ""
 
-        tokens = tokenizer(self.doc)
+        tokens = tokenizer(doc.extract_expert_ner())
         # print("tokens: ", tokens)
 
         # Create Dictionary
