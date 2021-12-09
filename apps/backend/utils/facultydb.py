@@ -49,7 +49,7 @@ class FacultyDB:
             faculty_university_name text NOT NULL,
             faculty_email text,
             faculty_phone text,
-            faculty_location text,
+            faculty_location NOT NULL,
             faculty_expertise text NOT NULL,
             faculty_biodata NOT NULL,
             last_modified_date text NOT NULL,
