@@ -222,6 +222,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
   
    # install 
    make
+   make install
    ```
       
 2. Using git clone the repository to a path
