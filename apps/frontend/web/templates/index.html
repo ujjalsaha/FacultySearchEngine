@@ -94,12 +94,9 @@
 </div>
      <script src="../static/js/index.js"></script>
       <script type="text/javascript">
-        /*var unis = JSON.parse(unis);
-        var locs = JSON.parse(locs);
-        var depts = JSON.parse(depts);*/
-        var unis = ["The University of Utah"];
-        var locs = ["Salt Lake City, Utah, United States"];
-        var depts = ["School of Computing"];
+        var unis = JSON.parse('{{ unis | tojson }}');
+        var locs = JSON.parse('{{ locs | tojson }}');
+        var depts = JSON.parse('{{ deps | tojson }}');
     </script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 

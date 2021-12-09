@@ -22,14 +22,13 @@ app.rootpath = "web/templates"
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'web/templates'))
 
 faculty = FacultyDB()
-uni_list = json.dumps(faculty.get_all_universities())
-loc_list = json.dumps(faculty.get_all_locations())
-dept_list = json.dumps(faculty.get_all_departments())
-
+uni_list = faculty.get_all_universities()
+loc_list = faculty.get_all_locations()
+dept_list = faculty.get_all_departments()
 
 @app.route('/')
 def home():
-    return render_template('index.html',unis=uni_list,locs=loc_list, depts=dept_list)
+    return render_template("index.html", unis = uni_list, locs = loc_list, deps = dept_list)
 
 @app.route('/admin')
 def admin():
