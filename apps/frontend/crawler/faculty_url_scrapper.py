@@ -187,9 +187,9 @@ class ScrapeFacultyWebPage:
 
 if __name__ == '__main__':
     faculty_dict = {
-        'dept_url': "http://www.cs.utah.edu/",
-        'faculty_link': "http://www.cs.utah.edu/people/faculty/",
-        'base_url': "https://www.utah.edu/",
+        'dept_url': "https://www.cs.cornell.edu/",
+        'faculty_link': "http://www.cs.cornell.edu/people/faculty/",
+        'base_url': "https://www.cornell.edu/",
     }
     scrapper = ScrapeFacultyWebPage(faculty_dict=faculty_dict)
     scrapper.get_faculty_urls()

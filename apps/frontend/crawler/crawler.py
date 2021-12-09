@@ -194,7 +194,7 @@ class ExtractFacultyURL:
 
 
 if __name__ == '__main__':
-    uni = "Harvard University, School of Engineering and Applied Sciences"
+    uni = "Cornell Bowers, Computer Science"
     print(uni)
     extractURL = ExtractFacultyURL(uni)
     print('Faculty Page found = ', extractURL.has_valid_faculty_link())
