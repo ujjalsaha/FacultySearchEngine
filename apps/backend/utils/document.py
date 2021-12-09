@@ -15,14 +15,14 @@ from bs4 import BeautifulSoup
 from apps.backend.api.googleapi import GoogleAPI
 from apps.backend.utils.nltk_utils import sanitizer, tokenizer, stopwords
 
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('averaged_perceptron_tagger')
-nltk.downloader.download('maxent_ne_chunker')
-nltk.downloader.download('words')
-nltk.downloader.download('treebank')
-nltk.downloader.download('maxent_treebank_pos_tagger')
+nltk.download('punkt', quiet=True)
+nltk.download('stopwords', quiet=True)
+nltk.download('wordnet', quiet=True)
+nltk.download('averaged_perceptron_tagger', quiet=True)
+nltk.downloader.download('maxent_ne_chunker', quiet=True)
+nltk.downloader.download('words', quiet=True)
+nltk.downloader.download('treebank', quiet=True)
+nltk.downloader.download('maxent_treebank_pos_tagger', quiet=True)
 
 # logger = logging.getLogger('ExpertSearchv2.0')
 logging.basicConfig(filename='lda_model.log', format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
