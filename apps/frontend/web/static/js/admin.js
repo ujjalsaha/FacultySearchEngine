@@ -20,7 +20,7 @@ $("#crawl_uni").click(function() {
             "searchText" : $("#searchText").val()
         }
         debugger;
-        fetch("http://localhost:8095/admin/crawl", {
+        fetch("/admin/crawl", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

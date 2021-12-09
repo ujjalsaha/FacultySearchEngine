@@ -53,6 +53,7 @@ class ScrapeFacultyWebPage:
         self.faculty_urls = []
         self.all_faculty_text = ''
         self.sanitized_list = []
+        self.faculty_link_dict = dict()
 
     def get_faculty_urls(self):
         all_a_tags = list()
@@ -84,10 +85,12 @@ class ScrapeFacultyWebPage:
                     faculty_profile_link = build_url(link, self.dept_url)
                     if validate_url(faculty_profile_link):
                         self.faculty_urls.append(faculty_profile_link)
+                        self.faculty_link_dict[faculty_profile_link] = name
                     else:
                         faculty_profile_link = build_url(link, self.faculty_link)
                         if validate_url(faculty_profile_link):
                             self.faculty_urls.append(faculty_profile_link)
+                            self.faculty_link_dict[faculty_profile_link] = name
                     break
         bio_dict = dict()
         for url in self.faculty_urls:
@@ -161,7 +164,8 @@ class ScrapeFacultyWebPage:
                     department_url=self.dept_url,
                     university_url=self.base_url
                 )
-                faculty_dict['faculty_name'] = doc.extract_name()
+                name = self.faculty_link_dict.get(url)
+                faculty_dict['faculty_name'] = " ".join(re.findall(r'[A-Z](?:[a-z]+|[A-Z]*(?=[A-Z]|$))', name))
                 print(f'{count}, {faculty_dict["faculty_name"]} ')
                 faculty_dict['faculty_department_name'] = doc.extract_department()
                 faculty_dict['faculty_university_name'] = doc.extract_university()
@@ -188,9 +192,9 @@ class ScrapeFacultyWebPage:
 
 if __name__ == '__main__':
     faculty_dict = {
-        'dept_url': "https://www.eecs.psu.edu/",
-        'faculty_link': "https://www.eecs.psu.edu/departments/cse-faculty-list.aspx",
-        'base_url': "https://www.psu.edu/",
+        'dept_url': "https://cs.indiana.edu/",
+        'faculty_link': "https://cs.indiana.edu/faculty-directory/index.html?&type=2&aca_dept=1&alpha=asc",
+        'base_url': "https://www.indiana.edu/",
     }
     scrapper = ScrapeFacultyWebPage(faculty_dict=faculty_dict)
     scrapper.get_faculty_urls()

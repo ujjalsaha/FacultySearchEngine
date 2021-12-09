@@ -1,18 +1,18 @@
 body {
     background-color: #F0F0F0;
-    font-family: Calibri;
+    font-family: Calibri, serif;
     font-size: 16pt;
 }
 
 .admininput {
     width: 20%;
     font-size: 100%;
-    font-family: Calibri;
+    font-family: Calibri, serif;
 }
 
 .adminbtn {
     font-size: 100%;
-    font-family: Calibri;
+    font-family: Calibri, serif;
 }
 
 .show-code {
@@ -148,4 +148,8 @@ body {
 #backdrop{
     font-family: "Oswald", Helvetica, Arial, sans-serif!important;;
     font-size: 10pt;
+}
+
+.static-popover{
+  display: block !important;
 }

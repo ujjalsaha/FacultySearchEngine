@@ -198,9 +198,9 @@ class Document:
         return " ".join(sanitizer(self.doc)) if self.doc else None
 
     def extract_location(self):
-        location = "Unknown"
+        location = ""
         try:
-            googleAPI = GoogleAPI(place_name=self.university_url)
+            googleAPI = GoogleAPI(place_name=self.extract_university())
             comps = googleAPI.get_component(field_comp='address_components')
             for comp in comps:
                 if len(comp['types']) > 1:
@@ -216,7 +216,7 @@ class Document:
         except:
             pass
 
-        return location if location else None
+        return location if location else "Unknown"
 
 
 if __name__ == '__main__':

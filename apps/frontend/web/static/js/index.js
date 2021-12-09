@@ -75,7 +75,7 @@ var doSearch = function() {
     if (searchTerm!='')
     {
     var num_fetched_res = 0
-    fetch("http://localhost:8095/search", {
+    fetch("/search", {
     // fetch("http://expertsearch.centralus.cloudapp.azure.com/search", {
         method: "POST",
         headers: {
@@ -88,14 +88,18 @@ var doSearch = function() {
             $("#docs-div").empty();
 
             docs.forEach((doc, count) => {
-                phone_id = doc[7].replace(/\D/g, '') + count
+                let phone_id = count
+                if (doc[7] != null) {
+                    phone_id = doc[7].replace(/\D/g, '') + count
+                }
+
                 $("#docs-div").append(
                     docDiv(doc, phone_id)
                 );
                     num_fetched_res = num_fetched_res+1;
 
 
-                if(doc[7] ==''){
+                if(!doc[7]){
                     $("#" + phone_id).addClass("hide")
                 }
             });
@@ -228,7 +232,7 @@ $("#applyFilters").click(function() {
     });
 
 $("#settingsButton").click(function() {
-   window.location = "http://localhost:8095/admin"
+   window.location = "/admin"
 });
 
 $("#loadMoreButton").click(function() {
