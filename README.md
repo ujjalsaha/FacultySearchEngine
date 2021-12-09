@@ -196,6 +196,13 @@ x86 64-bit CPU Multi Core **[Recommended]**
    ```shell script
    python --version
    ````
+2. Java Runtime Envirnment (OpenJDK JRE)
+   * [Linux/MacOS OpenJDK Installation Guide](https://openjdk.java.net/install/)
+   
+   Run the below command in virtual environment and Make sure you have installed Python3.9.X.
+   ```shell script
+   python --version
+   ````
       
 3. `pip` package installed in python3.9 virtual environment  - _Should be default wiith Python3.9_   
    * To install pip on your virtual environment run below command
@@ -204,6 +211,8 @@ x86 64-bit CPU Multi Core **[Recommended]**
     ````
 4. git cli tool
     * [Install git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)   
+
+5. `make` tool
 
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
@@ -231,20 +240,41 @@ x86 64-bit CPU Multi Core **[Recommended]**
    git clone https://github.com/sudiptobilu/CourseProject.git
    cd CourseProject
 
-3. Set Environemnt Variable\
+3. Set `GOOGLE_API_KEY` Environemnt Variable\
    [Click Here](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) to get the Google API Key from the [CMT](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) Abstract section (Make sure you are in reviewer role. Credentials required). \
     Add the below line in your `~/.basrc` or `~/.bash_profile` 
     ```shell script
     export GOOGLE_API_KEY=<Add Google api Key from CMT Abstract section>
     ```
-    Also create a `.env` file in project root directory and add the GOOGLE_API_KEY. Run the below commands
+    Also create a `.env` file in project root directory of project and add the GOOGLE_API_KEY. Run the below commands
     ```shell script
     cd <path to CourseProject repo>
    
     echo "GOOGLE_API_KEY='<Add Google api Key from CMT Abstract section>'" > .env   
     ```  
+
+4. Set `PYTHONPATH` Environemnt Variable\
+    Add the below line in your `~/.basrc` or `~/.bash_profile` 
+    ```shell script
+    export PYTHONPATH="<path to CourseProject repo>"
+    ```
+    Also create a `.env` file in project root directory of project and add the PYTHONPATH. Run the below commands
+    ```shell script
+    cd <path to CourseProject repo>
+   
+    echo "PYTHONPATH='<path to CourseProject repo>'" > .env   
+    ```  
+5.  Source the `~/.basrc` or `~/.bash_profile` on your terminal
+    ```shell script
+    source ~/.basrc
+   
+    # or 
+
+    source ~/.bash_profile 
+    ```
+
     
-4. Switch to the Python3.9 virtual environemnt\
+6. Switch to the Python3.9 virtual environemnt\
    If using Conda,
    ```shell script
    # TIP: Show all conda environemt
@@ -254,14 +284,14 @@ x86 64-bit CPU Multi Core **[Recommended]**
    conda activate <python3.9 virtual environment name> 
    ```
 
-5. Install the project requirements file on Python3.9 virtual environment
+7. Install the project requirements file on Python3.9 virtual environment
     ```shell script
     pip install -r requirements.txt
     ```
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
 ## Deploy
-1. Start Redis Server
+1. On a separate terminal, Start Redis Server (preferably on a screen session)
 
     For MacOS or Linux 
     ```shell script
@@ -273,20 +303,28 @@ x86 64-bit CPU Multi Core **[Recommended]**
     ```shell script
    python --version
     ````
-
-3. From the project directory, Run the below command 
+3. On a separate terminal, from the project directory, Run the redis `crawler-worker` (preferably on a screen session)
     ```shell script
     # go to project directory root level
     cd <path to CourseProject repo>
-    cd apps/frontend
-   
-    python server.py
+    
+    rq worker crawler-worker 
+    ````
+
+3. On a separate terminal, from the project directory, Launch the ExpertSerchv2.0 server  (preferably on a screen session)
+    ```shell script
+    # go to project directory root level
+    cd <path to CourseProject repo>
+    
+    python apps/frontend/server.py
     ````
 4. Open Chrome browser and browse the below url
     ```shell script
    http://localhost:8095
+   
+   http://<localhost_ip>:8095
     ````
-5. The browser should show up ExpertSearchv2.0 search application 
+5. The browser should display ExpertSearchv2.0 search application 
 
 :exclamation: A comprehensive software usage [video presentation](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw) is also available. [Click Here](https://uofi.app.box.com/file/893368706848?s=ealry89ittv21gz2x30bn2lrw319vhnw)
 
