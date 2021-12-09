@@ -102,7 +102,7 @@ class ScrapeFacultyWebPage:
 
         # process the document
         self.process_document(bio_dict)
-        close_driver()
+
 
     def __build_a_tags__(self, div_tag_lst, unique_href):
         for div in div_tag_lst:

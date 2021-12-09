@@ -2,7 +2,7 @@ import sys, os
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
 from apps.frontend.crawler.faculty_url_scrapper import ScrapeFacultyWebPage
 from apps.frontend.crawler.crawler import ExtractFacultyURL
-
+from apps.frontend.utils.beautiful_soup import close_driver
 
 uni_list = [
     'Harvard University, computer science',
@@ -92,12 +92,17 @@ uni_list = [
     'Santa Clara University, computer science',
     'Wake Forest University, computer science'
 ]
+count = 0
+for uni in uni_list:   
+        extract_url = ExtractFacultyURL(uni)
+        if extract_url.has_valid_faculty_link():
+            try:
+                faculty_dict = extract_url.get_faculty_link()
+                scrape_page = ScrapeFacultyWebPage(faculty_dict=faculty_dict)
+                scrape_page.get_faculty_urls()
+                print('total faculty page found = ', len(scrape_page.faculty_urls))
+            except:
+                print('Ignoring university = ', uni)
+                pass
 
-for uni in uni_list:
-    extract_url = ExtractFacultyURL(uni)
-    if extract_url.has_valid_faculty_link():
-        faculty_dict = extract_url.get_faculty_link()
-        scrape_page = ScrapeFacultyWebPage(faculty_dict=faculty_dict)
-        scrape_page.get_faculty_urls()
-        print('total faculty page found = ', len(scrape_page.faculty_urls))
-
+close_driver()
