@@ -1,0 +1,10 @@
+# Ignore Mac system files
+.DS_Store
+
+# Ignore PyCharm files
+.idea
+*.iml
+*.xml
+
+*.txt
+.env

@@ -1,0 +1,28 @@
+#### Reuirements - General ####
+urllib3
+tldextract
+requests
+python-decouple
+
+#### Reuirements - Server and Hosting Services ####
+flask
+gunicorn
+
+#### Reuirements - Web Driver and Scraping ####
+beautifulsoup4
+selenium
+webdriver-manager
+redis
+rq
+#### Reuirements - Scientific Processing ####
+numpy
+scikit-learn
+
+#### Reuirements - NLP / Text Retrieval / Text Mining ####
+nltk
+gensim
+rank_bm25
+
+#### Reuirements - Redis Cluster ####
+redis
+rq

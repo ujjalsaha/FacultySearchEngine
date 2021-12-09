@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/bootstrap-4.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/admin.css') }}">
+    <script src="{{url_for('static',filename='js/jquery-3.4.1.min.js')}}" crossorigin="anonymous"></script>
+     <script src="{{url_for('static',filename='js/admin.js')}}" crossorigin="anonymous"></script>
+    <script src="../static/bootstrap-4.0.0-dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+
+
+    <title>Expert Search Admin</title>
+  </head>
+  <body>
+
+          <div class="jumbotron vertical-center">
+          <div class="container-fluid">
+              <div class="modal fade" id="backdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModalIcon">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <p id="modalBody"></p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeModal">Understood</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <div class="main">
+              <div class="row">
+                <div class="col-md-10 offset-md-2">
+                  <h3>Crawl a faculty Page of an University </h3>
+                </div>
+              </div>
+     <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <div class="input-group" style="">
+
+        <input type="text" class="form-control" placeholder="Please enter University Name or University URL" id="searchText">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button" id="crawl_uni">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+     </div>
+    </div>
+    <div class="overlay"></div>
+        <div class="spanner">
+          <div class="loader"></div>
+          <p>Loading..</p>
+    </div>
+  </body>
+</html>

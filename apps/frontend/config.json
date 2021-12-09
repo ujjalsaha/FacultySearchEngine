@@ -1,0 +1,28 @@
+{
+  "database": {
+    "db_filename": "faculty.db"
+  },
+  "crawler": {
+    "faculty_keywords": [
+      "profiles",
+      "all-faculty",
+      "faculty",
+      "faculty-staff",
+      "people",
+      "our-team",
+      "faculty-profiles",
+      "bios",
+      "facstaff",
+      "faculty-staffs-all",
+      "faculty-and-staff",
+      "academic-staff",
+      "faculty/overview",
+      "faculty/all",
+      "faculty-and-lecturers/",
+      "faculty-profile",
+      "faculty.html",
+      "Faculty.html",
+      "directory",
+      "faculty-directory"]
+  }
+}
