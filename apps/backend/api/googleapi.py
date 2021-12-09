@@ -25,7 +25,7 @@ class GoogleAPI:
         self.place_name = place_name
         self.place_id = None
         self.details_url = 'details/json?'
-        self.logger = logging.getLogger('Crawler')
+        self.logger = logging.getLogger('GoogleAPI')
         self.__call__()
 
     def get_component(self, field_comp):

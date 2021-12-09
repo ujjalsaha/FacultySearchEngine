@@ -6,7 +6,7 @@ import sys, os
 import re
 import random
 import json
-from pathlib import Path
+import requests
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'lib'))
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
@@ -17,16 +17,19 @@ from apps.frontend.crawler.crawler import build_url
 from apps.backend.utils.document import Document
 from apps.backend.utils.facultydb import FacultyDB
 
-print('pwd ', os.getcwd())
 dirname = os.path.dirname(__file__)
 model_file = os.path.join(dirname,
                           '../../../lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz')
 jar_file = os.path.join(dirname, '../../../lib/stanford-ner-2020-11-17/stanford-ner.jar')
 
 st = StanfordNERTagger(model_file, jar_file, encoding='utf-8')
-# st = StanfordNERTagger('../../lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz',
-#                        '../../lib/stanford-ner-2020-11-17/stanford-ner.jar')
 
+
+def validate_url(url):
+    response = requests.get(url)
+    if response.status_code > 200:
+        return False
+    return True
 
 def random_str_generator(size=8, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -78,16 +81,14 @@ class ScrapeFacultyWebPage:
             tag_text = re.sub("[^a-zA-Z0-9]+", "", tag_text)
             for name in self.sanitized_list:
                 if name == tag_text and len(name):
-                    faculty_link = build_url(link, self.dept_url)
-                    self.faculty_urls.append(faculty_link)
+                    faculty_profile_link = build_url(link, self.dept_url)
+                    if validate_url(faculty_profile_link):
+                        self.faculty_urls.append(faculty_profile_link)
+                    else:
+                        faculty_profile_link = build_url(link, self.faculty_link)
+                        if validate_url(faculty_profile_link):
+                            self.faculty_urls.append(faculty_profile_link)
                     break
-        headers = ['uni_url', 'dept_url', 'faculty_url', 'bio']
-        # fileName = '../../../data/' + random_str_generator() + '_bio.txt'
-        # with open(fileName, mode='w+', encoding='utf-8') as temp_file:
-        #     for url in self.faculty_urls:
-        #         bio_texts = self.get_bio(url)
-        #         temp_file.write(bio_texts)
-        #         temp_file.write("\n")
         bio_dict = dict()
         for url in self.faculty_urls:
             try:
@@ -187,9 +188,9 @@ class ScrapeFacultyWebPage:
 
 if __name__ == '__main__':
     faculty_dict = {
-        'dept_url': "https://www.cs.cornell.edu/",
-        'faculty_link': "http://www.cs.cornell.edu/people/faculty/",
-        'base_url': "https://www.cornell.edu/",
+        'dept_url': "https://www.eecs.psu.edu/",
+        'faculty_link': "https://www.eecs.psu.edu/departments/cse-faculty-list.aspx",
+        'base_url': "https://www.psu.edu/",
     }
     scrapper = ScrapeFacultyWebPage(faculty_dict=faculty_dict)
     scrapper.get_faculty_urls()

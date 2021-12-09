@@ -9,6 +9,7 @@ import re
 from apps.backend.utils.facultydb import FacultyDB
 from apps.backend.api.search import Search
 
+from apps.frontend.crawler.crawler import ExtractFacultyURL
 from redis import Redis
 import redis
 import rq
@@ -38,14 +39,18 @@ def admin():
 @app.route("/admin/crawl", methods=['POST'])
 def doCrawl():
     redis_server = Redis(host='localhost', port=6379, db=0)
-    if is_redis_available(redis_server):
-        data = json.loads(request.data.decode("utf-8"))
-        search_str = data["searchText"]
-        print(type(data))
-        print(data)
+    data = json.loads(request.data.decode("utf-8"))
+    search_str = data["searchText"]
+    extract_url = ExtractFacultyURL(search_str)
+    if not extract_url.has_valid_faculty_link():
+        return jsonify({
+            "msg": "Unfortunately we did not find any faculty link for the search key. "
+                   "Please provide a search key which has a link to the list of department faculty."
+        })
+    elif is_redis_available(redis_server):
         queue = rq.Queue('crawler-worker', connection=redis_server, default_timeout=3600)
-        job = queue.enqueue(run_task, search_str)
-        print('job id = ', job.get_id())
+        faculty_dict = extract_url.get_faculty_link()
+        queue.enqueue(run_task, faculty_dict)
         return jsonify({
             "msg": "Your request has been accepted. We will process the request asynchronously"
         })

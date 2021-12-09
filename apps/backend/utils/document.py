@@ -198,22 +198,24 @@ class Document:
         return " ".join(sanitizer(self.doc)) if self.doc else None
 
     def extract_location(self):
-        location = ""
+        location = "Unknown"
+        try:
+            googleAPI = GoogleAPI(place_name=self.university_url)
+            comps = googleAPI.get_component(field_comp='address_components')
+            for comp in comps:
+                if len(comp['types']) > 1:
+                    if comp['types'][0] == 'administrative_area_level_1':
+                        state = comp['long_name']
+                        location = location + str(comp['long_name']) + ", "
+                    if comp['types'][0] == 'locality':
+                        city = comp['long_name']
+                        location = location + str(comp['long_name']) + ", "
+                    if comp['types'][0] == 'country':
+                        country = comp['long_name']
+                        location = location + str(comp['long_name'])
+        except:
+            pass
 
-        googleAPI = GoogleAPI(place_name=self.university_url)
-        comps = googleAPI.get_component(field_comp='address_components')
-
-        for comp in comps:
-            if len(comp['types'])>1:
-                if comp['types'][0]=='administrative_area_level_1':
-                    state = comp['long_name']
-                    location = location + str(comp['long_name']) + ", "
-                if comp['types'][0]=='locality':
-                    city = comp['long_name']
-                    location = location + str(comp['long_name']) + ", "
-                if comp['types'][0]=='country':
-                    country = comp['long_name']
-                    location = location + str(comp['long_name'])
         return location if location else None
 
 

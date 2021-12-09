@@ -16,19 +16,22 @@ logging.basicConfig(level=logging.INFO, format=console_format)
 
 
 def build_url(link, url):
-    last_index_slash = url.rfind('/')
-    url = url[:last_index_slash] if last_index_slash == len(url) - 1 else url
-    if link.startswith('https:') or link.startswith('//') or link.startswith('http:'):
-        link = link.replace('//', 'https://') if link.startswith('//') else link
-        link = link.replace('http:', 'https:')
-        faculty_link = link
-    elif link.startswith('..'):
-        link = link.replace('../', '/')
-        faculty_link = url + link
-    elif link.startswith('/'):
-        faculty_link = url + link
-    else:
-        faculty_link = url + '/' + link
+    faculty_link = requests.compat.urljoin(url, link)
+    # last_index_slash = url.rfind('/')
+    # url = url[:last_index_slash] if last_index_slash == len(url) - 1 else url
+    # print('url ==> ', url)
+    # print('link ==> ', link)
+    # if link.startswith('https:') or link.startswith('//') or link.startswith('http:'):
+    #     link = link.replace('//', 'https://') if link.startswith('//') else link
+    #     link = link.replace('http:', 'https:')
+    #     faculty_link = link
+    # elif link.startswith('..'):
+    #     link = link.replace('../', '/')
+    #     faculty_link = url + link
+    # elif link.startswith('/'):
+    #     faculty_link = url + link
+    # else:
+    #     faculty_link = url + '/' + link
 
     return faculty_link
 
@@ -167,6 +170,7 @@ class ExtractFacultyURL:
             try:
                 googleAPI = GoogleAPI(place_name=self.uni_name)
                 base_url =  googleAPI.get_component(field_comp='website')
+                print('base url => ', base_url)
             except Exception as ex:
                 self.log.error(ex)
         return base_url
@@ -194,7 +198,7 @@ class ExtractFacultyURL:
 
 
 if __name__ == '__main__':
-    uni = "Cornell Bowers, Computer Science"
+    uni = ""
     print(uni)
     extractURL = ExtractFacultyURL(uni)
     print('Faculty Page found = ', extractURL.has_valid_faculty_link())
