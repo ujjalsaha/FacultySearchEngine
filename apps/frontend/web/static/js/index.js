@@ -119,9 +119,9 @@ var doSearch = function() {
     const data = {
         "query": searchTerm,
         "num_results": numResults,
-        "selected_loc_filters" : selected_loc_filters,
-        "selected_uni_filters": selected_uni_filters,
-        "selected_dept_filters": selected_dept_filters
+        "selected_loc_filters" : selected_loc_filters[0],
+        "selected_uni_filters": selected_uni_filters[0],
+        "selected_dept_filters": selected_dept_filters[0]
     }
     if (searchTerm!='')
     {
@@ -175,14 +175,13 @@ $(window).on("resize",function() {
 
 
 $(document).ready(function() {
-    $('#loc_filter').select2({placeholder: "e.g. United States, California"});
+    $('#loc_filter').select2({placeholder: "e.g. United States, Illinois"});
     $('#uni_filter').select2({placeholder: "e.g. University of Illinois Urbana-Champaign"});
     $('#dept_filter').select2({placeholder: "e.g. Computer Science"});
     $(window).trigger('resize');
 });
 
 window.onload=function(){
-    console.log("Hello")
     for (var i=0;i<unis.length;i++){
          var newOption = new Option(unis[i], i, false, false);
         // Append it to the select
