@@ -85,9 +85,9 @@ class Document:
         soup = BeautifulSoup(html, 'html.parser')
         title = soup.find('title')
 
-        print()
         title = title.string if title else ""
-        return title.split('|')[1].strip() if title and "|" in title else title if title else ""
+        title =  title.split('|')[1].strip() if title and "|" in title else title if title else ""
+        return title
 
     def extract_expertise(self):
 
@@ -160,7 +160,7 @@ class Document:
         # return unqiue topic words
         # return " ".join(list(set(seed_topic_list)))
 
-        return " ".join(topic_list[0]) if topic_list and topic_list[0] else ""
+        return " ".join(topic_list[0]) if topic_list and topic_list[0] else None
 
     def extract_phone(self):
         if not self.doc:
@@ -168,23 +168,27 @@ class Document:
 
         # phone_numbers = re.findall(r'[+(]?[1-9][0-9 .\-()]{8,}[0-9]', self.doc)
         phone_numbers = re.findall(r"\(?\b[2-9][0-9]{2}\)?[-. ]?[2-9][0-9]{2}[-. ]?[0-9]{4}\b", self.doc)
-        return phone_numbers[0] if phone_numbers else ""
+        return phone_numbers[0] if phone_numbers else None
 
     def extract_email(self):
         if not self.doc:
             return ""
 
         emails = re.findall(r'[\w.-]+@[\w.-]+', self.doc)
-        return emails[0] if emails else ""
+        return emails[0] if emails else None
 
     def extract_name(self):
-        return self.__extract_ner(tag="PERSON")
+        # name = self.__extract_ner(tag="PERSON")
+        name = self.__extract_title(self.faculty_url)
+        return name if name else None
 
     def extract_university(self):
-        return self.__extract_title(self.university_url)
+        university_name = self.__extract_title(self.university_url)
+        return university_name if university_name else None
 
     def extract_department(self):
-        return self.__extract_title(self.department_url)
+        department_name =  self.__extract_title(self.department_url)
+        return department_name if department_name else None
 
     def extract_biodata(self):
         return " ".join(sanitizer(self.doc)) if self.doc else None
@@ -206,13 +210,13 @@ class Document:
                 if comp['types'][0]=='country':
                     country = comp['long_name']
                     location = location + str(comp['long_name'])
-        return location
+        return location if location else None
 
 
 if __name__ == '__main__':
     doc = "  Geoffrey Werner Challen Teaching Associate Professor 2227 Siebel Center for Comp Sci 201 N. Goodwin Ave. Urbana Illinois 61801 (217) 300-6150 challen@illinois.edu : Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page Education Ph.D. Computer Science, Harvard University, 2010 AB Physics, Harvard University, 2003 Academic Positions Associate Teaching Professor, University of Illinois, 2017 . Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . . For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . "
     doc = Document(doc,
-                   faculty_url="http://czhai.cs.illinois.edu",
+                   faculty_url="http://www.cs.utah.edu/~mflatt/",
                    department_url="https://www.cs.utah.edu/",
                    university_url="https://utah.edu/")
     print("NAME:       ", doc.extract_name())
