@@ -24,6 +24,10 @@ nltk.downloader.download('words')
 nltk.downloader.download('treebank')
 nltk.downloader.download('maxent_treebank_pos_tagger')
 
+# logger = logging.getLogger('ExpertSearchv2.0')
+logging.basicConfig(filename='lda_model.log', format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+
+
 
 class Document:
 
@@ -217,13 +221,17 @@ if __name__ == '__main__':
     doc = "  Geoffrey Werner Challen Teaching Associate Professor 2227 Siebel Center for Comp Sci 201 N. Goodwin Ave. Urbana Illinois 61801 (217) 300-6150 challen@illinois.edu : Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page Education Ph.D. Computer Science, Harvard University, 2010 AB Physics, Harvard University, 2003 Academic Positions Associate Teaching Professor, University of Illinois, 2017 . Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . . For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . "
     doc = Document(doc,
                    faculty_url="http://www.cs.utah.edu/~mflatt/",
-                   department_url="https://www.cs.utah.edu/",
+                   department_url="https://www.eecs.psu.edu/departments/cse-faculty-list.aspx",
                    university_url="https://utah.edu/")
+
+    # department_url = "https://www.cs.utah.edu/",
     print("NAME:       ", doc.extract_name())
     print("DEPARTMENT: ", doc.extract_department())
+    """
     print("UNIVERSITY: ", doc.extract_university())
     print("PHONE:      ", doc.extract_phone())
     print("EMAIL:      ", doc.extract_email())
     print("EXPERTISE:  ", doc.extract_expertise())
     print("LOCATION:   ", doc.extract_location())
     print("BIODATA:    ", doc.extract_biodata())
+    """

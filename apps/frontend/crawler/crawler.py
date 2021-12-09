@@ -162,19 +162,21 @@ class ExtractFacultyURL:
         Get base url from Google API university name
         :return: Base URL
         """
+        base_url = None
         if self.uni_name:
             try:
                 googleAPI = GoogleAPI(place_name=self.uni_name)
-                return googleAPI.get_component(field_comp='website')
+                base_url =  googleAPI.get_component(field_comp='website')
             except Exception as ex:
                 self.log.error(ex)
-        return None
+        return base_url
 
     def get_faculty_link(self):
         """
         Get the Dictionary from the crawler.
         :return: A dictionary with faculty url, base url, dept url and faculty page soup.
         """
+
         if self.crawler:
             faculty_link_dict = self.crawler.return_dict
             return faculty_link_dict

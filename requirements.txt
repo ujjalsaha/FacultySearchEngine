@@ -26,3 +26,4 @@ rank_bm25
 #### Reuirements - Redis Cluster ####
 redis
 rq
+apps
