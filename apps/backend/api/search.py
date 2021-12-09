@@ -4,13 +4,13 @@ class Search:
     def __init__(self):
         print("Initialize")
 
-    def get_search_results(self, query, university_filter, dept_filter, location_filter):
+    def get_search_results(self, query, num_of_results, university_filter, dept_filter, location_filter):
         try:
             # print("Corpus Method")
             corpus = FacultyDB().get_biodata_records(university_filter, dept_filter, location_filter)
             #print(corpus)
 
-            ranked_id_list = Ranker(corpus).score(query, 10)
+            ranked_id_list = Ranker(corpus).score(query, num_of_results)
             #print(ranked_id_list)
 
             search_results_list  = FacultyDB().get_faculty_records(ranked_id_list)
