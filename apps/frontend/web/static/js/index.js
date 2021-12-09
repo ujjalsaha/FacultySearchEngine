@@ -73,9 +73,8 @@ var docDiv = (doc) => {
             `<div class="card">
              <div class="card-header">
        <div style="display: flex;">
-
-        
                  <b style="font-size:14pt">${fac_name}</b>
+                 <span style="margin-left:auto;color:black;margin-right:20px;"><i class="material-icons ">phone</i> : ${fac_phone}</span>
                  <a style="margin-left:auto;color:black;margin-right:20px;" href='mailto:${email}' "><i class="material-icons">email</i></a>
                  <a style="color:black;" href=${fac_url} target="_blank"><i class="material-icons">launch</i></a>
                  </div>
@@ -90,10 +89,7 @@ var docDiv = (doc) => {
                 <div class="tag">
                   <i class="material-icons">location_on</i>
                    ${loc}
-                 </div>
-                 <div>
-                    Phone - ${fac_phone}
-                </div>
+                 </div>                 
             </div>            
             </div>
          
