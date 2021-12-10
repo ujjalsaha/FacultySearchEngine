@@ -70,7 +70,7 @@ def doCrawl():
     except:
         return jsonify(
             {
-                "msg": "Unexpected error occurred. Please contact system administrators for more details."
+                "msg": "Invalid Url error occurred. Please try again."
             }
         )
 
