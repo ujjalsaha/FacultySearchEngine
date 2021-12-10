@@ -6,6 +6,8 @@
 *.iml
 *.xml
 *.pem
-faculty.db
 *.txt
 .env
+
+# Ignore update of database file
+faculty.db
