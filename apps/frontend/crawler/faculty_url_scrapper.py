@@ -161,9 +161,10 @@ class ScrapeFacultyWebPage:
     def process_document(self, bio_dict):
         faculty_dict_list = []
         count = 0
+        n = len(self.faculty_urls)
         print(f"{'*' * 50}")
         for i, url in enumerate(self.faculty_urls):
-            print(f"Processing Faculty #{i + 1}")
+            print(f"Processing Faculty: {i+1} / {n}")
             print(f"Base URL (University URL: {self.base_url}")
             print(f"Department URL: {self.dept_url}")
             print(f"Faculty URL: {url}")
@@ -178,7 +179,7 @@ class ScrapeFacultyWebPage:
                 )
                 name = self.faculty_link_dict.get(url)
                 faculty_dict['faculty_name'] = " ".join(re.findall(r'[A-Z](?:[a-z]+|[A-Z]*(?=[A-Z]|$))', name))
-                print(f'{count}, {faculty_dict["faculty_name"]} ')
+                # print(f'{count}, {faculty_dict["faculty_name"]} ')
                 faculty_dict['faculty_department_name'] = doc.extract_department()
                 faculty_dict['faculty_university_name'] = doc.extract_university()
                 faculty_dict['faculty_phone'] = doc.extract_phone()

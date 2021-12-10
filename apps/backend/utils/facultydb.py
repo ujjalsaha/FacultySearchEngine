@@ -117,6 +117,7 @@ class FacultyDB:
 
         print(f"{len(faculty_data)} record(s) ready for insert into faculty_info table.\n")
 
+        n = len(faculty_data)
         # Form bulk records for faculty_info insert opertation
         for i, faculty in enumerate(faculty_data):
             record = [None]
@@ -135,7 +136,7 @@ class FacultyDB:
             faculty_records.append(tuple(record))
 
             print(f"{'*' * 50}")
-            print (f"DB Record: {i}")
+            print (f"DB Record: {i + 1} / {n}")
             print ("DB:: faculty_name", faculty["faculty_name"])
             print ("DB:: faculty_homepage_url", faculty["faculty_homepage_url"])
             print ("DB:: faculty_department_url", faculty["faculty_department_url"])
