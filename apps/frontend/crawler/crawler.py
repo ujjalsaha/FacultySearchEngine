@@ -13,6 +13,8 @@ from apps.frontend.utils.beautiful_soup import BeautifulSoupLocal, html_tag_visi
 console_format = '%(name)s - %(levelname)s - %(message)s'
 logging.root.setLevel(logging.INFO)
 logging.basicConfig(level=logging.INFO, format=console_format)
+dirname = os.path.dirname(__file__)
+keywords_file_path = os.path.join(dirname, '../../../lib/keywords.txt')
 
 
 def build_url(link, url):
@@ -47,6 +49,7 @@ class Crawler:
         self.base_url = base_url
         self.beautiful_soup = BeautifulSoupLocal(url=self.base_url)
         self.key_words = self.get_key_words()
+        print('key words =>> ', self.key_words)
         self.faculty_links = []
         self.logger = logging.getLogger('Crawler')
         self.get_dept_url()
@@ -75,13 +78,13 @@ class Crawler:
         Get key words for the faculty url
         :return: list of keywords from keywords.txt file
         """
+        keywords = ['faculty', 'all-faculty']
         try:
-            with open("lib/keywords.txt") as fileName:
+            with open(keywords_file_path) as fileName:
                 keywords = fileName.readlines()
                 keywords = [line.rstrip() for line in keywords]
-            return keywords
         finally:
-            return ['faculty', 'all-faculty']
+            return keywords
 
     def scrape_dir_page(self):
         """
@@ -97,7 +100,7 @@ class Crawler:
                 lambda tag: tag.name == "a" and ("Faculty" in tag.text or "People" in tag.text)):
             link = faculty['href']
             if link not in faculty_pages and \
-                    any(keyword in link for keyword in self.get_key_words()):
+                    any(keyword in link for keyword in self.key_words):
                 faculty_pages.add(link)
                 faculty_link = build_url(link, self.base_url)
                 self.faculty_links.append(faculty_link)
