@@ -56,7 +56,6 @@ def doCrawl():
             extract_url.close_driver()
             queue = rq.Queue('crawler-worker', connection=redis_server, default_timeout=3600)
             faculty_dict = extract_url.get_faculty_link()
-            print('dict = > ', faculty_dict)
             queue.enqueue(run_task, faculty_dict)
             return jsonify({
                 "msg": "Your request has been accepted. We will process the request asynchronously"
