@@ -56,14 +56,19 @@ if __name__ == '__main__':
         "7 The project charter is the document issued by the project initiator or sponsor that formally authorizes the existence of a project and provides the project manager with the authority to apply organizational resources to project activities. It documents the high-level information on the project and on the product, service, or result the project is intended to satisfy, such as."
     ]
 
+    from  apps.backend.utils.facultydb import FacultyDB
+
+    corpus = FacultyDB().get_biodata_records()
+
     ranker = Ranker(corpus)
-    query = "Geoffrey Werner Challen"
-    results = ranker.score(query, 2)
+    #query = "Knowledge is the process "
+    query = "Marcelo Worsley"
+    results = ranker.score(query, 10)
     print(f" Result for query 0 '{query}'")
     pprint(results)
-
     print("\n")
 
+    """
     query = "Cheng Zhai Knowledge"
     results = ranker.score(query, 4)
     print(f" Result for query 1 '{query}'")
@@ -89,6 +94,7 @@ if __name__ == '__main__':
     results = ranker.score(query, 4)
     print(f" Result for query 4 '{query}'")
     pprint(results)
+    """
 
 
 
