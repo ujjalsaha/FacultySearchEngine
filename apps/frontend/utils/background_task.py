@@ -10,5 +10,6 @@ def run_task(faculty_dict=None):
     else:
         scrape_page = ScrapeFacultyWebPage(faculty_dict=faculty_dict)
         scrape_page.get_faculty_urls()
+        scrape_page.close_driver()
         print('total faculty page found = ', len(scrape_page.faculty_urls))
     return None
