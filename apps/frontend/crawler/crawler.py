@@ -49,7 +49,6 @@ class Crawler:
         self.base_url = base_url
         self.beautiful_soup = BeautifulSoupLocal(url=self.base_url)
         self.key_words = self.get_key_words()
-        print('key words =>> ', self.key_words)
         self.faculty_links = []
         self.logger = logging.getLogger('Crawler')
         self.get_dept_url()
