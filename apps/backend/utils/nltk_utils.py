@@ -1,5 +1,5 @@
 import re
-
+import gensim
 import nltk
 from nltk.corpus import wordnet
 from nltk.stem.wordnet import WordNetLemmatizer
@@ -27,6 +27,9 @@ def word_lemmatizer(text):
     text = lemmatizer.lemmatize(text, get_wordnet_pos(text))
     return text
 
+def sent_to_words(sentences):
+    for sentence in sentences:
+        yield gensim.utils.simple_preprocess(str(sentence), deacc=True)  # deacc=True removes punctuations
 
 def tokenizer(doc, remove_email: bool = True):
     tokens = []
@@ -59,8 +62,14 @@ def tokenizer(doc, remove_email: bool = True):
     tokens = [word for word in word_tokenize(doc)]
     tokens = [word for word in tokens if len(word) >= 3]
 
+    bigram = gensim.models.Phrases([tokens], min_count=5, threshold=100)  # higher threshold fewer phrases.
+    bigram_mod = gensim.models.phrases.Phraser(bigram)
+
+    data_words_bigrams = [bigram_mod[doc] for doc in [tokens]]
+    #print(data_words_bigrams)
+
     # removes smaller than 3 character
-    tokens = [word_lemmatizer(w) for w in tokens]
+    tokens = [word_lemmatizer(w) for w in data_words_bigrams[0]]
 
     # remove stop words
     tokens = [s for s in tokens if s not in stopwords.words('english')]
