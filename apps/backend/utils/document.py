@@ -112,7 +112,7 @@ class Document:
 
         return " ".join(matched_tokens)
 
-    def __extract_title(self, url):
+    def __extract_title(self, url, type=None):
         if not url:
             return ""
 
@@ -121,8 +121,26 @@ class Document:
         soup = BeautifulSoup(html, 'html.parser')
         title = soup.find('title')
 
-        title = title.string if title else ""
-        title =  title.split('|')[1].strip() if title and "|" in title else title if title else ""
+        title = title.string.strip() if title else ""
+
+        # Trim unwanted text from title string
+        title = title.replace("welcome to", "") if "welcome to" in title else title
+        title = title.replace("Welcome to", "") if "Welcome to" in title else title
+
+        title = title.strip()
+
+        if '|' in title:
+            if type == "university":
+                titles = [title.strip() for title in title.split('|') if title and "department" not in title.lower()]
+
+            elif type == "department":
+                titles = [title.strip() for title in title.split('|') if title and "university" not in title.lower()]
+
+            else:
+                titles = [title.strip() for title in title.split('|') if title]
+
+            title = max(titles, key=len)
+
         return title
 
     def extract_expertise(self):
