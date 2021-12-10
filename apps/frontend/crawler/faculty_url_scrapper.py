@@ -188,7 +188,7 @@ class ScrapeFacultyWebPage:
                 faculty_dict['faculty_homepage_url'] = url
                 faculty_dict['faculty_department_url'] = self.dept_url
                 faculty_dict['faculty_university_url'] = self.base_url
-                faculty_dict['faculty_biodata'] = doc.extract_biodata()
+                faculty_dict['faculty_biodata'] = bio
                 faculty_dict['faculty_location'] = doc.extract_location()
                 faculty_dict_list.append(faculty_dict)
 
