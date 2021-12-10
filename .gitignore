@@ -10,4 +10,4 @@
 .env
 
 # Ignore update of database file
-faculty.db
+*.db

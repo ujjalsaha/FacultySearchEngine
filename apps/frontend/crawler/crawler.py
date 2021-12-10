@@ -49,6 +49,7 @@ class Crawler:
         self.key_words = self.get_key_words()
         self.faculty_links = []
         self.logger = logging.getLogger('Crawler')
+        self.get_dept_url()
 
     def get_base_url(self):
         """
