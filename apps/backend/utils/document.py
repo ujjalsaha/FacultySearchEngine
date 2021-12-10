@@ -131,6 +131,7 @@ class Document:
             return ""
 
         tokens = tokenizer(doc.extract_expert_ner())
+        #tokens = tokenizer(self.doc)
         # print("tokens: ", tokens)
 
         # Create Dictionary
@@ -157,7 +158,7 @@ class Document:
         """
 
         topics = lda_model.print_topics(num_words=10)
-
+        lda_model.save("cs410_project")
 
         '''for topic in topics:
             print(topic)'''
@@ -170,6 +171,7 @@ class Document:
 
         # LDA topics
         """seed_topic_list = [[word[0] for word in topic[1]] for topic in shown_topics]
+        #seed_topic_list = [["internet","education","research"]]
 
         # print("LDA Topics: ", seed_topic_list)
         token_vectorizer = CountVectorizer(tokenizer=tokenizer,
@@ -192,9 +194,10 @@ class Document:
             # print('Topic {}: {}'.format(i, ' '.join(topic_words)))
         # return unqiue topic words
         return " ".join(list(set(" ".join(topic_words).split())))
-        """
+
         # return unqiue topic words
         # return " ".join(list(set(seed_topic_list)))
+        """
 
         return " ".join(topic_list[0]) if topic_list and topic_list[0] else None
 
@@ -252,7 +255,8 @@ class Document:
 
 
 if __name__ == '__main__':
-    doc = "  Geoffrey Werner Challen Teaching Associate Professor 2227 Siebel Center for Comp Sci 201 N. Goodwin Ave. Urbana Illinois 61801 (217) 300-6150 challen@illinois.edu : Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page Education Ph.D. Computer Science, Harvard University, 2010 AB Physics, Harvard University, 2003 Academic Positions Associate Teaching Professor, University of Illinois, 2017 . Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . . For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . "
+    #doc = "  Geoffrey Werner Challen Teaching Associate Professor 2227 Siebel Center for Comp Sci 201 N. Goodwin Ave. Urbana Illinois 61801 (217) 300-6150 challen@illinois.edu : Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page Education Ph.D. Computer Science, Harvard University, 2010 AB Physics, Harvard University, 2003 Academic Positions Associate Teaching Professor, University of Illinois, 2017 . Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . . For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . "
+    doc = "  Geoffrey Werner Challen Teaching Associate Professor 2227 Siebel Center for Comp Sci 201 N. Goodwin Ave. Urbana Illinois 61801 (217) 300-6150 challen@illinois.edu : Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page Education Ph.D. Computer Science, Harvard University, 2010 AB Physics, Harvard University, 2003 Academic Positions Associate Teaching Professor, University of Illinois, 2017 . Primary Research Area CS Education Research Areas CS Education For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . . For more information blue Systems Research Group (Defunct) Internet Class: Learn About the Internet on the Internet OPS Class: Learn Operating Systems Online CS 125 Home Page . Jiaxin Lin , Kiran Patel , Brent E. Stephens , Anirudh Sivaraman , Aditya Akella Jiaxin Lin , Kiran Patel , Brent E. Stephens , Anirudh Sivaraman , Aditya Akella Jiaxin Lin , Kiran Patel , Brent E. Stephens , Anirudh Sivaraman , Aditya Akella Jiaxin Lin , Kiran Patel , Brent E. Stephens , Anirudh Sivaraman , Aditya Akella"
     doc = Document(doc,
                    faculty_url="http://www.cs.utah.edu/~mflatt/",
                    department_url="https://www.eecs.psu.edu/departments/cse-faculty-list.aspx",
@@ -269,3 +273,4 @@ if __name__ == '__main__':
     print("LOCATION:   ", doc.extract_location())
     print("BIODATA:    ", doc.extract_biodata())
     """
+    print("EXPERTISE:  ", doc.extract_expertise())
