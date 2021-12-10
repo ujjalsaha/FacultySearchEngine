@@ -8,7 +8,7 @@ sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'lib'))
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
 
 from apps.backend.api.googleapi import GoogleAPI
-from apps.frontend.utils.beautiful_soup import get_js_soup, remove_script, tag_visible
+from apps.frontend.utils.beautiful_soup import BeautifulSoupLocal, html_tag_visible
 
 console_format = '%(name)s - %(levelname)s - %(message)s'
 logging.root.setLevel(logging.INFO)
@@ -43,6 +43,7 @@ class Crawler:
 
     def __init__(self, base_url=None):
         self.base_url = base_url
+        self.beautiful_soup = BeautifulSoupLocal(url=self.base_url)
         self.key_words = self.get_key_words()
         self.faculty_links = []
         self.logger = logging.getLogger('Crawler')
@@ -86,7 +87,7 @@ class Crawler:
         :return: Final URL and the JS Soup
         """
         self.logger.info('Scraping directory page')
-        base_page_soup = remove_script(get_js_soup(self.base_url))
+        base_page_soup = self.beautiful_soup.get_html()
         faculty_pages = set()
         for faculty in base_page_soup.findAll(
                 lambda tag: tag.name == "a" and ("Faculty" in tag.text or "People" in tag.text)):
@@ -114,11 +115,11 @@ class Crawler:
                     final_link = url
                     break
                 # print('url in faculty_links => ', url)
-                faculty_link_soup = remove_script(get_js_soup(url))
+                faculty_link_soup =  self.beautiful_soup.get_html_from_url(url)
                 # print(faculty_link_soup)
                 faculty_page_html = faculty_link_soup.find_all(text=True)
                 # print(faculty_page_html)
-                visible_texts = filter(tag_visible, faculty_page_html)
+                visible_texts = filter(html_tag_visible, faculty_page_html)
                 faculty_count = 0
                 for text in visible_texts:
                     # print(f"{url} => {faculty_count} => {text}")
@@ -196,10 +197,17 @@ class ExtractFacultyURL:
             found = self.crawler.valid_faculty_page_found()
         return found
 
+    def close_driver(self):
+        """
+        Close the Selenium Driver
+        :return:
+        """
+        self.beautiful_soup.close_driver()
+
 
 if __name__ == '__main__':
-    uni = ""
+    uni = "brigham young university, computer science"
     print(uni)
     extractURL = ExtractFacultyURL(uni)
     print('Faculty Page found = ', extractURL.has_valid_faculty_link())
-    print('faculty_link = ', extractURL.get_faculty_link().get('faculty_link'))
+    print('faculty_link = ', extractURL.get_faculty_link())
