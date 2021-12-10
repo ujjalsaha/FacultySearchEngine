@@ -45,6 +45,7 @@ def doCrawl():
     data = json.loads(request.data.decode("utf-8"))
     search_str = data["searchText"]
     extract_url = ExtractFacultyURL(search_str)
+    extract_url.close_driver()
     if not extract_url.has_valid_faculty_link():
         return jsonify({
             "msg": "Unfortunately we did not find any faculty link for the search key. "
