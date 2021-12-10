@@ -42,14 +42,13 @@ class Crawler:
     """
 
     def __init__(self, base_url=None):
+        self.extract = tldextract.extract(base_url)
+        self.return_dict = dict()
         self.base_url = base_url
         self.beautiful_soup = BeautifulSoupLocal(url=self.base_url)
         self.key_words = self.get_key_words()
         self.faculty_links = []
         self.logger = logging.getLogger('Crawler')
-        self.extract = tldextract.extract(self.base_url)
-        self.return_dict = dict()
-        self.get_dept_url()
 
     def get_base_url(self):
         """
@@ -64,9 +63,11 @@ class Crawler:
            Get the department URL using tldextract library.
            :return:None
        """
-        dept_url = "https://" + self.extract.subdomain +  "." + self.extract.domain + "." + self.extract.suffix
-        self.base_url = dept_url
+        index_of_slash = self.base_url.rfind("://")
+        dept_url = self.base_url[
+                   0:index_of_slash + 3] + self.extract.subdomain + "." + self.extract.domain + "." + self.extract.suffix
         self.return_dict['dept_url'] = dept_url
+        return dept_url
 
     def get_key_words(self):
         """
@@ -88,6 +89,8 @@ class Crawler:
         """
         self.logger.info('Scraping directory page')
         base_page_soup = self.beautiful_soup.get_html()
+        if not base_page_soup:
+            return None
         faculty_pages = set()
         for faculty in base_page_soup.findAll(
                 lambda tag: tag.name == "a" and ("Faculty" in tag.text or "People" in tag.text)):
@@ -115,7 +118,9 @@ class Crawler:
                     final_link = url
                     break
                 # print('url in faculty_links => ', url)
-                faculty_link_soup =  self.beautiful_soup.get_html_from_url(url)
+                faculty_link_soup = self.beautiful_soup.get_html_from_url(url)
+                if not faculty_link_soup:
+                    continue
                 # print(faculty_link_soup)
                 faculty_page_html = faculty_link_soup.find_all(text=True)
                 # print(faculty_page_html)
@@ -138,13 +143,24 @@ class Crawler:
         Given a URL it validates whether the faculty Link exists
         :return:
         """
-        response = requests.get(self.base_url)
-        if response.status_code > 200:
-            return False
-        self.scrape_dir_page()
-        if self.return_dict.get("faculty_link"):
-            return True
+        try:
+            response = requests.get(self.base_url)
+            if response.status_code > 200:
+                return False
+            self.scrape_dir_page()
+            if self.return_dict.get("faculty_link"):
+                return True
+        except Exception as exc:
+            print(str(exc))
+            pass
         return False
+
+    def close_driver(self):
+        """
+        Close the Selenium Driver
+        :return:
+        """
+        self.beautiful_soup.close_driver()
 
 
 class ExtractFacultyURL:
@@ -170,7 +186,7 @@ class ExtractFacultyURL:
         if self.uni_name:
             try:
                 googleAPI = GoogleAPI(place_name=self.uni_name)
-                base_url =  googleAPI.get_component(field_comp='website')
+                base_url = googleAPI.get_component(field_comp='website')
                 print('base url => ', base_url)
             except Exception as ex:
                 self.log.error(ex)
@@ -198,15 +214,11 @@ class ExtractFacultyURL:
         return found
 
     def close_driver(self):
-        """
-        Close the Selenium Driver
-        :return:
-        """
-        self.beautiful_soup.close_driver()
+        self.crawler.close_driver()
 
 
 if __name__ == '__main__':
-    uni = "brigham young university, computer science"
+    uni = "rice university, computer science"
     print(uni)
     extractURL = ExtractFacultyURL(uni)
     print('Faculty Page found = ', extractURL.has_valid_faculty_link())

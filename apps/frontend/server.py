@@ -44,24 +44,33 @@ def doCrawl():
     redis_server = Redis(host='localhost', port=6379, db=0)
     data = json.loads(request.data.decode("utf-8"))
     search_str = data["searchText"]
-    extract_url = ExtractFacultyURL(search_str)
-    extract_url.close_driver()
-    if not extract_url.has_valid_faculty_link():
-        return jsonify({
-            "msg": "Unfortunately we did not find any faculty link for the search key. "
-                   "Please provide a search key which has a link to the list of department faculty."
-        })
-    elif is_redis_available(redis_server):
-        queue = rq.Queue('crawler-worker', connection=redis_server, default_timeout=3600)
-        faculty_dict = extract_url.get_faculty_link()
-        queue.enqueue(run_task, faculty_dict)
-        return jsonify({
-            "msg": "Your request has been accepted. We will process the request asynchronously"
-        })
-    else:
+    try:
+        extract_url = ExtractFacultyURL(search_str)
+        if not extract_url.has_valid_faculty_link():
+            extract_url.close_driver()
+            return jsonify({
+                "msg": "Unfortunately we did not find any faculty link for the search key. "
+                       "Please provide a search key which has a link to the list of department faculty."
+            })
+        elif is_redis_available(redis_server):
+            extract_url.close_driver()
+            queue = rq.Queue('crawler-worker', connection=redis_server, default_timeout=3600)
+            faculty_dict = extract_url.get_faculty_link()
+            queue.enqueue(run_task, faculty_dict)
+            return jsonify({
+                "msg": "Your request has been accepted. We will process the request asynchronously"
+            })
+        else:
+            extract_url.close_driver()
+            return jsonify(
+                {
+                    "msg": "An error occurred. Please contact system administrators for more details."
+                }
+            )
+    except:
         return jsonify(
             {
-                "msg": "An error occurred. Please contact system administrators for more details."
+                "msg": "Unexpected error occurred. Please contact system administrators for more details."
             }
         )
 
