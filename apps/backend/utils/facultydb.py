@@ -117,8 +117,9 @@ class FacultyDB:
 
         print(f"{len(faculty_data)} record(s) ready for insert into faculty_info table.\n")
 
+        n = len(faculty_data)
         # Form bulk records for faculty_info insert opertation
-        for faculty in faculty_data:
+        for i, faculty in enumerate(faculty_data):
             record = [None]
             record.append(faculty["faculty_name"])
             record.append(faculty["faculty_homepage_url"])
@@ -133,6 +134,21 @@ class FacultyDB:
             record.append(faculty["faculty_biodata"])
             record.extend([datetime.now(), datetime.now()])
             faculty_records.append(tuple(record))
+
+            print(f"{'*' * 50}")
+            print (f"DB Record: {i + 1} / {n}")
+            print ("DB:: faculty_name", faculty["faculty_name"])
+            print ("DB:: faculty_homepage_url", faculty["faculty_homepage_url"])
+            print ("DB:: faculty_department_url", faculty["faculty_department_url"])
+            print ("DB:: faculty_department_name", faculty["faculty_department_name"])
+            print ("DB:: faculty_university_url", faculty["faculty_university_url"])
+            print ("DB:: faculty_university_name", faculty["faculty_university_name"])
+            print ("DB:: faculty_email", faculty["faculty_email"])
+            print ("DB:: faculty_phone", faculty["faculty_phone"])
+            print ("DB:: faculty_location", faculty["faculty_location"])
+            print ("DB:: faculty_expertise", faculty["faculty_expertise"])
+            print ("DB:: faculty_biodata length", len(faculty["faculty_biodata"]))
+            print(f"{'*' * 50}")
 
         try:
             conn = self.__open_connection()
