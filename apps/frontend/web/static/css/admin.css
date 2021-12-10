@@ -150,3 +150,9 @@ body {
 .static-popover{
   display: block !important;
 }
+
+.alert-css{
+  margin-top: 10px;
+  font-size: 14px;
+  width: 60%;
+}
