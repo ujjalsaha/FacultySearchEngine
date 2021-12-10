@@ -169,9 +169,9 @@ class Document:
                                                     alpha='auto',
                                                     per_word_topics=True)
         try:
-            lda_model.load("cs410_project")
+            lda_model.load("lda-trained-dataset")
         except:
-            lda_model.save("cs410_project")
+            lda_model.save("lda-trained-dataset")
         """
         # Print the Keyword in the 10 topics
         print(lda_model.print_topics())
@@ -180,7 +180,7 @@ class Document:
 
         topics = lda_model.print_topics(num_words=10)
         lda_model.update(corpus)
-        lda_model.save("cs410_project")
+        lda_model.save("lda-trained-dataset")
 
         '''for topic in topics:
             print(topic)'''
