@@ -1,16 +1,11 @@
 
 $(document).ready(function() {
 
-
-
-
 $("#crawl_uni").click(function() {
     debugger;
-    $("div.spanner").addClass("show");
-    $('div.overlay').addClass("show");
+    $("#spinner2").addClass("show-spinner");
     if ($("#searchText").val() === ''){
-        $("div.spanner").removeClass("show");
-        $("div.overlay").removeClass("show");
+       $("#spinner2").removeClass("show-spinner");
         $("#backdrop").modal("show");
         $("#modalBody").text("Please enter a search string");
         $("#backdrop").appendTo("body");
@@ -28,8 +23,7 @@ $("#crawl_uni").click(function() {
             body: JSON.stringify(data)
         }).then(response => {
             response.json().then(data => {
-                $("div.spanner").removeClass("show");
-        $("div.overlay").removeClass("show");
+                $("#spinner2").removeClass("show-spinner");
                 $("#backdrop").modal("show");
                 $("#modalBody").text(data["msg"])
                 $("#backdrop").appendTo("body");

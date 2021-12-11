@@ -65,56 +65,58 @@ var docDiv = (doc, phone_id) => {
 }
 
 var doSearch = function() {
+
     const data = {
         "query": searchTerm,
         "num_results": numResults,
-        "selected_loc_filters" : selected_loc_filters[0],
-        "selected_uni_filters": selected_uni_filters[0],
-        "selected_dept_filters": selected_dept_filters[0]
+        "selected_loc_filters" : selected_loc_filters.length > 0 ? selected_loc_filters[0] : "",
+        "selected_uni_filters":  selected_uni_filters.length > 0 ? selected_uni_filters[0] : "",
+        "selected_dept_filters": selected_dept_filters.length > 0 ? selected_dept_filters[0] : ""
     }
-    if (searchTerm!='')
+    if (searchTerm!=='')
     {
-    var num_fetched_res = 0
-    fetch("/search", {
-    // fetch("http://expertsearch.centralus.cloudapp.azure.com/search", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    }).then(response => {
-        response.json().then(data => {
-            const docs = data.docs;
-            $("#docs-div").empty();
+        $("#spinner2").addClass("show-spinner");
+        var num_fetched_res = 0
+        fetch("/search", {
+        // fetch("http://expertsearch.centralus.cloudapp.azure.com/search", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            response.json().then(data => {
+                const docs = data.docs;
+                $("#docs-div").empty();
 
-            docs.forEach((doc, count) => {
-                let phone_id = count
-                if (doc[7] != null) {
-                    phone_id = doc[7].replace(/\D/g, '') + count
+                docs.forEach((doc, count) => {
+                    let phone_id = count
+                    if (doc[7] != null) {
+                        phone_id = doc[7].replace(/\D/g, '') + count
+                    }
+
+                    $("#docs-div").append(
+                        docDiv(doc, phone_id)
+                    );
+                        num_fetched_res = num_fetched_res+1;
+
+
+                    if(!doc[7]){
+                        $("#" + phone_id).addClass("hide")
+                    }
+                });
+
+
+                if (num_fetched_res===numResults){
+                    $("#loadMoreButton").css("display", "block")
                 }
-
-                $("#docs-div").append(
-                    docDiv(doc, phone_id)
-                );
-                    num_fetched_res = num_fetched_res+1;
-
-
-                if(!doc[7]){
-                    $("#" + phone_id).addClass("hide")
+                else{
+                    $("#loadMoreButton").css("display", "none")
                 }
-            });
-
-          
-            if (num_fetched_res==numResults){
-
-            $("#loadMoreButton").css("display", "block")
-        }
-        else{
-            $("#loadMoreButton").css("display", "none")
-        }
-        if (num_fetched_res==0){
-            $("#docs-div").append(`<h3 style="text-align: center;margin-top:20px;">No Search Results Found</h3>`);
-        }
+                if (num_fetched_res==0){
+                        $("#docs-div").append(`<h3 style="text-align: center;margin-top:20px;">No Search Results Found</h3>`);
+                }
+                $("#spinner2").removeClass("show-spinner");
         })
 
     });
@@ -136,6 +138,7 @@ $(document).ready(function() {
     $('#loc_filter').select2({placeholder: "e.g. United States, Illinois"});
     $('#uni_filter').select2({placeholder: "e.g. University of Illinois Urbana-Champaign"});
     $('#dept_filter').select2({placeholder: "e.g. Computer Science"});
+
     $(window).trigger('resize');
 });
 
@@ -147,21 +150,21 @@ window.onload=function(){
        
 
     }
-    selected_uni_filters = unis.slice()
+    // selected_uni_filters = unis.slice()
     for (var i=0;i<locs.length;i++){
          var newOption = new Option(locs[i], i, false, false);
         // Append it to the select
         $('#loc_filter').append(newOption).trigger('change');
     }
-    selected_loc_filters = locs.slice()
+    // selected_loc_filters = locs.slice()
 
-    selected_dept_filters = depts.slice()
+    // selected_dept_filters = depts.slice()
     for (var i=0;i<depts.length;i++){
          var newOption = new Option(depts[i], i, false, false);
         // Append it to the select
         $('#dept_filter').append(newOption).trigger('change');
     }
-    selected_dept_filters = depts.slice()
+    // selected_dept_filters = depts.slice()
 
     $(window).trigger('resize');
  
@@ -197,34 +200,33 @@ $("#applyFilters").click(function() {
     selected_uni_filters = []
     selected_uni_data.forEach(s => {
             selected_uni_filters.push(s['text']);
-
-});
+    });
       
-    if (selected_uni_filters.length== 0){
-        selected_uni_filters = unis.slice()
-    }
+    // if (selected_uni_filters.length== 0){
+    //     selected_uni_filters = unis.slice()
+    // }
 
     var selected_loc_data = $("#loc_filter").select2("data");
     selected_loc_filters = []
     selected_loc_data.forEach(s => {
             selected_loc_filters.push(s['text']);
 
-});
+    });
 
-    if (selected_loc_filters.length == 0){
-        selected_loc_filters = locs.slice()
-    }
+    // if (selected_loc_filters.length == 0){
+    //     selected_loc_filters = locs.slice()
+    // }
 
     var selected_dept_data = $("#dept_filter").select2("data");
     selected_dept_filters = []
     selected_dept_data.forEach(s => {
             selected_dept_filters.push(s['text']);
 
-});
+    });
 
-    if (selected_dept_filters.length == 0){
-        selected_dept_filters = depts.slice()
-    }
+    // if (selected_dept_filters.length == 0){
+    //     selected_dept_filters = depts.slice()
+    // }
 
   filters_div = document.getElementById("search-filters")
   filters_div.style.display = 'none'
@@ -237,6 +239,5 @@ $("#settingsButton").click(function() {
 
 $("#loadMoreButton").click(function() {
     numResults += incResults
-
     doSearch();
 });
