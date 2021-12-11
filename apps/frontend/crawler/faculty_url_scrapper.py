@@ -10,7 +10,7 @@ sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'lib'))
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'data'))
 
-logging.basicConfig(filename='lda_model.log', format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+logging.basicConfig(filename='expertsearch.log', format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 
 from apps.frontend.utils.beautiful_soup import BeautifulSoupLocal, html_tag_visible
