@@ -103,7 +103,7 @@ def sanitizer(doc):
     doc = doc.lower()
 
     tokens = [word for word in word_tokenize(doc)]
-    tokens = [word for word in tokens if len(word) >= 3]
+    # tokens = [word for word in tokens if len(word) >= 3]
 
     # removes smaller than 3 character
     tokens = [word_lemmatizer(w) for w in tokens]
