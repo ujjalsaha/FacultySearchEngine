@@ -1,6 +1,7 @@
 import re
 import gensim
 import nltk
+import spacy
 from nltk.corpus import wordnet
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
@@ -69,10 +70,11 @@ def tokenizer(doc, remove_email: bool = True):
     #print(data_words_bigrams)
 
     # removes smaller than 3 character
-    tokens = [word_lemmatizer(w) for w in data_words_bigrams[0]]
+    #tokens = [word_lemmatizer(w) for w in data_words_bigrams[0]]
+    data_lemmatized = lemmatization(data_words_bigrams, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV'])
 
     # remove stop words
-    tokens = [s for s in tokens if s not in stopwords.words('english')]
+    tokens = [s for s in data_lemmatized[0] if s not in stopwords.words('english')]
 
     # print("Tokens: ", tokens)
 
@@ -109,3 +111,13 @@ def sanitizer(doc):
     # print("Tokens: ", tokens)
 
     return tokens
+
+#######################################
+nlp = spacy.load('en_core_web_sm')
+def lemmatization(texts, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV']):
+    """https://spacy.io/api/annotation"""
+    texts_out = []
+    for sent in texts:
+        doc = nlp(" ".join(sent))
+        texts_out.append([token.lemma_ for token in doc if token.pos_ in allowed_postags])
+    return texts_out
