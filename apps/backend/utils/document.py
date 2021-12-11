@@ -148,8 +148,8 @@ class Document:
         if not self.doc:
             return ""
 
-        tokens = tokenizer(self.extract_expert_ner())
-        #tokens = tokenizer(self.doc)
+        #tokens = tokenizer(self.extract_expert_ner())
+        tokens = tokenizer(self.doc)
         # print("tokens: ", tokens)
 
         # Create Dictionary
