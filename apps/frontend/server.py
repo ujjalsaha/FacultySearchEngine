@@ -10,6 +10,7 @@ import re
 from redis import Redis
 import redis
 import rq
+from decouple import config
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
 
@@ -136,5 +137,8 @@ def is_redis_available(r):
 
 if __name__ == '__main__':
     # environ = os.environ.get("APP_ENV")
-
-    app.run(debug=True, threaded=True, host='localhost', port=8095)
+    env = config("ENVIRONMENT")
+    if env == 'PRODUCTION':
+        app.run(debug=True, threaded=True, host='0.0.0.0', port=8095)
+    else:
+        app.run(debug=True, threaded=True, host='localhost', port=8095)
