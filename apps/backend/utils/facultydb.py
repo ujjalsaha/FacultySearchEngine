@@ -255,7 +255,7 @@ class FacultyDB:
                         faculty_email,
                         faculty_phone,
                         faculty_location,
-                        faculty_expertise
+                        faculty_expertise,
                         faculty_biodata
                   FROM  faculty_info
                   WHERE id IN """ + ids
@@ -272,7 +272,7 @@ class FacultyDB:
                         faculty_email,
                         faculty_phone,
                         faculty_location,
-                        faculty_expertise
+                        faculty_expertise,
                         faculty_biodata
                   FROM  faculty_info
                 """

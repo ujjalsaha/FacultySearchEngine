@@ -314,7 +314,7 @@ pprint(corpus)
 """
 
 from elasticsearch import Elasticsearch
-es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
+from pprint import pprint
 
 
 class ElasticSearchAPI:
@@ -328,12 +328,8 @@ class ElasticSearchAPI:
         try:
             print("Deleting old index...")
             #iterate through documents indexing them
-            es.indices.delete(index=self.index)
-            print("Index complete: ", len(corpus))
-
-            result = es.search(index=self.index, body={"query": {"match_all": {}}})
-            print("total hits:", len(result["hits"]["hits"]))
-
+            self.es.indices.delete(index=self.index)
+            print("Old Index deleted: ", len(corpus))
 
         except Exception as e:
             print("Unexpected Exception occured in delete index: ", repr(e))
@@ -344,10 +340,10 @@ class ElasticSearchAPI:
             print(f"Rebuilding new index with {len(corpus)} records in corpus")
             for record in corpus:
                 # print (record)
-                es.index(index=self.index, doc_type=self.doc_type, id=record["id"], document=record)
+                self.es.index(index=self.index, doc_type=self.doc_type, id=record["id"], document=record)
 
-            result = es.search(index=self.index, body={"query": {"match_all": {}}})
-            print("total hits:", len(result["hits"]["hits"]))
+            result = self.es.search(index=self.index, body={"query": {"match_all": {}}})
+            print(f"New Index Created with record count {len(result['hits']['hits'])}")
 
         except Exception as e:
             print ("Unexpected Exception occured in create index: ", repr(e))
@@ -382,12 +378,14 @@ class ElasticSearchAPI:
                 }
             }
         """
-
         ranked_list =  []
         try:
+            # result = self.es.search(index=self.index, body={"query": {"match_all": {}}})
+            # print("total hits:", len(result["hits"]["hits"]))
+            # pprint(result)
             res = self.es.search(index=self.index, query=query)
-
             # print(res)
+
             print(f"Matched Query: {res['hits']['total']['value']}")
             for record in res['hits']['hits'][:n]:
                 faculty = {}
@@ -402,6 +400,8 @@ class ElasticSearchAPI:
                 faculty["faculty_location"] = record['_source']["faculty_location"]
                 faculty["faculty_expertise"] = record['_source']["faculty_expertise"]
                 ranked_list.append(faculty)
+
+            pprint(ranked_list)
 
         except Exception as e :
             print ("Unexpected exception error: While getting search results: ", repr(e))
@@ -655,7 +655,7 @@ if __name__ == '__main__':
     db["faculty_university_url"] = "https://www.georgetown.edu"
     db["faculty_university_name"] = "Georgetown University in Washington DC"
     db["faculty_location"] = "Washington, District of Columbia, United States"
-    db["faculty_expertise"] = "distribute algorithm science research consistency acm computer include memory computing"
+    db["faculty_expertise"] = "distribute algorithm science research consistency acm computer include memory computing computer"
     corpus.append(db)
     db = {}
 
@@ -684,7 +684,8 @@ if __name__ == '__main__':
     corpus.append(db)
 
     elasticsearchapi = ElasticSearchAPI()
-    elasticsearchapi.add_records(corpus)
+    # elasticsearchapi.add_records(corpus)
+    elasticsearchapi.get_search_results("Walmart")
 
 
 
