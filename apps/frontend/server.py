@@ -2,10 +2,7 @@ from flask import Flask
 from flask import render_template, request, jsonify
 import json
 import os
-import requests
-import base64
 import sys
-import re
 
 from redis import Redis
 import redis
@@ -15,13 +12,10 @@ from decouple import config
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
 
 from apps.backend.utils.facultydb import FacultyDB
-from apps.backend.api.search import Search
 from apps.backend.utils.document import extract_expert_ner
-
 from apps.frontend.crawler.crawler import ExtractFacultyURL
-
-
 from apps.frontend.utils.background_task import run_task
+from apps.backend.api.elasticsearchapi import ElasticSearchAPI
 
 app = Flask(__name__, template_folder='web/templates', static_folder='web/static')
 app.rootpath = "web/templates"
@@ -87,9 +81,9 @@ def search():
 
     if num_results >100:
         num_of_results = 100
-    search_obj = Search()
-    #search_result = search_obj.get_search_results(querytext, "Manipal", "Computer", "Sikkim")
-    search_result = search_obj.get_search_results(querytext, num_results, unifilter, deptfilter, locfilter)
+    elasticsearchapi = ElasticSearchAPI()
+    # search_result = search_obj.get_search_results(querytext, "Manipal", "Computer", "Sikkim")
+    search_result = elasticsearchapi.get_search_results(querytext, num_results, unifilter, deptfilter, locfilter)
 
     print(search_result)
     faculty_names = []
@@ -113,7 +107,7 @@ def search():
         faculty_email.append(v['faculty_email'])
         faculty_phone.append(v['faculty_phone'])
         faculty_location.append(v['faculty_location'])
-        change_expertise = extract_expert_ner(v['faculty_expertise'])
+        change_expertise = " ".join(set(extract_expert_ner(v['faculty_expertise']).split()))
         faculty_expertise.append(change_expertise)
 
     results = list(zip(faculty_names, faculty_homepage_url, faculty_department_url, faculty_department_name,
