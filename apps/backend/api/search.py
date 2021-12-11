@@ -2,7 +2,8 @@ from apps.backend.utils.facultydb import FacultyDB
 from apps.backend.utils.ranker import Ranker
 class Search:
     def __init__(self):
-        print("Initialize")
+        pass
+
 
     def get_search_results(self, query, num_of_results, university_filter, dept_filter, location_filter):
         try:
