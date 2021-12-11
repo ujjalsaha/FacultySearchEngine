@@ -4,6 +4,8 @@ import sqlite3
 from datetime import datetime
 from sqlite3 import Error
 
+from apps.backend.api.elasticsearchapi import ElasticSearchAPI
+
 
 class FacultyDB:
 
@@ -171,6 +173,13 @@ class FacultyDB:
         except Exception as e:
             raise Exception("Unexpected SQLite3 connection close  error: " + str(e))
 
+        # Now reindex the elastic search
+        try:
+            ElasticSearchAPI().add_records(self.get_faculty_records())
+
+        except Exception as e:
+            raise Exception("Unexpected expectation occured while reindex ElasticSearch: " + repr(e))
+
     def get_biodata_records(self, university_filter=None, department_filter=None, location_filter=None):
         """
         Get faculty biodata. if ay of the filter parameters are provided, get biodate based on filters
@@ -232,21 +241,41 @@ class FacultyDB:
             conn = self.__open_connection()
             conn.row_factory = sqlite3.Row
 
-            ids = "('" + "','".join([str(i) for i in id]) + "')"
 
-            select_faculty_sql = """
-            SELECT faculty_name,
-                    faculty_homepage_url,
-                    faculty_department_url,
-                    faculty_department_name,
-                    faculty_university_url,
-                    faculty_university_name,
-                    faculty_email,
-                    faculty_phone,
-                    faculty_location,
-                    faculty_expertise
-              FROM  faculty_info
-              WHERE id IN """ + ids
+            if id:
+                ids = "('" + "','".join([str(i) for i in id]) + "')"
+                select_faculty_sql = """
+                SELECT  id,
+                        faculty_name,
+                        faculty_homepage_url,
+                        faculty_department_url,
+                        faculty_department_name,
+                        faculty_university_url,
+                        faculty_university_name,
+                        faculty_email,
+                        faculty_phone,
+                        faculty_location,
+                        faculty_expertise
+                        faculty_biodata
+                  FROM  faculty_info
+                  WHERE id IN """ + ids
+
+            else:
+                select_faculty_sql = """
+                SELECT  id,
+                        faculty_name,
+                        faculty_homepage_url,
+                        faculty_department_url,
+                        faculty_department_name,
+                        faculty_university_url,
+                        faculty_university_name,
+                        faculty_email,
+                        faculty_phone,
+                        faculty_location,
+                        faculty_expertise
+                        faculty_biodata
+                  FROM  faculty_info
+                """
 
             # print("select_faculty_sql: ", select_faculty_sql)
 
@@ -417,6 +446,7 @@ if __name__ == '__main__':
     # bulk insert faulty data
     faculty_db.add_records(faculty_data)
 
+    """
     # get all biodata
     records = faculty_db.get_biodata_records(university_filter='Manipal')
     print("BIODATA RECORDS:    ")
@@ -429,7 +459,6 @@ if __name__ == '__main__':
     pprint(records)
 
     print("\n")
-
 
     # get faculty info for ids 2 and 3
     records = faculty_db.get_faculty_records([2, 3])
@@ -456,3 +485,4 @@ if __name__ == '__main__':
     records = faculty_db.get_all_locations()
     print("LOCATIONS INFO: ")
     pprint(records)
+    """

@@ -14,7 +14,7 @@ import rq
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
 
 from apps.backend.utils.facultydb import FacultyDB
-from apps.backend.api.search import Search
+from apps.backend.api.elasticsearchapi import ElasticSearchAPI
 
 from apps.frontend.crawler.crawler import ExtractFacultyURL
 
@@ -85,9 +85,9 @@ def search():
 
     if num_results >100:
         num_of_results = 100
-    search_obj = Search()
+
     #search_result = search_obj.get_search_results(querytext, "Manipal", "Computer", "Sikkim")
-    search_result = search_obj.get_search_results(querytext, num_results, unifilter, deptfilter, locfilter)
+    search_result = ElasticSearchAPI().get_search_results(querytext, num_results, unifilter, deptfilter, locfilter)
 
     print(search_result)
     faculty_names = []
