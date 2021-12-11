@@ -61,7 +61,7 @@ As a team, we did a deep analysis of the current ExpertSearch capabilities and f
 The deficiencies include lack of accuracy in the search results, lack of relevant search results and inconsistencies in the search results, older and out of support python library usages, undocumented code and repo etc.\
 These deficiencies can be addressed using the right text retrieval and text mining techniques along with some good practices that will improve the overall search experience in the ExpertSearch system.  
 Our team was involved in implementing following features as we forked the existing ExpertSearch System and added/improved core-functionalities that we built on top of it. 
-Below are the core functionalities that we added/improved on the existing ExpertSearch thereby calling it **ExpertSearchv2.0**:
+Below are the core functionalities that we added/improved on the existing ExpertSearch thereby calling it **ExpertSearch v2.0**:
 <details>
    <summary>Converting unstructured dataset to structured dataset. Click to learn more</summary>
    <br/>
@@ -196,7 +196,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
    ```shell script
    python --version
    ````
-2. Java Runtime Envirnment (OpenJDK JRE)
+2. Java Runtime Environment (OpenJDK JRE)
    * [Linux/MacOS OpenJDK Installation Guide](https://openjdk.java.net/install/)
    
    Run the below command in virtual environment and make sure you have installed Python3.9.X.
@@ -240,7 +240,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
    git clone https://github.com/sudiptobilu/CourseProject.git
    cd CourseProject
 
-3. Set `GOOGLE_API_KEY` Environemnt Variable\
+3. Set `GOOGLE_API_KEY` Environment Variable\
    [Click Here](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) to get the Google API Key from the [CMT](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) Abstract section (Make sure you are in reviewer role. Credentials required). \
     Add the below line in your `~/.basrc` or `~/.bash_profile` 
     ```shell script
@@ -379,7 +379,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 * The result's dataset is now a structured data with key pair values being displayed in the front end accordingly
 * The benefit of displaying structured data is consistency in displaying results and all the attributes and allowing certain user actions on them. (for e.g. send email, explore location etc.)
 
-:bangbang: The entire workflow and code discussed above is all new work in the ExpertSearch v2.0 that has been done. Tasks involved adapting new libraries for Python3.9, explorations, PoCs, and then designining an effctive workflow and implementing it.   
+:bangbang: The entire workflow and code discussed above is all new work in the ExpertSearch v2.0 that has been done. Tasks involved adapting new libraries for Python3.9, explorations, PoCs, and then designing an effective workflow and implementing it.   
 
 <details>
    <summary>Click to See the Workflow Diagram of Search Functionality</summary>
@@ -408,7 +408,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
     <details>
        <summary><b>User Story: </b> Crawler Implementation for a given webpage url. Click for Story Details</summary>
        <br/>
-       <p>In the admin interface when admin inputs an url, this story takes the url as input and scrapes the page and extracts the faculty bio-data. We also implemented intelligent logic in scraper to find right faculty page if the base url has links that leads to multiple faculty related pages.</p>
+       <p>In the admin interface when admin inputs an url, this story takes the url as input and scrapes the page and extracts the faculty bio-data. We also implemented intelligent logic in scraper to find right faculty page if the base url has links that led to multiple faculty related pages.</p>
     </details>     
 
     <details>
