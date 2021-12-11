@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../static/bootstrap-4.0.0-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link rel="stylesheet" href="../static/fontawesome/css/all.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../static/css/index.css">
@@ -12,12 +12,12 @@
      <script src="{{url_for('static',filename='js/admin.js')}}" crossorigin="anonymous"></script>
     <script src="../static/bootstrap-4.0.0-dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
-    <title>Expert Search V2.0 Admin</title>
+    <title>Expert Search v2.0 Admin</title>
   </head>
   <body>
         <nav class="navbar  navbar-expand-sm fixed-top">
             <div class="navbar-header">
-              <a class="navbar-brand" href="/">Expert Search V2.0</a>
+              <a class="navbar-brand" href="/">Expert Search v2.0</a>
             </div>
         </nav>
 
@@ -36,7 +36,7 @@
                           <p id="modalBody"></p>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeModal">Understood</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeModal">Ok</button>
                       </div>
                     </div>
                   </div>
@@ -54,7 +54,7 @@
         <input type="text" class="form-control" placeholder="Please enter University Name or University URL" id="searchText">
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" id="crawl_uni">
-                <i class="fa fa-search"></i>
+                <i class="fa fa-sign-in-alt"></i>
               </button>
             </div>
           </div>
@@ -65,7 +65,11 @@
 
           <div class="col-md-9 offset-md-3">
             <div class="alert alert-info alert-css" role="alert" style="">
-          <span class="alert-heading">Here are some search term examples you can use to search! Please try to be specific.</span>
+            <p class="alert-heading">
+                Please contribute to our database.
+                You can specify University department name or University url, and we will scrape the page for faculty data.
+            </p>
+            <span class="alert-heading">Here are some search term examples you can use to search! Please try to be specific.</span>
           <ol>
               <li>
                    Oregon State University, Computer Science Department
