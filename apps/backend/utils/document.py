@@ -27,7 +27,38 @@ nltk.downloader.download('maxent_treebank_pos_tagger', quiet=True)
 # logger = logging.getLogger('ExpertSearchv2.0')
 logging.basicConfig(filename='lda_model.log', format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
+dirname = os.path.dirname(__file__)
+model_file = os.path.join(dirname,
+                          '../../../lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz')
+jar_file = os.path.join(dirname, '../../../lib/stanford-ner-2020-11-17/stanford-ner.jar')
 
+
+def extract_expert_ner(expertise):
+    """
+    Using StanfordNERTagger finds name entity recognition
+    """
+    if not expertise:
+        return ""
+
+    matched_tokens = []
+
+    try:
+        st = StanfordNERTagger(model_file, jar_file, encoding='utf-8')
+
+        tokenized_text = word_tokenize(expertise)
+        classified_text = st.tag(tokenized_text)
+
+        noname = ''
+        for tup in classified_text:
+            if tup[1] != 'PERSON' and tup[1] != "LOCATION":
+                noname += ' ' + tup[0].title()
+
+        matched_tokens.append(noname)
+    except Exception as e:
+        print("Exception encouneted while extracting nonames: " + str(e))
+        pass
+    nertext = " ".join(matched_tokens)
+    return nertext
 
 class Document:
 
@@ -80,38 +111,6 @@ class Document:
 
         return " ".join(matched_tokens)
 
-    def extract_expert_ner(self):
-        """
-        Using StanfordNERTagger finds name entity recognition
-        """
-        if not self.doc:
-            return ""
-
-        matched_tokens = []
-
-        try:
-            dirname = os.path.dirname(__file__)
-            model_file = os.path.join(dirname,
-                                      '../../../lib/stanford-ner-2020-11-17/classifiers/english.all.3class.distsim.crf.ser.gz')
-            jar_file = os.path.join(dirname, '../../../lib/stanford-ner-2020-11-17/stanford-ner.jar')
-
-            st = StanfordNERTagger(model_file, jar_file, encoding='utf-8')
-
-            tokenized_text = word_tokenize(self.doc)
-            classified_text = st.tag(tokenized_text)
-
-            noname = ''
-            for tup in classified_text:
-                if tup[1] != 'PERSON' and tup[1]!= "LOCATION":
-                    noname += ' ' + tup[0].title()
-
-            matched_tokens.append(noname)
-        except Exception as e:
-            print("Exception encouneted while extracting nonames: " + str(e))
-            pass
-
-        return " ".join(matched_tokens)
-
     def __extract_title(self, url, type=None):
         if not url:
             return ""
@@ -148,8 +147,8 @@ class Document:
         if not self.doc:
             return ""
 
-        tokens = tokenizer(self.extract_expert_ner())
-        #tokens = tokenizer(self.doc)
+        #tokens = tokenizer(extract_expert_ner(self.doc))
+        tokens = tokenizer(self.doc)
         # print("tokens: ", tokens)
 
         # Create Dictionary
@@ -162,7 +161,7 @@ class Document:
         lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
                                                     id2word=id2word,
                                                     num_topics=1,
-                                                    random_state=10,
+                                                    random_state=20,
                                                     update_every=1,
                                                     chunksize=1,
                                                     passes=50,
@@ -184,7 +183,7 @@ class Document:
         doc_lda = lda_model[corpus]
         """
 
-        topics = lda_model.print_topics(num_words=10)
+        topics = lda_model.print_topics(num_words=20)
         lda_model.update(corpus)
         lda_model.save(lda_dataset)
 
@@ -193,7 +192,7 @@ class Document:
 
 
         shown_topics = lda_model.show_topics(num_topics=1,
-                                             num_words=10,
+                                             num_words=20,
                                              formatted=False)
         topic_list = [[word[0] for word in topic[1]] for topic in shown_topics]
 

@@ -15,7 +15,8 @@ from decouple import config
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
 
 from apps.backend.utils.facultydb import FacultyDB
-from apps.backend.api.elasticsearchapi import ElasticSearchAPI
+from apps.backend.api.search import Search
+from apps.backend.utils.document import extract_expert_ner
 
 from apps.frontend.crawler.crawler import ExtractFacultyURL
 
@@ -86,9 +87,9 @@ def search():
 
     if num_results >100:
         num_of_results = 100
-
+    search_obj = Search()
     #search_result = search_obj.get_search_results(querytext, "Manipal", "Computer", "Sikkim")
-    search_result = ElasticSearchAPI().get_search_results(querytext, num_results, unifilter, deptfilter, locfilter)
+    search_result = search_obj.get_search_results(querytext, num_results, unifilter, deptfilter, locfilter)
 
     print(search_result)
     faculty_names = []
@@ -112,7 +113,8 @@ def search():
         faculty_email.append(v['faculty_email'])
         faculty_phone.append(v['faculty_phone'])
         faculty_location.append(v['faculty_location'])
-        faculty_expertise.append(v['faculty_expertise'])
+        change_expertise = extract_expert_ner(v['faculty_expertise'])
+        faculty_expertise.append(change_expertise)
 
     results = list(zip(faculty_names, faculty_homepage_url, faculty_department_url, faculty_department_name,
                        faculty_university_url, faculty_university_name, faculty_email, faculty_phone, faculty_location,
