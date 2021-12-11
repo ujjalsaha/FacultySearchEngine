@@ -82,7 +82,7 @@ class ScrapeFacultyWebPage:
         bio_dict = dict()
         n = len(self.faculty_urls)
         for i, url in enumerate(self.faculty_urls):
-            print(f"Processing Faculty: {i + 1} / {n}")
+            print(f"Processing Faculty Url: {i + 1} / {n}")
             try:
                 bio_texts = self.get_bio(url)
                 bio_dict[url] = bio_texts
@@ -129,11 +129,11 @@ class ScrapeFacultyWebPage:
         return self.faculty_link_soup.find_all("div", recursive=True, attrs={attr_to_search: re.compile(text)})
 
     def __check_name__(self, all_faculty_text):
+        print(f"{'*' * 50}")
         print('Started NLTK validation for human names ')
         tokenize = nltk.sent_tokenize(all_faculty_text)
         n = len(tokenize)
         for i, token in enumerate(tokenize):
-            print(f"Processing token: {i + 1} / {n}")
             tokens = nltk.tokenize.word_tokenize(token)
             tags = st.tag(tokens)
             full_name = ''
@@ -176,7 +176,7 @@ class ScrapeFacultyWebPage:
         faculty_dict_list = []
         count = 0
         n = len(self.faculty_urls)
-        print(f"{'*' * 50}")
+
         for i, url in enumerate(self.faculty_urls):
             count += 1
             if count > 5:
@@ -197,27 +197,17 @@ class ScrapeFacultyWebPage:
                     department_url=self.dept_url,
                     university_url=self.base_url
                 )
-                print('doc is ok')
                 faculty_dict['faculty_department_name'] = doc.extract_department()
-                print('extract_department is ok')
                 faculty_dict['faculty_university_name'] = doc.extract_university()
-                print('extract_university is ok')
                 faculty_dict['faculty_phone'] = doc.extract_phone()
-                print('extract_phone is ok')
                 faculty_dict['faculty_email'] = doc.extract_email()
-                print('extract_email is ok')
                 faculty_dict['faculty_expertise'] = doc.extract_expertise()
-                print('extract_expertise is ok')
                 faculty_dict['faculty_homepage_url'] = url
                 faculty_dict['faculty_department_url'] = self.dept_url
                 faculty_dict['faculty_university_url'] = self.base_url
                 faculty_dict['faculty_biodata'] = doc.extract_biodata()
-                print('extract_biodata is ok')
                 faculty_dict['faculty_location'] = doc.extract_location()
-                print('extract_location is ok')
-
                 faculty_dict_list.append(faculty_dict)
-
             except Exception as e:
                 print(f"(IGNORING) Exception encountered for Faculty URL: {url}", "\n", str(e))
                 pass
