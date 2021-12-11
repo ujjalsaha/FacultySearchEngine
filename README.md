@@ -218,6 +218,8 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 ## Setup
 
+Please follow the steps in order. Do not jump or skip any step.
+
 1. Using Redis
 
    Installing Redis on MacOS or Linux
@@ -272,8 +274,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
     source ~/.bash_profile 
     ```
-
-    
+   
 6. Switch to the Python3.9 virtual environemnt\
    If using Conda,
    ```shell script
@@ -288,9 +289,18 @@ x86 64-bit CPU Multi Core **[Recommended]**
     ```shell script
     pip install -r requirements.txt
     ```
+
+8. Install `spacy` package model files
+    ```shell script
+    python -m spacy download en_core_web_sm
+    ```
+
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
 ## Deploy
+
+Please follow the steps in order. Do not jump or skip any step.
+
 1. On a separate terminal, Start Redis Server (preferably on a screen session)
 
     For MacOS or Linux 
