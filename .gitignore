@@ -1,5 +1,6 @@
 # Ignore Mac system files
 .DS_Store
+__pycache__
 
 # Ignore PyCharm files
 .idea
@@ -8,6 +9,9 @@
 *.pem
 *.txt
 .env
+
+#ignore lda
+lib/lda
 
 # Ignore update of database file
 *.db
