@@ -137,7 +137,7 @@ def is_redis_available(r):
 
 if __name__ == '__main__':
     # environ = os.environ.get("APP_ENV")
-    env = config("ENVIRONMENT")
+    env = config("EXPERTSEARCH_ENVIRONMENT")
     if env == 'PRODUCTION':
         app.run(debug=True, threaded=True, host='0.0.0.0', port=8095)
     else:
