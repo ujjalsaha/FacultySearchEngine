@@ -11,3 +11,12 @@
 
 # Ignore update of database file
 *.db
+faculty.db
+data//sqlite3/*
+lib/lda/*
+
+# Ignore trained dataset
+lda-trained*
+
+# pycache
+__pycache__
