@@ -2,7 +2,7 @@
 
 ## Table of contents
 * [Video Presentation](#video-presentation)
-* [Using the ExpertSearch v2.0 Webapp](#using-the-expertsearch-v2.0-webapp)
+* [Using the ExpertSearch v2.0 Webapp](#using-the-expertsearch-v2-0-webapp)
 * [Overview](#overview)
 * [Technologies](#technologies)
 * [Hardware Requirements](#hardware-requirements)
@@ -24,7 +24,7 @@
 <sub><sup>MacOS   To open in a new tab: Cmd </sup></sub><kbd>⌘</kbd><sub><sup> + Click</sup></sub>      
 <sub><sup>Windows   To open in a new tab: Cmd </sup></sub><kbd>⌃</kbd><sub><sup> + Click</sup></sub>      
 
-## Using the ExpertSearch v2.0 Webapp
+## Using the ExpertSearch v2 0 Webapp
 - - - - 
 :warning: \
 The team put all emphasis on the NLP, text retrieval, text mining techniques and aspects for faculty search. 
