@@ -37,7 +37,7 @@ def do_db_call(faculty_list):
         faculty_db = FacultyDB()
         faculty_db.add_records(faculty_list)
     except Exception as exc:
-        raise Exception(" Database error occurred = {}".format(exc))
+        print(" Database error occurred = {}".format(exc))
 
 
 class ScrapeFacultyWebPage:
@@ -176,15 +176,16 @@ class ScrapeFacultyWebPage:
             try:
                 faculty_dict = dict()
                 bio = bio_dict.get(url)
+                name = self.faculty_link_dict.get(url)
+                faculty_dict['faculty_name'] = " ".join(re.findall(r'[A-Z](?:[a-z]+|[A-Z]*(?=[A-Z]|$))', name))
+                bio = bio if bio else faculty_dict['faculty_name']
                 doc = Document(
                     doc=bio,
                     faculty_url=url,
                     department_url=self.dept_url,
                     university_url=self.base_url
                 )
-                name = self.faculty_link_dict.get(url)
-                faculty_dict['faculty_name'] = " ".join(re.findall(r'[A-Z](?:[a-z]+|[A-Z]*(?=[A-Z]|$))', name))
-                # print(f'{count}, {faculty_dict["faculty_name"]} ')
+
                 faculty_dict['faculty_department_name'] = doc.extract_department()
                 faculty_dict['faculty_university_name'] = doc.extract_university()
                 faculty_dict['faculty_phone'] = doc.extract_phone()
