@@ -28,3 +28,5 @@ spacy
 redis
 rq
 
+#### Reuirements - Elastic Search ####
+elasticsearch
