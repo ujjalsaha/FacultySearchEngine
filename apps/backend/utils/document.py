@@ -26,7 +26,7 @@ nltk.downloader.download('treebank', quiet=True)
 nltk.downloader.download('maxent_treebank_pos_tagger', quiet=True)
 
 # logger = logging.getLogger('ExpertSearchv2.0')
-logging.basicConfig(filename='lda_model.log', format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+logging.basicConfig(filename='expertsearch.log', format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 dirname = os.path.dirname(__file__)
 model_file = os.path.join(dirname,

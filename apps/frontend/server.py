@@ -4,7 +4,7 @@ import json
 import os
 import sys
 from pprint import pprint
-
+import logging
 from redis import Redis
 import redis
 import rq

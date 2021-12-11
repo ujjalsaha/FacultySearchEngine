@@ -3,6 +3,7 @@ urllib3
 tldextract
 requests
 python-decouple
+httplib2
 
 #### Reuirements - Server and Hosting Services ####
 flask

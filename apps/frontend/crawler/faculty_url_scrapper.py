@@ -1,16 +1,17 @@
-import string
-
 import nltk
 from nltk.tag.stanford import StanfordNERTagger
 import sys, os
 import re
-import random
 import json
-import requests
+import httplib2
+import logging
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'lib'))
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'data'))
+
+logging.basicConfig(filename='expertsearch.log', format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+
 
 from apps.frontend.utils.beautiful_soup import BeautifulSoupLocal, html_tag_visible
 from apps.frontend.crawler.crawler import build_url
@@ -26,10 +27,9 @@ st = StanfordNERTagger(model_file, jar_file, encoding='utf-8')
 
 
 def validate_url(url):
-    response = requests.get(url)
-    if response.status_code > 200:
-        return False
-    return True
+    h = httplib2.Http()
+    resp = h.request(url, 'HEAD')
+    return int(resp[0]['status']) < 400
 
 
 def do_db_call(faculty_list):
@@ -61,27 +61,27 @@ class ScrapeFacultyWebPage:
             self.faculty_link_soup = self.beautiful_soup.get_html()
         if not self.faculty_link_soup:
             return None
-        all_faculty_text, all_a_tags = self.__get_all_faculty_text()
-        print('all text ', all_faculty_text)
+        all_faculty_text, all_tag_name_dict = self.__get_all_faculty_text()
+        from datetime import datetime
         self.__check_name__(all_faculty_text)
-        for tag in all_a_tags:
-            link = tag["href"]
-            tag_text = tag.text.strip()
-            tag_text = re.sub("[^a-zA-Z0-9]+", "", tag_text)
-            for name in self.sanitized_list:
-                if name == tag_text and len(name):
-                    faculty_profile_link = build_url(link, self.dept_url)
+        for name in self.sanitized_list:
+            if all_tag_name_dict.get(name):
+                link = all_tag_name_dict.get(name)
+                faculty_profile_link = build_url(link, self.dept_url)
+                start2 = datetime.now()
+                validate = validate_url(faculty_profile_link)
+                if validate:
+                    self.faculty_urls.append(faculty_profile_link)
+                    self.faculty_link_dict[faculty_profile_link] = name
+                else:
+                    faculty_profile_link = build_url(link, self.faculty_link)
                     if validate_url(faculty_profile_link):
                         self.faculty_urls.append(faculty_profile_link)
                         self.faculty_link_dict[faculty_profile_link] = name
-                    else:
-                        faculty_profile_link = build_url(link, self.faculty_link)
-                        if validate_url(faculty_profile_link):
-                            self.faculty_urls.append(faculty_profile_link)
-                            self.faculty_link_dict[faculty_profile_link] = name
-                    break
         bio_dict = dict()
-        for url in self.faculty_urls:
+        n = len(self.faculty_urls)
+        for i, url in enumerate(self.faculty_urls):
+            print(f"Processing Faculty Url: {i + 1} / {n}")
             try:
                 bio_texts = self.get_bio(url)
                 bio_dict[url] = bio_texts
@@ -96,6 +96,7 @@ class ScrapeFacultyWebPage:
         div_class = ['content', 'container', 'directory']
         unique_href = set()
         all_faculty_text = ''
+        all_tag_name_dict = dict()
 
         for cls in div_class:
             div_lst = self.__find_div__('class', cls)
@@ -108,7 +109,11 @@ class ScrapeFacultyWebPage:
             if tag_text:
                 # print('text inside a tag => ', tag_text)
                 all_faculty_text += tag_text + ' ~ '
-        return all_faculty_text, all_a_tags
+                link = tag["href"]
+                tag_text = tag_text.strip()
+                tag_text = re.sub("[^a-zA-Z0-9]+", "", tag_text)
+                all_tag_name_dict[tag_text] = link
+        return all_faculty_text, all_tag_name_dict
 
     def __build_a_tags__(self, div_tag_lst, unique_href):
         for div in div_tag_lst:
@@ -123,8 +128,11 @@ class ScrapeFacultyWebPage:
         return self.faculty_link_soup.find_all("div", recursive=True, attrs={attr_to_search: re.compile(text)})
 
     def __check_name__(self, all_faculty_text):
-        print('-' * 20, 'Started NLTK validation for human names ', '-' * 20)
-        for token in nltk.sent_tokenize(all_faculty_text):
+        print(f"{'*' * 50}")
+        print('Started NLTK validation for human names ')
+        tokenize = nltk.sent_tokenize(all_faculty_text)
+        n = len(tokenize)
+        for i, token in enumerate(tokenize):
             tokens = nltk.tokenize.word_tokenize(token)
             tags = st.tag(tokens)
             full_name = ''
@@ -165,12 +173,10 @@ class ScrapeFacultyWebPage:
 
     def process_document(self, bio_dict):
         faculty_dict_list = []
-        count = 0
         n = len(self.faculty_urls)
-        print(f"{'*' * 50}")
         for i, url in enumerate(self.faculty_urls):
-            print(f"Processing Faculty: {i+1} / {n}")
-            print(f"Base URL (University URL: {self.base_url}")
+            print(f"Processing Faculty: {i + 1} / {n}")
+            print(f"Base URL (University URL): {self.base_url}")
             print(f"Department URL: {self.dept_url}")
             print(f"Faculty URL: {url}")
             try:
@@ -185,7 +191,6 @@ class ScrapeFacultyWebPage:
                     department_url=self.dept_url,
                     university_url=self.base_url
                 )
-
                 faculty_dict['faculty_department_name'] = doc.extract_department()
                 faculty_dict['faculty_university_name'] = doc.extract_university()
                 faculty_dict['faculty_phone'] = doc.extract_phone()
@@ -197,7 +202,6 @@ class ScrapeFacultyWebPage:
                 faculty_dict['faculty_biodata'] = doc.extract_biodata()
                 faculty_dict['faculty_location'] = doc.extract_location()
                 faculty_dict_list.append(faculty_dict)
-
             except Exception as e:
                 print(f"(IGNORING) Exception encountered for Faculty URL: {url}", "\n", str(e))
                 pass
@@ -210,8 +214,9 @@ class ScrapeFacultyWebPage:
 
 
 if __name__ == '__main__':
-    faculty_dict = {'dept_url': 'https://cs.byu.edu', 'faculty_link': 'https://cs.byu.edu/faculty/faculty-directory/',
-                    'base_url': 'https://www.byu.edu'}
+    faculty_dict = {'dept_url': 'http://web.cs.dartmouth.edu',
+                    'faculty_link': 'https://web.cs.dartmouth.edu/people',
+                    'base_url': 'https://www.dartmouth.edu'}
     scrapper = ScrapeFacultyWebPage(faculty_dict=faculty_dict)
     scrapper.get_faculty_urls()
     print('total faculty page found = ', len(scrapper.faculty_urls))
