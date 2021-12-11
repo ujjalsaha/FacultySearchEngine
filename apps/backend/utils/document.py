@@ -227,7 +227,7 @@ class Document:
         # return " ".join(list(set(seed_topic_list)))
         """
 
-        return " ".join(topic_list[0]) if topic_list and topic_list[0] else None
+        return " ".join(topic_list[0]) if topic_list and topic_list[0] else ""
 
     def extract_phone(self):
         if not self.doc:
