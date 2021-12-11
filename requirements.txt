@@ -22,7 +22,9 @@ scikit-learn
 nltk
 gensim
 rank_bm25
+spacy
 
 #### Reuirements - Redis Cluster ####
 redis
 rq
+
