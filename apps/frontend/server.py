@@ -4,13 +4,14 @@ import json
 import os
 import sys
 from pprint import pprint
-
+import logging
 from redis import Redis
 import redis
 import rq
 from decouple import config
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
+logging.basicConfig(filename='lda_model.log', format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 from apps.backend.utils.facultydb import FacultyDB
 from apps.backend.utils.document import extract_expert_ner
