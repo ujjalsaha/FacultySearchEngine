@@ -62,7 +62,6 @@ class ScrapeFacultyWebPage:
         if not self.faculty_link_soup:
             return None
         all_faculty_text, all_a_tags = self.__get_all_faculty_text()
-        print('all text ', all_faculty_text)
         self.__check_name__(all_faculty_text)
         for tag in all_a_tags:
             link = tag["href"]
@@ -123,8 +122,11 @@ class ScrapeFacultyWebPage:
         return self.faculty_link_soup.find_all("div", recursive=True, attrs={attr_to_search: re.compile(text)})
 
     def __check_name__(self, all_faculty_text):
-        print('-' * 20, 'Started NLTK validation for human names ', '-' * 20)
-        for token in nltk.sent_tokenize(all_faculty_text):
+        print('Started NLTK validation for human names ')
+        tokenize = nltk.sent_tokenize(all_faculty_text)
+        n = len(tokenize)
+        for i, token in enumerate(tokenize):
+            print(f"Processing token: {i + 1} / {n}")
             tokens = nltk.tokenize.word_tokenize(token)
             tags = st.tag(tokens)
             full_name = ''
