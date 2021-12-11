@@ -1,18 +1,17 @@
-import string
-
 import nltk
 from nltk.tag.stanford import StanfordNERTagger
 import sys, os
 import re
-import random
 import json
-import requests
 import httplib2
-
+import logging
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'lib'))
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'data'))
+
+logging.basicConfig(filename='lda_model.log', format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+
 
 from apps.frontend.utils.beautiful_soup import BeautifulSoupLocal, html_tag_visible
 from apps.frontend.crawler.crawler import build_url
@@ -174,13 +173,8 @@ class ScrapeFacultyWebPage:
 
     def process_document(self, bio_dict):
         faculty_dict_list = []
-        count = 0
         n = len(self.faculty_urls)
-
         for i, url in enumerate(self.faculty_urls):
-            count += 1
-            if count > 5:
-                break
             print(f"Processing Faculty: {i + 1} / {n}")
             print(f"Base URL (University URL): {self.base_url}")
             print(f"Department URL: {self.dept_url}")
