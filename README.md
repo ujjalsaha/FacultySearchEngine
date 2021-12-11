@@ -71,7 +71,8 @@ Below are the core functionalities that we added/improved on the existing Expert
    This makes the new system much more organized with data while maintaining consistency in displaying search results with uniformity in data.
    The existing ExpertSearch system doesn't have the structured data implementation and search results displays and very inconsistent. 
    </p>
-   <img/>
+   </p>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_structured.png?raw=true"/>
 </details>     
  
 <details>
@@ -82,7 +83,8 @@ Below are the core functionalities that we added/improved on the existing Expert
    The areas of interests field, which is being displayed in the search results of faculty, is the outcome of this innovative approach.
    The existing ExpertSearch application doesn't have this feature.
    </p>
-   <img/>
+   </p>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_lda.png?raw=true"/>
 </details>     
 
 <details>
@@ -99,7 +101,8 @@ Below are the core functionalities that we added/improved on the existing Expert
        <li>As soon system extracts bio-data for the faculty url, it then extracts structured data using text retrieval and topic mining techniques and saves in database as structured data.</li>
    </ul>
    <p>The existing ExpertSearch system doesn't have these robust, user-friendly functionalities. The existing system doesn't also have mechanism to extract structured data from unstructured dataset.</p>
-   <img/>
+   </p>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_admin.png?raw=true"/>
 </details>     
 
 <details>
@@ -107,7 +110,8 @@ Below are the core functionalities that we added/improved on the existing Expert
    <br/>
    <p>ExpertSearch v2.0 maintains structured data set in database. Based on search query with filters we can retrieve all saved bio-data matching the filters and apply elasticsearch ranking to only the filtered bio-data set for a specific query. 
    This is how the new system able to offer more filter criterion as compared to the existing ExpertSearch system</p>
-   <img/>
+   </p>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_filters.png?raw=true"/>
 </details>     
 
 <details>
@@ -120,7 +124,7 @@ Below are the core functionalities that we added/improved on the existing Expert
    Since these operations are done during crawling and scraping and saved into database as structured data, hence during actual query based on the elasticsearch ranking results, the data is fetched from database. 
    The overall improved process resulted in improved search results and faculty attributes display with no missing information thus improving consistency.
    </p>
-   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_python_version.png?raw=true"/>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_relevent.png?raw=true"/>
 </details>     
 
 <details>
