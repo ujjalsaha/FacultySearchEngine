@@ -168,10 +168,16 @@ class Document:
                                                     passes=50,
                                                     alpha='auto',
                                                     per_word_topics=True)
+
+        dirname = os.path.dirname(__file__)
+        lda_dataset = os.path.join(dirname, "../../../lib/lda/lda-trained-dataset")
+
         try:
-            lda_model.load("../../../lib/lda/lda-trained-dataset")
+            lda_model.load(lda_dataset)
+
         except:
-            lda_model.save("../../../lib/lda/lda-trained-dataset")
+            lda_model.save(lda_dataset)
+
         """
         # Print the Keyword in the 10 topics
         print(lda_model.print_topics())
@@ -180,7 +186,7 @@ class Document:
 
         topics = lda_model.print_topics(num_words=10)
         lda_model.update(corpus)
-        lda_model.save("../../../lib/lda/lda-trained-dataset")
+        lda_model.save(lda_dataset)
 
         '''for topic in topics:
             print(topic)'''
@@ -299,4 +305,3 @@ if __name__ == '__main__':
     print("LOCATION:   ", doc.extract_location())
     print("BIODATA:    ", doc.extract_biodata())
     """
-
