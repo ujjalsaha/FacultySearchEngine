@@ -298,4 +298,3 @@ if __name__ == '__main__':
     print("LOCATION:   ", doc.extract_location())
     print("BIODATA:    ", doc.extract_biodata())
     """
-    print("EXPERTISE:  ", doc.extract_expertise())
