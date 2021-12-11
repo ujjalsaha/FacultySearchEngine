@@ -3,6 +3,7 @@ from flask import render_template, request, jsonify
 import json
 import os
 import sys
+from pprint import pprint
 
 from redis import Redis
 import redis
@@ -83,9 +84,14 @@ def search():
         num_of_results = 100
     elasticsearchapi = ElasticSearchAPI()
     # search_result = search_obj.get_search_results(querytext, "Manipal", "Computer", "Sikkim")
+    print(f"query => {querytext}")
+    print(f"num_results => {num_results}")
+    print(f"unifilter => {unifilter}")
+    print(f"deptfilter => {deptfilter}")
+    print(f"locfilter => {locfilter}")
     search_result = elasticsearchapi.get_search_results(querytext, num_results, unifilter, deptfilter, locfilter)
 
-    print(search_result)
+    # print(search_result)
     faculty_names = []
     faculty_homepage_url = []
     faculty_department_url = []
@@ -113,8 +119,7 @@ def search():
     results = list(zip(faculty_names, faculty_homepage_url, faculty_department_url, faculty_department_name,
                        faculty_university_url, faculty_university_name, faculty_email, faculty_phone, faculty_location,
                        faculty_expertise))
-    for r in results:
-        print(r)
+    pprint(results)
 
     return jsonify({
         "docs": results

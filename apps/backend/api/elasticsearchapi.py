@@ -386,7 +386,7 @@ class ElasticSearchAPI:
             res = self.es.search(index=self.index, query=query)
             # print(res)
 
-            print(f"Matched Query: {res['hits']['total']['value']}")
+            # print(f"Matched Query: {res['hits']['total']['value']}")
             for record in res['hits']['hits'][:n]:
                 faculty = {}
                 faculty["faculty_name"] = record['_source']["faculty_name"]
@@ -401,7 +401,7 @@ class ElasticSearchAPI:
                 faculty["faculty_expertise"] = record['_source']["faculty_expertise"]
                 ranked_list.append(faculty)
 
-            pprint(ranked_list)
+            # pprint(ranked_list)
 
         except Exception as e :
             print ("Unexpected exception error: While getting search results: ", repr(e))
