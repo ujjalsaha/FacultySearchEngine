@@ -66,7 +66,7 @@ Below are the core functionalities that we added/improved on the existing Expert
    <summary>Converting unstructured dataset to structured dataset. Click to learn more</summary>
    <br/>
    <p>The new ExpertSearch v2.0 system can scrap faulty pages. By using text retrieval techniques, it extracts structured data such as Name, email, department name, university name, phone number, email, location, areas of interests etc. and saves in the database along with the scraped bio-data. 
-   Whenever a user enters a search query, along with the optional filter used with the search query, the system grabs the bio-data from the database and ranks them using BM25 ranking algorithm.
+   Whenever a user enters a search query, along with the optional filter used with the search query, the system grabs the bio-data from the database and ranks them using ElasticSearch Indexing ranking algorithm.
    After the ranking process is run, the system grabs the ranked data and gets corresponding faculty attributes from the structured database entry for the faculties.
    This makes the new system much more organized with data while maintaining consistency in displaying search results with uniformity in data.
    The existing ExpertSearch system doesn't have the structured data implementation and search results displays and very inconsistent. 
@@ -86,7 +86,7 @@ Below are the core functionalities that we added/improved on the existing Expert
 </details>     
 
 <details>
-   <summary>Re-Architected admin interface for auto crawling and scraping faculty pages asynchronously. Click to learn more.</summary>
+   <summary>Architected admin interface for auto crawling and scraping faculty pages asynchronously. Click to learn more.</summary>
    <br/>
    <p>In the new ExpertSearch v2.0 system the admin interface has been reengineered with many improvements and feature upgrades.
    Admin interface is primarily responsible to receive university input from user to parse, crawl, scrape the data and insert structured data to database.
@@ -105,7 +105,7 @@ Below are the core functionalities that we added/improved on the existing Expert
 <details>
    <summary>Added more filter criteria. Click to learn more.</summary>
    <br/>
-   <p>ExpertSearch v2.0 maintains structured data set in database. Based on search query with filters we can retrieve all saved bio-data matching the filters and apply ranking to only the filtered bio-data set for a specific query. 
+   <p>ExpertSearch v2.0 maintains structured data set in database. Based on search query with filters we can retrieve all saved bio-data matching the filters and apply elasticsearch ranking to only the filtered bio-data set for a specific query. 
    This is how the new system able to offer more filter criterion as compared to the existing ExpertSearch system</p>
    <img/>
 </details>     
@@ -117,7 +117,7 @@ Below are the core functionalities that we added/improved on the existing Expert
    The old ExpertSearch did runtime operations which A. makes the system slower for heavy text retrieval techniques and B. missed few modern text retrieval techniques for extracting fields such as department name, phone number etc.  
    We leveraged key browser provided information in html elements such as "title" which mostly provides unique info. 
    We also improved the regex package for extracting accurate phone numbers, email etc. 
-   Since these operations are done during crawling and scraping and saved into database as structured data, hence during actual query based on the ranking results, the data is fetched from database. 
+   Since these operations are done during crawling and scraping and saved into database as structured data, hence during actual query based on the elasticsearch ranking results, the data is fetched from database. 
    The overall improved process resulted in improved search results and faculty attributes display with no missing information thus improving consistency.
    </p>
    <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_python_version.png?raw=true"/>
@@ -128,7 +128,7 @@ Below are the core functionalities that we added/improved on the existing Expert
    <br/>
    <p>New ExpertSearch v2.0 is build on latest Python3.9 and dependent packages compared to the existing ExpertSearch that is build on old and out of support Python2.7.
    With that said the team went through many research and exploration phases as few of the NLP / Text Processing libraries from old system aren't supported in Python3.9 version.
-   New and modern standard libraries were tested and adopted (such as nltk, gensim etc.) and then engineered to fit the logic of ranking, scoring, topic mining and text retrieval techniques in the new ExpertSearch v2.0 system.
+   New and modern standard libraries were tested and adopted (such as nltk, gensim etc.) and then engineered to fit the logic of indexing, ranking, scoring, topic mining and text retrieval techniques in the new ExpertSearch v2.0 system.
    In summary, all capabilities of existing ExpertSearch system have been covered by ExpertSearch v2.0 along with additional features like new set of Python3.9 libraries which by itself is a great achievement.       
    </p>
    <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_python_version.png?raw=true"/>
@@ -166,10 +166,11 @@ Linux or MacOS  **[Recommended]**
 2. x86 64-bit CPU  [Minimum] \
 x86 64-bit CPU Multi Core **[Recommended]** 
 
-3. 8 GB RAM  [Minimum]\
-16 GB RAM  **[Recommended]**
+3. 16 GB RAM  [Minimum]\
+32 GB RAM  **[Recommended]**
 
-4. 5 GB free disk space
+4. 4 GB free disk space    [Minimum]\
+8 GB free disk space  **[Recommended]**
 
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
@@ -218,7 +219,11 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 ## Setup
 
-1. Using Redis
+1. ElasticSearch Setup
+
+   [Installing ElasticSearch on MacOS or Linux](https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html)
+
+2. Redis Setup
 
    Installing Redis on MacOS or Linux
    ```shell script
@@ -234,13 +239,13 @@ x86 64-bit CPU Multi Core **[Recommended]**
    make install
    ```
       
-2. Using git clone the repository to a path
+3. Using git clone the repository to a path
    ```shell script
    cd <desired path where you want to download the project>
    git clone https://github.com/sudiptobilu/CourseProject.git
    cd CourseProject
 
-3. Set `GOOGLE_API_KEY` Environment Variable\
+4. Set `GOOGLE_API_KEY` Environment Variable\
    [Click Here](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) to get the Google API Key from the [CMT](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) Abstract section (Make sure you are in reviewer role. Credentials required). \
     Add the below line in your `~/.basrc` or `~/.bash_profile` 
     ```shell script
@@ -253,7 +258,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
     echo "GOOGLE_API_KEY='<Add Google api Key from CMT Abstract section>'" > .env   
     ```  
 
-4. Set `PYTHONPATH` Environment Variable\
+5. Set `PYTHONPATH` Environment Variable\
     Add the below line in your `~/.basrc` or `~/.bash_profile` 
     ```shell script
     export PYTHONPATH="<path to CourseProject repo>"
@@ -264,7 +269,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
    
     echo "PYTHONPATH='<path to CourseProject repo>'" > .env   
     ```  
-5.  Source the `~/.basrc` or `~/.bash_profile` on your terminal
+6.  Source the `~/.basrc` or `~/.bash_profile` on your terminal
     ```shell script
     source ~/.basrc
    
@@ -272,9 +277,8 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
     source ~/.bash_profile 
     ```
-
     
-6. Switch to the Python3.9 virtual environment\
+7. Switch to the Python3.9 virtual environment\
    If using Conda,
    ```shell script
    # TIP: Show all conda environment
@@ -284,13 +288,21 @@ x86 64-bit CPU Multi Core **[Recommended]**
    conda activate <python3.9 virtual environment name> 
    ```
 
-7. Install the project requirements file on Python3.9 virtual environment
+8. Install the project requirements file on Python3.9 virtual environment
     ```shell script
     pip install -r requirements.txt
     ```
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
 ## Deploy
+1. On a separate terminal, Start ElasticSearch Service (preferably on a screen session)
+
+    For MacOS or Linux 
+    ```shell script
+    cd <path to elasticsearch>
+    ./bin/elasticsearch
+    ````
+
 1. On a separate terminal, Start Redis Server (preferably on a screen session)
 
     For MacOS or Linux 
@@ -435,7 +447,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
     <details>
        <summary><b>User Story: </b> Enhance the search experience with relevant search results. Click for Story Details</summary>
        <br/>
-       <p>Based on search input, we will look up all bio-data from structured dataset and implement a ranking function using metapy library. Based on ranking results we will extract corresponding fields from the structured data and display as search results. We will enhance filter based searching feature too, where user can get better accuracy because of structured dataset.</p>
+       <p>Based on search input, we will look up all bio-data from structured dataset and implement a elasticsearch ranking. Based on elasticsearch ranking results we will extract corresponding fields from the structured data and display as search results. We will enhance filter based searching feature too, where user can get better accuracy because of structured dataset.</p>
     </details>     
       
     <details>
@@ -521,9 +533,13 @@ The ExpertSearch v2.0 was build upon existing ExpertSearch web application [[1]]
 [2] [Coursera - CS410 Text information Systems - Course Project Overview](https://www.coursera.org/learn/cs-410/supplement/fTuOi/course-project-overview)\
 [3] [NLTK API Reference](https://www.nltk.org/api/nltk.html)\
 [4] [Gensim API Reference](https://radimrehurek.com/gensim/apiref.html)\
-[5] [BM25 Ranker](https://github.com/dorianbrown/rank_bm25)\
-[6] [Flask + Bootstrap. HTML interface for effortless Python projects](https://diyprojects.io/flask-bootstrap-html-interface-effortless-python-projects/#.YbEIE33MLok)\
-[7] [AWS Cloud Hosting Service - EC2](https://aws.amazon.com/application-hosting/)\
-[8] [Github ReadMe - Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+[5] [Topic Modelling in Python with NLTK and Gensim](https://towardsdatascience.com/topic-modelling-in-python-with-nltk-and-gensim-4ef03213cd21)  
+[6] [Beginners Guide to Topic Modeling in Python](https://www.analyticsvidhya.com/blog/2016/08/beginners-guide-to-topic-modeling-in-python/)
+[7] [BM25 Ranker](https://github.com/dorianbrown/rank_bm25)\
+[8] [Flask + Bootstrap. HTML interface for effortless Python projects](https://diyprojects.io/flask-bootstrap-html-interface-effortless-python-projects/#.YbEIE33MLok)\
+[9] [How to Use Redis With Python](https://realpython.com/python-redis/)\
+[10] [Python Elasticsearch Getting Started Guide](https://www.hackdeploy.com/python-elasticsearch-getting-started-guide/)\
+[11] [AWS Cloud Hosting Service - EC2](https://aws.amazon.com/application-hosting/)\
+[12] [Github ReadMe - Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
