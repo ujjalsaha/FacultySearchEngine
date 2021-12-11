@@ -12,7 +12,7 @@ sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'lib'))
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'apps'))
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'data'))
 
-from apps.frontend.utils.beautiful_soup import BeautifulSoupLocal
+from apps.frontend.utils.beautiful_soup import BeautifulSoupLocal, html_tag_visible
 from apps.frontend.crawler.crawler import build_url
 from apps.backend.utils.document import Document
 from apps.backend.utils.facultydb import FacultyDB
@@ -140,16 +140,21 @@ class ScrapeFacultyWebPage:
 
     def get_bio(self, url):
         faculty_bio_soup = self.beautiful_soup.get_html_from_url(url)
-        div_class = ['content', 'container']
-        all_texts = []
-        for cls in div_class:
-            elements = faculty_bio_soup.find_all(class_=cls)
-            if not len(elements):
-                elements = faculty_bio_soup.find_all(id=cls)
-            for elem in elements:
-                all_texts.extend(s.strip() for s in elem.strings if s.strip())
+        faculty_page_html = faculty_bio_soup.find_all(text=True)
+        visible_texts = filter(html_tag_visible, faculty_page_html)
+        return " ".join(visible_texts)
 
-        return " ".join(all_texts)
+        # faculty_bio_soup = self.beautiful_soup.get_html_from_url(url)
+        # div_class = ['content', 'container']
+        # all_texts = []
+        # for cls in div_class:
+        #     elements = faculty_bio_soup.find_all(class_=cls)
+        #     if not len(elements):
+        #         elements = faculty_bio_soup.find_all(id=cls)
+        #     for elem in elements:
+        #         all_texts.extend(s.strip() for s in elem.strings if s.strip())
+        #
+        # return " ".join(all_texts)
 
     def close_driver(self):
         """
