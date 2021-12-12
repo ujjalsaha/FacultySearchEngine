@@ -390,7 +390,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 * The `search` in turn calls an orchestration function [apps/backend/api/search.py::get_search_results()](apps/backend/api/search.py)
 * The `get_search_results` is an orchestration function and calls different backend systems to retrieve the data
     * The call first goes to [apps/backend/utils/facultydb.py::get_biodata_records()](apps/backend/utils/facultydb.py) and grabs all scraped bio-data stored in a database table column along with corresponding structured data id.
-    * Then the corpus data is passed to [apps/backend/utils/ranker.py::score()](apps/backend/utils/ranker.py) to score the corpus bio-data dataset based on search query. The function used BM25 as text retrieval algorithm to rank corpus documents.
+    * Then the corpus data is passed to [apps/backend/utils/ranker.py::score()](apps/backend/utils/ranker.py) to score the corpus bio-data dataset based on search query. The function used elasticsearch ranking abilities to rank corpus documents.
     * Once ranking is done the corresponding structured data ids were returned as a ranked list of faculty ids 
     * The ranked ids were taken and passed to [apps/backend/utils/facultydb.py::get_faculty_records()](apps/backend/utils/facultydb.py) to get the structured data from database
 * The result's dataset is now a structured data with key pair values being displayed in the front end accordingly
