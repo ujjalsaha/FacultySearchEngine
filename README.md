@@ -34,7 +34,7 @@ The webapp still has got many improvement areas in terms of UX, UI display, comm
 While developing the ExpertSearch v2.0 we considered developing the prototype and leaving the opportunity to build things on top of this.      
 - - - - 
 #### Using Search Feature
-1. Launch the app in your Chrome browser using the URL.
+1. Launch the app in your Chrome browser using the Demo URL: http://34.231.70.1:8095/  
 2. The ExpertSearch v2.0 Home Page should be displayed.
 3. Now try searching a faculty by entering queries like: 
     * Names can be provided such as Matt Caesar, Cheng Zhai, John Hart etc.
@@ -44,7 +44,7 @@ While developing the ExpertSearch v2.0 we considered developing the prototype an
 5. Few of the faculty attributes will be displayed as search results. A user can perform action on them such as clicking the email to open the local outlook composer, or clicking location to opt in for details from Google Maps etc.
     
 #### Using Admin Feature
-1. Go to the Admin interface.
+1. Go to the Admin interface using the settings buttons. Demo URL: http://34.231.70.1:8095/
 2. Admin interface is a way for admin users (currently open for all users) to add universities, department and faculty urls for the system to be able to append and store additional faculty data to its database. This will result in broadening the search results and data availability. This is also a continuous process to enrich the system with much more data as they are explored.  
 1. User can provide either university name or university url or department url. User can also specify University Name and Department name together in the search area.
 2. The ExpertSearch v2.0 system would asynchronously start crawling and scraping data on the backend system and would also prompt the user that the data will be added through a background process eventually. 
