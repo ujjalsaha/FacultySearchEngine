@@ -541,7 +541,7 @@ The ExpertSearch v2.0 was build upon existing ExpertSearch web application [[1]]
 [3] [NLTK API Reference](https://www.nltk.org/api/nltk.html)\
 [4] [Gensim API Reference](https://radimrehurek.com/gensim/apiref.html)\
 [5] [Topic Modelling in Python with NLTK and Gensim](https://towardsdatascience.com/topic-modelling-in-python-with-nltk-and-gensim-4ef03213cd21)  
-[6] [Beginners Guide to Topic Modeling in Python](https://www.analyticsvidhya.com/blog/2016/08/beginners-guide-to-topic-modeling-in-python/)
+[6] [Beginners Guide to Topic Modeling in Python](https://www.analyticsvidhya.com/blog/2016/08/beginners-guide-to-topic-modeling-in-python/)\
 [7] [BM25 Ranker](https://github.com/dorianbrown/rank_bm25)\
 [8] [Flask + Bootstrap. HTML interface for effortless Python projects](https://diyprojects.io/flask-bootstrap-html-interface-effortless-python-projects/#.YbEIE33MLok)\
 [9] [How to Use Redis With Python](https://realpython.com/python-redis/)\
