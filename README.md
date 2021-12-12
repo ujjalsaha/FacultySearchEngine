@@ -349,6 +349,9 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 ## Implementation Details 
 
+![ExpertSearchv2.0](docs/assets/expertsearch.png)
+
+
 :pushpin: :pushpin:     
 #### ExpertSearch v2.0 Admin Functionality
 
