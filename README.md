@@ -353,7 +353,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 
 :pushpin: :pushpin:     
-#### ExpertSearch v2.0 Admin Functionality
+#### ExpertSearch v2.0 Admin Functionality (Contribute with URL for Crawling Interface)
 
 * Admin interface is primarily responsible for receiving university/department/faculty name or urls as input from user to parse, crawl, scrape data, retrieve fields using various text mining approaches and insert structured data to database.
 * The purpose of Admin is to add more data from admin provided urls to broaden the search results and add more data availability. This is also a continuous process to enrich the system with more and more data as they are available or explored.
