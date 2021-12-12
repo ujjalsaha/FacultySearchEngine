@@ -71,7 +71,8 @@ Below are the core functionalities that we added/improved on the existing Expert
    This makes the new system much more organized with data while maintaining consistency in displaying search results with uniformity in data.
    The existing ExpertSearch system doesn't have the structured data implementation and search results displays and very inconsistent. 
    </p>
-   <img/>
+   </p>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_structured.png?raw=true"/>
 </details>     
  
 <details>
@@ -82,7 +83,8 @@ Below are the core functionalities that we added/improved on the existing Expert
    The areas of interests field, which is being displayed in the search results of faculty, is the outcome of this innovative approach.
    The existing ExpertSearch application doesn't have this feature.
    </p>
-   <img/>
+   </p>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_lda.png?raw=true"/>
 </details>     
 
 <details>
@@ -99,7 +101,8 @@ Below are the core functionalities that we added/improved on the existing Expert
        <li>As soon system extracts bio-data for the faculty url, it then extracts structured data using text retrieval and topic mining techniques and saves in database as structured data.</li>
    </ul>
    <p>The existing ExpertSearch system doesn't have these robust, user-friendly functionalities. The existing system doesn't also have mechanism to extract structured data from unstructured dataset.</p>
-   <img/>
+   </p>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_admin.png?raw=true"/>
 </details>     
 
 <details>
@@ -107,7 +110,8 @@ Below are the core functionalities that we added/improved on the existing Expert
    <br/>
    <p>ExpertSearch v2.0 maintains structured data set in database. Based on search query with filters we can retrieve all saved bio-data matching the filters and apply elasticsearch ranking to only the filtered bio-data set for a specific query. 
    This is how the new system able to offer more filter criterion as compared to the existing ExpertSearch system</p>
-   <img/>
+   </p>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_filters.png?raw=true"/>
 </details>     
 
 <details>
@@ -120,7 +124,7 @@ Below are the core functionalities that we added/improved on the existing Expert
    Since these operations are done during crawling and scraping and saved into database as structured data, hence during actual query based on the elasticsearch ranking results, the data is fetched from database. 
    The overall improved process resulted in improved search results and faculty attributes display with no missing information thus improving consistency.
    </p>
-   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_python_version.png?raw=true"/>
+   <img alt="ExpertSearch Documentation Comparison" src="docs/assets/comparison_relevent.png?raw=true"/>
 </details>     
 
 <details>
@@ -155,6 +159,7 @@ Below are the main technologies that were used to build ExpertSearch v2.0
 * Webpages crawling and scraping
 * NLP Libraries - NLTK, Gensim, Spacy
 * Redis Cluster
+* Elastic Search
 * Sqlite3 Database
 * Web technologies like HTML, CSS, JQuery
 * Flask based web server
@@ -246,7 +251,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
    cd CourseProject
 
 4. Set `GOOGLE_API_KEY` Environment Variable\
-   [Click Here](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) to get the Google API Key from the [CMT](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) Abstract section (Make sure you are in reviewer role. Credentials required). \
+   [Click Here](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) to get the Google API Key from the [CMT](https://cmt3.research.microsoft.com/CS410Expo2021/Submission/Summary/56) Abstract section (Make sure you are in reviewer role. Credentials required). You can also use your own Google API Key if you have any.\
     Add the below line in your `~/.basrc` or `~/.bash_profile` 
     ```shell script
     export GOOGLE_API_KEY=<Add Google api Key from CMT Abstract section>
@@ -344,8 +349,11 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 ## Implementation Details 
 
+![ExpertSearchv2.0](docs/assets/expertsearch.png)
+
+
 :pushpin: :pushpin:     
-#### ExpertSearch v2.0 Admin Functionality
+#### ExpertSearch v2.0 Admin Functionality (Contribute with URL for Crawling Interface)
 
 * Admin interface is primarily responsible for receiving university/department/faculty name or urls as input from user to parse, crawl, scrape data, retrieve fields using various text mining approaches and insert structured data to database.
 * The purpose of Admin is to add more data from admin provided urls to broaden the search results and add more data availability. This is also a continuous process to enrich the system with more and more data as they are available or explored.
@@ -385,7 +393,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 * The `search` in turn calls an orchestration function [apps/backend/api/search.py::get_search_results()](apps/backend/api/search.py)
 * The `get_search_results` is an orchestration function and calls different backend systems to retrieve the data
     * The call first goes to [apps/backend/utils/facultydb.py::get_biodata_records()](apps/backend/utils/facultydb.py) and grabs all scraped bio-data stored in a database table column along with corresponding structured data id.
-    * Then the corpus data is passed to [apps/backend/utils/ranker.py::score()](apps/backend/utils/ranker.py) to score the corpus bio-data dataset based on search query. The function used BM25 as text retrieval algorithm to rank corpus documents.
+    * Then the corpus data is passed to [apps/backend/utils/ranker.py::score()](apps/backend/utils/ranker.py) to score the corpus bio-data dataset based on search query. The function used elasticsearch ranking abilities to rank corpus documents.
     * Once ranking is done the corresponding structured data ids were returned as a ranked list of faculty ids 
     * The ranked ids were taken and passed to [apps/backend/utils/facultydb.py::get_faculty_records()](apps/backend/utils/facultydb.py) to get the structured data from database
 * The result's dataset is now a structured data with key pair values being displayed in the front end accordingly
@@ -405,7 +413,7 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 ## Project Team Members
 
-| ! Name          | NetID    | Email                 |
+| Name          | NetID    | Email                 |
 |:----------------|:---------|:----------------------|
 | Ujjal Saha      | ujjals2  | ujjals2@illinois.edu  |
 | Arnab KarSarkar | arnabk2  | arnabk2@illinois.edu  |
@@ -513,11 +521,13 @@ x86 64-bit CPU Multi Core **[Recommended]**
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
 ## Improvements Areas
-* Crawling and Scraping activities can be tracked if implemented as a publisher and subscriber. However, we did not pursue it as it would not add much value to our goal and focus on Text Retrieval and Mining techniques.  
-* GuidedLDA couldn't be used for specialized topic mining. We settled with general LDA. Specialized Topic mining with seeded datasets could result is more relevant topic words for a faculty.
+* Crawling and Scraping activities can be tracked if implemented as a publisher and subscriber. However, we did not pursue it as it would not add much value to our goal and focus on Text Retrieval and Mining techniques.
+* There is huge opportunity to improve the crawling and scraping feature. Each university has their own styling in website url names and page contents. So more we explore more logical scenarios we can add so more pages can be crawled with a generic implementation. 
+* Many times a faculty has multiple homepage urls and the system. In the main homepage url there could be multiple links and requires more intelligent to identify which page is the main homepage url.
+* We have used trained LDA Model which generated better output of topical data. However, future research can be done to check if using a trained model alongside a specialized topic mining with seeded datasets could result is more relevant topic words for a faculty. We also explored GuidedLDA and did not find any improvements either.  
 * Admin interface repeated entry can be malicious and hence there is a need to implement some sort of restrictions
 * Making the webapp perfect in terms of end-to-end best user experience was not part of the goal for this project. The webapp still has got many improvement areas in terms of UX, UI display, communication, request response structure, industry standards, completeness which could be a separate project by itself.
- 
+* We were only able to crawl and scrape HTML from US universities. Any international university may or may not work with the current implementation. 
 
 ## Licensing
 The ExpertSearch v2.0 was build upon existing ExpertSearch web application [[1]](https://github.com/CS410Assignments/ExpertSearch) and thus will inherit the original licensing terms and conditions of the original ExpertSearch system.  
@@ -534,7 +544,7 @@ The ExpertSearch v2.0 was build upon existing ExpertSearch web application [[1]]
 [3] [NLTK API Reference](https://www.nltk.org/api/nltk.html)\
 [4] [Gensim API Reference](https://radimrehurek.com/gensim/apiref.html)\
 [5] [Topic Modelling in Python with NLTK and Gensim](https://towardsdatascience.com/topic-modelling-in-python-with-nltk-and-gensim-4ef03213cd21)  
-[6] [Beginners Guide to Topic Modeling in Python](https://www.analyticsvidhya.com/blog/2016/08/beginners-guide-to-topic-modeling-in-python/)
+[6] [Beginners Guide to Topic Modeling in Python](https://www.analyticsvidhya.com/blog/2016/08/beginners-guide-to-topic-modeling-in-python/)\
 [7] [BM25 Ranker](https://github.com/dorianbrown/rank_bm25)\
 [8] [Flask + Bootstrap. HTML interface for effortless Python projects](https://diyprojects.io/flask-bootstrap-html-interface-effortless-python-projects/#.YbEIE33MLok)\
 [9] [How to Use Redis With Python](https://realpython.com/python-redis/)\
