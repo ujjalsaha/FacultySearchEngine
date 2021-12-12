@@ -519,12 +519,12 @@ x86 64-bit CPU Multi Core **[Recommended]**
 
 ## Improvements Areas
 * Crawling and Scraping activities can be tracked if implemented as a publisher and subscriber. However, we did not pursue it as it would not add much value to our goal and focus on Text Retrieval and Mining techniques.
-* There is huge opportunity to improve the crawling and scrpaing feature. Each universities has their own styling in website url names and page conntents. So more we explore more logical scenarios we can add so more pages can be crawled with a generic implementaion. 
-* Many time a faculy has multiple homepage urls and the system. In the main homepage url there could be multiple links and requires more intelligent to identiify which page is the main homepage url.
-* We have used trained LDA Model which generated better output of topical data. However future research can be done to check if using a trained model alongside a specialized topic mining with seeded datasets could result is more relevant topic words for a faculty. We also explored GuidedLDA and did not find any improvements either.  
+* There is huge opportunity to improve the crawling and scraping feature. Each university has their own styling in website url names and page contents. So more we explore more logical scenarios we can add so more pages can be crawled with a generic implementation. 
+* Many times a faculty has multiple homepage urls and the system. In the main homepage url there could be multiple links and requires more intelligent to identify which page is the main homepage url.
+* We have used trained LDA Model which generated better output of topical data. However, future research can be done to check if using a trained model alongside a specialized topic mining with seeded datasets could result is more relevant topic words for a faculty. We also explored GuidedLDA and did not find any improvements either.  
 * Admin interface repeated entry can be malicious and hence there is a need to implement some sort of restrictions
 * Making the webapp perfect in terms of end-to-end best user experience was not part of the goal for this project. The webapp still has got many improvement areas in terms of UX, UI display, communication, request response structure, industry standards, completeness which could be a separate project by itself.
- 
+* We were only able to crawl and scrape HTML from US universities. Any international university may or may not work with the current implementation. 
 
 ## Licensing
 The ExpertSearch v2.0 was build upon existing ExpertSearch web application [[1]](https://github.com/CS410Assignments/ExpertSearch) and thus will inherit the original licensing terms and conditions of the original ExpertSearch system.  
