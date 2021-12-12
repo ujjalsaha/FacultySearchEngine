@@ -159,6 +159,7 @@ Below are the main technologies that were used to build ExpertSearch v2.0
 * Webpages crawling and scraping
 * NLP Libraries - NLTK, Gensim, Spacy
 * Redis Cluster
+* Elastic Search
 * Sqlite3 Database
 * Web technologies like HTML, CSS, JQuery
 * Flask based web server
@@ -517,8 +518,10 @@ x86 64-bit CPU Multi Core **[Recommended]**
 <div style="text-align: right"> <a href="#top">Back to top</a> </div>
 
 ## Improvements Areas
-* Crawling and Scraping activities can be tracked if implemented as a publisher and subscriber. However, we did not pursue it as it would not add much value to our goal and focus on Text Retrieval and Mining techniques.  
-* GuidedLDA couldn't be used for specialized topic mining. We settled with general LDA. Specialized Topic mining with seeded datasets could result is more relevant topic words for a faculty.
+* Crawling and Scraping activities can be tracked if implemented as a publisher and subscriber. However, we did not pursue it as it would not add much value to our goal and focus on Text Retrieval and Mining techniques.
+* There is huge opportunity to improve the crawling and scrpaing feature. Each universities has their own styling in website url names and page conntents. So more we explore more logical scenarios we can add so more pages can be crawled with a generic implementaion. 
+* Many time a faculy has multiple homepage urls and the system. In the main homepage url there could be multiple links and requires more intelligent to identiify which page is the main homepage url.
+* We have used trained LDA Model which generated better output of topical data. However future research can be done to check if using a trained model alongside a specialized topic mining with seeded datasets could result is more relevant topic words for a faculty. We also explored GuidedLDA and did not find any improvements either.  
 * Admin interface repeated entry can be malicious and hence there is a need to implement some sort of restrictions
 * Making the webapp perfect in terms of end-to-end best user experience was not part of the goal for this project. The webapp still has got many improvement areas in terms of UX, UI display, communication, request response structure, industry standards, completeness which could be a separate project by itself.
  
