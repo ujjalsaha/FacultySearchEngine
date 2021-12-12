@@ -96,7 +96,7 @@ class Crawler:
             return None
         faculty_pages = set()
         for faculty in base_page_soup.findAll(
-                lambda tag: tag.name == "a" and ("Faculty" in tag.text or "People" in tag.text or "Directory" in tag.text)):
+                lambda tag: tag.name == "a" and ("Faculty" in tag.text or "People" in tag.text)):
             link = faculty['href']
             if link not in faculty_pages and \
                     any(keyword in link for keyword in self.key_words):
@@ -221,7 +221,7 @@ class ExtractFacultyURL:
 
 
 if __name__ == '__main__':
-    uni = "University of California, Davis, Computer Science"
+    uni = "rice university, computer science"
     print(uni)
     extractURL = ExtractFacultyURL(uni)
     print('Faculty Page found = ', extractURL.has_valid_faculty_link())
