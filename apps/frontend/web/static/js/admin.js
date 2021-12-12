@@ -1,8 +1,28 @@
 
+
 $(document).ready(function() {
 
+$('#searchText').keydown(function(e) {
+    searchTerm = $('#query').val()
+    if (e.keyCode === 13) {
+       enterData();
+    }
+});
+
 $("#crawl_uni").click(function() {
-    debugger;
+    enterData();
+});
+
+ $("#closeModal").click(function (){
+      $("#backdrop").modal("hide");
+ });
+ $("#closeModalIcon").click(function (){
+      $("#backdrop").modal("hide");
+ });
+
+});
+
+function enterData(){
     $("#spinner2").addClass("show-spinner");
     if ($("#searchText").val() === ''){
        $("#spinner2").removeClass("show-spinner");
@@ -10,11 +30,10 @@ $("#crawl_uni").click(function() {
         $("#modalBody").text("Please enter a search string");
         $("#backdrop").appendTo("body");
     }
-    else{
+    else {
         const data = {
-            "searchText" : $("#searchText").val()
+            "searchText": $("#searchText").val()
         }
-        debugger;
         fetch("/admin/crawl", {
             method: "POST",
             headers: {
@@ -27,21 +46,9 @@ $("#crawl_uni").click(function() {
                 $("#backdrop").modal("show");
                 $("#modalBody").text(data["msg"])
                 $("#backdrop").appendTo("body");
-        })
-    });
+            })
+        });
     }
-
-
-});
-
- $("#closeModal").click(function (){
-      $("#backdrop").modal("hide");
- });
- $("#closeModalIcon").click(function (){
-      $("#backdrop").modal("hide");
- });
-
-});
-
+}
 
 
