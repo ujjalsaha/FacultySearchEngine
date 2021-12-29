@@ -20,7 +20,7 @@
 
 ## Video Presentation
 
-#### [Software usage tutorial presentation](https://uofi.box.com/s/h6gvq79zr6jzdri1vtjy30gi593mnukf) 
+#### [Software usage tutorial presentation](https://youtu.be/W338V1TiPYc) 
 <sub><sup>MacOS   To open in a new tab: Cmd </sup></sub><kbd>⌘</kbd><sub><sup> + Click</sup></sub>      
 <sub><sup>Windows   To open in a new tab: Cmd </sup></sub><kbd>⌃</kbd><sub><sup> + Click</sup></sub>      
 
